@@ -12,14 +12,26 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.tiuho22bangkit.gizi.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:id="@+id/navigation_article"
+        android:name="com.tiuho22bangkit.gizi.ui.article.ArticleFragment"
+        android:label="@string/title_article"
+        tools:layout="@layout/fragment_article" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.tiuho22bangkit.gizi.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        android:id="@+id/navigation_nutriai"
+        android:name="com.tiuho22bangkit.gizi.ui.nutriai.NutriaiFragment"
+        android:label="@string/title_nutriai"
+        tools:layout="@layout/fragment_nutriai" />
+
+    <fragment
+        android:id="@+id/navigation_medcheck"
+        android:name="com.tiuho22bangkit.gizi.ui.medcheck.MedcheckFragment"
+        android:label="@string/title_medcheck"
+        tools:layout="@layout/fragment_medcheck" />
+
+    <fragment
+        android:id="@+id/navigation_profile"
+        android:name="com.tiuho22bangkit.gizi.ui.profile.ProfileFragment"
+        android:label="@string/title_profile"
+        tools:layout="@layout/fragment_profile" />
 </navigation>
