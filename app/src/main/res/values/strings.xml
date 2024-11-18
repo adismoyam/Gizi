@@ -5,10 +5,13 @@
     <string name="title_nutriai">NutriAI</string>
     <string name="title_medcheck">MedCheck</string>
     <string name="title_profile">Profile</string>
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="article_description">Article Description</string>
+    <string name="article_title">Article Title</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
-
-
-
-
+    <string name="error_message_here">error_message_here</string>
+    <string name="author">Author</string>
+    <string name="published_at">Published At</string>
+    <string name="article_content">Article Content</string>
+    <string name="description">Description</string>
+    <string name="baca_di_web_browser">Baca di Web Browser</string>
 </resources>
