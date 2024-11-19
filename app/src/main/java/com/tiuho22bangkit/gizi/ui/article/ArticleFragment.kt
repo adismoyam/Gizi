@@ -9,8 +9,10 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.tiuho22bangkit.gizi.R
 import com.tiuho22bangkit.gizi.data.remote.ArticlesItem
 import com.tiuho22bangkit.gizi.databinding.FragmentArticleBinding
 import com.tiuho22bangkit.gizi.ui.article.detail.DetailFragment
@@ -66,19 +68,13 @@ class ArticleFragment : Fragment() {
     }
 
     private fun setArticleData(articlesList: List<ArticlesItem>) {
-//        val bundle = Bundle()
-//        val detailFragment = DetailFragment()
 
-//        bundle.putString(DetailFragment.EXTRA_ARTICLE_URL, viewModel.articleData.value)
-//        detailCategoryFragment.arguments = bundle
-
+        // safe args
         val adapter = ArticleAdapter { article ->
-
-//            val intent = Intent(requireContext(), DetailActivity::class.java).apply {
-//                putExtra(DetailActivity.EXTRA_EVENT_ID, event.id)
-//            }
-//            startActivity(intent)
+            val action = ArticleFragmentDirections.actionToDetailFragment(article)
+            findNavController().navigate(action)
         }
+
         adapter.submitList(articlesList)
         binding.rvArticle.adapter = adapter
         binding.rvArticle.visibility = View.VISIBLE

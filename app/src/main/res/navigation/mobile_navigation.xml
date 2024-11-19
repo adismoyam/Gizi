@@ -15,7 +15,20 @@
         android:id="@+id/navigation_article"
         android:name="com.tiuho22bangkit.gizi.ui.article.ArticleFragment"
         android:label="@string/title_article"
-        tools:layout="@layout/fragment_article" />
+        tools:layout="@layout/fragment_article">
+        <action
+            android:id="@+id/action_to_detailFragment"
+            app:destination="@id/detail_fragment" />
+    </fragment>
+
+        <fragment
+            android:id="@+id/detail_fragment"
+            android:name="com.tiuho22bangkit.gizi.ui.article.detail.DetailFragment"
+            android:label="Detail Fragment">
+            <argument
+                android:name="article"
+                app:argType="com.tiuho22bangkit.gizi.data.remote.ArticlesItem" />
+        </fragment>
 
     <fragment
         android:id="@+id/navigation_nutriai"
