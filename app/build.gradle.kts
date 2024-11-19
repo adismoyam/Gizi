@@ -5,7 +5,7 @@ plugins {
     id("com.google.devtools.ksp")
     id("kotlin-parcelize")
 
-    id ("androidx.navigation.safeargs")
+    id("androidx.navigation.safeargs")
 }
 
 android {
@@ -36,11 +36,14 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+//        sourceCompatibility = JavaVersion.VERSION_11
+//        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
         jvmTarget = "11"
+        jvmTarget = "17"
     }
     buildFeatures {
         viewBinding = true
@@ -55,6 +58,7 @@ dependencies {
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
     implementation(libs.androidx.constraintlayout)
+
     implementation(libs.androidx.lifecycle.livedata.ktx)
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
 
@@ -70,9 +74,7 @@ dependencies {
     // tflite
     implementation(libs.tensorflow.lite.metadata)
     implementation(libs.tensorflow.lite.support)
-
-    // tflite core (saran dari chatGPT :v
-    implementation(libs.tensorflow.lite)
+    implementation(libs.tensorflow.lite)    // tflite core (saran dari chatGPT) :v
 
     // retrofit
     implementation(libs.retrofit)
@@ -83,4 +85,15 @@ dependencies {
     implementation(libs.glide)
 
     ksp(libs.ksp)
+
+    // room
+    implementation(libs.androidx.room.runtime)
+    ksp(libs.androidx.room.compiler)
+    implementation(libs.androidx.room.ktx)
+
+    // splash screen
+    implementation(libs.androidx.core.splashscreen)
+
+    // gambar bulat
+    implementation(libs.circleimageview)
 }
