@@ -9,10 +9,9 @@ interface ApiService {
     @GET("everything")
     fun getArticles(
         @Query("q") query: String = "hamil OR asi OR gizi OR stunting OR balita OR mental",
-        @Query("from") from: String= "2024-10-18",  // sa sengaja batasi artikelnya muncul yang diupload
-                                                    // sejak 15 hari yang lalu supaya nda tro banyak muncul
+        @Query("from") from: String= "2024-10-20",  // batasnya cuma sebulan yang lalu
         @Query("language") language: String = "id",
         @Query("apiKey") apiKey: String = BuildConfig.API_KEY
     ): Call<NewsAPIResponse>
 }
-
+//https://newsapi.org/v2/everything?q=hamil%20OR%20asi%20OR%20gizi%20OR%20stunting%20OR%20balita%20OR%20mental&from=2024-10-19&language=id&apiKey=a2c7c8f11d164471a4b66dc1696b5186

@@ -1,6 +1,8 @@
 package com.tiuho22bangkit.gizi.data.remote
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
 data class NewsAPIResponse(
 
@@ -15,22 +17,26 @@ data class NewsAPIResponse(
 	val status: String
 )
 
+@Parcelize
 data class Source(
 
 	@field:SerializedName("name")
 	val name: String,
 
 	@field:SerializedName("id")
-	val id: Any?
-)
+//	val id: Any?
+	val id: String?
+) : Parcelable
 
+@Parcelize
 data class ArticlesItem(
 
 	@field:SerializedName("publishedAt")
 	val publishedAt: String,
 
 	@field:SerializedName("author")
-	val author: Any?,
+//	val author: Any?,
+	val author: String?,
 
 	@field:SerializedName("urlToImage")
 	val urlToImage: String,
@@ -49,4 +55,4 @@ data class ArticlesItem(
 
 	@field:SerializedName("content")
 	val content: String
-)
+): Parcelable
