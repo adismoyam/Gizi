@@ -14,4 +14,14 @@
     <string name="article_content">Article Content</string>
     <string name="description">Description</string>
     <string name="baca_di_web_browser">Buka di Web Browser</string>
+    <string name="tambah">Tambah</string>
+    <string name="berat">Berat (kg)</string>
+    <string name="tinggi">Tinggi (cm)</string>
+    <string name="tambah_data">Tambah Data</string>
+    <string name="kembali">Kembali</string>
+    <string name="isi_data_anak">Isi Data Anak</string>
+    <string name="nama_anak">Nama Anak</string>
+    <string name="laki_laki">Laki-laki</string>
+    <string name="perempuan">Perempuan</string>
+    <string name="tanggal_lahir">Tanggal Lahir</string>
 </resources>

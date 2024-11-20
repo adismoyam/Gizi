@@ -11,8 +11,8 @@ import androidx.room.RoomDatabase
     exportSchema = false
 )
 abstract class GiziDatabase : RoomDatabase() {
-    abstract fun ibuDao(): MomDao
-    abstract fun anakDao(): KidDao
+    abstract fun momDao(): MomDao
+    abstract fun kidDao(): KidDao
 
     companion object {
         @Volatile
