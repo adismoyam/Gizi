@@ -35,8 +35,11 @@ data class MomEntity(
     val bloodSugarLevel: Float,
     // kadar gula darah (mmol/L)
 
+    @field:ColumnInfo(name = "bodyTemperature")
+    val bodyTemperature: Float,
+    // suhu tubuh
+
     @field:ColumnInfo(name = "heartRate")
     val heartRate: Int,
     // jumlah detak jantung per menit (bpm)
-
 ) : Parcelable

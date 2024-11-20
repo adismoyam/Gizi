@@ -9,7 +9,7 @@ interface ApiService {
     @GET("everything")
     fun getArticles(
         @Query("q") query: String = "hamil OR asi OR gizi OR stunting OR balita OR mental",
-        @Query("from") from: String= "2024-10-20",  // batasnya cuma sebulan yang lalu
+        @Query("from") from: String= "2024-11-1",  // batasnya cuma sebulan yang lalu
         @Query("language") language: String = "id",
         @Query("apiKey") apiKey: String = BuildConfig.API_KEY
     ): Call<NewsAPIResponse>
