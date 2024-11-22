@@ -1,6 +1,8 @@
 package com.tiuho22bangkit.gizi.data
 
+import androidx.lifecycle.LiveData
 import com.tiuho22bangkit.gizi.data.local.KidDao
+import com.tiuho22bangkit.gizi.data.local.KidEntity
 import com.tiuho22bangkit.gizi.data.local.MomDao
 import com.tiuho22bangkit.gizi.data.remote.ApiService
 
@@ -10,6 +12,8 @@ class GiziRepository private constructor(
     private val appExecutors: AppExecutors,
     private val momDao: MomDao,
 )  {
+
+    fun getAllKid(): LiveData<List<KidEntity>> = kidDao.getAllKids()
 
     companion object {
         @Volatile

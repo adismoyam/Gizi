@@ -1,5 +1,6 @@
 package com.tiuho22bangkit.gizi.data.local
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
@@ -13,7 +14,7 @@ interface KidDao {
     fun insertKidData(kid: KidEntity)
 
     @Query("SELECT * FROM kid_table")
-    fun getAllKids(): List<KidEntity>
+    fun getAllKids(): LiveData<List<KidEntity>>
 
     @Query("SELECT * FROM kid_table WHERE id = :userId")
     fun getKidById(userId: Int): KidEntity?

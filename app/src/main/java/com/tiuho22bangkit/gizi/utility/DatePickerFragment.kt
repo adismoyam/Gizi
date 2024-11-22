@@ -1,4 +1,4 @@
-package com.tiuho22bangkit.gizi.ui.utility
+package com.tiuho22bangkit.gizi.utility
 
 import android.app.DatePickerDialog
 import android.app.Dialog
