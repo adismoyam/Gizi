@@ -11,4 +11,4 @@ Gizi: Generasi Indonesia Zero Stunting
 - Argitha Trihapsari  
 ### Cloud Computing  
 - Irfan  
-- Jumain Zulkaidah  
+- Jumain Zulkaidah
