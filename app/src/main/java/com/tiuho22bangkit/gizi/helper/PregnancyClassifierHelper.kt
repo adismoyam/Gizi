@@ -18,18 +18,15 @@ class PregnancyClassifierHelper(
     val context: Context,
     val classifierListener: ClassifierListener?,
 ) {
-//    private var imageClassifier: ImageClassifier? = null
 
     init {
-        setupImageClassifier()
+        setupClassifier()
     }
 
-    private fun setupImageClassifier() {
-        // TODO: Menyiapkan Image Classifier untuk memproses gambar.
+    private fun setupClassifier() {
     }
 
-    fun classifyStaticImage(imageUri: Uri) {
-        // TODO: mengklasifikasikan imageUri dari gambar statis.
+    fun classify() {
     }
 
     interface ClassifierListener {
