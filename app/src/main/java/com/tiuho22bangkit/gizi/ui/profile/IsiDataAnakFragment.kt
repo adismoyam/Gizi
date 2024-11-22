@@ -10,14 +10,15 @@ import android.widget.RadioGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.setFragmentResult
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.tiuho22bangkit.gizi.R
 import com.tiuho22bangkit.gizi.data.local.GiziDatabase
 import com.tiuho22bangkit.gizi.data.local.KidDao
 import com.tiuho22bangkit.gizi.data.local.KidEntity
-import com.tiuho22bangkit.gizi.ui.utility.DatePickerFragment
+import com.tiuho22bangkit.gizi.ui.article.ArticleFragmentDirections
+import com.tiuho22bangkit.gizi.utility.DatePickerFragment
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -110,7 +111,7 @@ class IsiDataAnakFragment : Fragment(), DatePickerFragment.DialogDateListener {
                             kidDao.insertKidData(kid)
                             withContext(Dispatchers.Main) {
                                 Toast.makeText(requireContext(), "Data anak berhasil disimpan", Toast.LENGTH_SHORT).show()
-                                findNavController().popBackStack()
+                                findNavController().navigateUp()
                             }
                         } catch (e: Exception) {
                             withContext(Dispatchers.Main) {

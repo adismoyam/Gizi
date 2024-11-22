@@ -20,14 +20,14 @@
             android:id="@+id/action_to_detailFragment"
             app:destination="@id/detail_fragment" />
     </fragment>
-        <fragment
-            android:id="@+id/detail_fragment"
-            android:name="com.tiuho22bangkit.gizi.ui.article.detail.DetailFragment"
-            android:label="Detail Fragment">
-            <argument
-                android:name="article"
-                app:argType="com.tiuho22bangkit.gizi.data.remote.ArticlesItem" />
-        </fragment>
+    <fragment
+        android:id="@+id/detail_fragment"
+        android:name="com.tiuho22bangkit.gizi.ui.article.detail.DetailFragment"
+        android:label="Detail Fragment">
+        <argument
+            android:name="article"
+            app:argType="com.tiuho22bangkit.gizi.data.remote.ArticlesItem" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_nutriai"
@@ -45,7 +45,7 @@
         android:id="@+id/navigation_profile"
         android:name="com.tiuho22bangkit.gizi.ui.profile.ProfileFragment"
         android:label="@string/title_profile"
-        tools:layout="@layout/fragment_profile" >
+        tools:layout="@layout/fragment_profile">
         <action
             android:id="@+id/action_navigation_profile_to_isiDataAnakFragment"
             app:destination="@id/isi_data_anak_fragment" />
@@ -54,6 +54,4 @@
         android:id="@+id/isi_data_anak_fragment"
         android:name="com.tiuho22bangkit.gizi.ui.profile.IsiDataAnakFragment"
         android:label="Isi Data Anak" />
-
-
 </navigation>
