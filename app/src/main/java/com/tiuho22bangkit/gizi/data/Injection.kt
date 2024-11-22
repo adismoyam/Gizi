@@ -5,12 +5,18 @@ import com.tiuho22bangkit.gizi.data.local.GiziDatabase
 import com.tiuho22bangkit.gizi.data.remote.ApiConfig
 
 object Injection {
-    fun provideRepository(context: Context): GiziRepository {
+    fun provideGiziRepository(context: Context): GiziRepository {
         val apiService = ApiConfig.getApiService()
         val database = GiziDatabase.getInstance(context)
         val kidDao = database.kidDao()
-        val momDao = database.momDao()
         val appExecutors = AppExecutors()
+        val momDao = database.momDao()
         return GiziRepository.getInstance(apiService, kidDao, appExecutors, momDao)
+    }
+    fun provideUserRepository(context: Context): UserRepository {
+        val database = GiziDatabase.getInstance(context)
+        val userDao = database.userDao()
+        val appExecutors = AppExecutors()
+        return UserRepository.getInstance(userDao, appExecutors)
     }
 }

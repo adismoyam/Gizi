@@ -5,11 +5,14 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.tiuho22bangkit.gizi.data.GiziRepository
 import com.tiuho22bangkit.gizi.data.Injection
+import com.tiuho22bangkit.gizi.data.UserRepository
 import com.tiuho22bangkit.gizi.ui.profile.ProfileViewModel
+import com.tiuho22bangkit.gizi.ui.register.UserViewModel
 
 class ViewModelFactory private constructor(
 //    private val mApplication: Application,
     private val giziRepository: GiziRepository,
+    private val userRepository: UserRepository,
 
     ) : ViewModelProvider.NewInstanceFactory() {
 
@@ -37,6 +40,10 @@ class ViewModelFactory private constructor(
                 ProfileViewModel(giziRepository) as T
             }
 
+            modelClass.isAssignableFrom(UserViewModel::class.java) -> {
+                UserViewModel(userRepository) as T
+            }
+
 //            modelClass.isAssignableFrom(SettingViewModel::class.java) -> {
 //                SettingViewModel(settingPreferences) as T
 //            }
@@ -49,10 +56,11 @@ class ViewModelFactory private constructor(
         @Volatile
         private var instance: ViewModelFactory? = null
         fun getInstance(context: Context): ViewModelFactory {
-            val repository = Injection.provideRepository(context)
+            val repository = Injection.provideGiziRepository(context)
+            val repositoryUser = Injection.provideUserRepository(context)
 //            val preferences = SettingPreferences.getInstance(context.dataStore)
             return instance ?: synchronized(this) {
-                instance ?: ViewModelFactory(repository,
+                instance ?: ViewModelFactory(repository, repositoryUser
 //                    preferences
                 ).also { instance = it }
             }
