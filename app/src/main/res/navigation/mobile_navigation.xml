@@ -12,6 +12,50 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
+        android:id="@+id/navigation_start"
+        android:name="com.tiuho22bangkit.gizi.ui.StartFragment"
+        android:label="@string/title_start"
+        tools:layout="@layout/fragment_start" >
+        <action
+            android:id="@+id/action_fragmentStart_to_fragmentLogin"
+            app:destination="@id/navigation_login"
+            app:enterAnim="@transition/move"
+            app:exitAnim="@transition/move" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_register"
+        android:name="com.tiuho22bangkit.gizi.ui.auth.RegisterFragment"
+        android:label="@string/title_register"
+        tools:layout="@layout/fragment_register" >
+        <action
+            android:id="@+id/action_registerFragment_to_roleFragment"
+            app:destination="@id/navigation_role" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_role"
+        android:name="com.tiuho22bangkit.gizi.ui.auth.RoleFragment"
+        android:label="@string/title_register"
+        tools:layout="@layout/fragment_role" >
+        <argument
+            android:name="username"
+            app:argType="string" />
+        <argument
+            android:name="email"
+            app:argType="string" />
+        <argument
+            android:name="password"
+            app:argType="string" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_login"
+        android:name="com.tiuho22bangkit.gizi.ui.auth.LoginFragment"
+        android:label="@string/title_login"
+        tools:layout="@layout/fragment_login" />
+
+    <fragment
         android:id="@+id/navigation_article"
         android:name="com.tiuho22bangkit.gizi.ui.article.ArticleFragment"
         android:label="@string/title_article"

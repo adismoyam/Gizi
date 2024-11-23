@@ -7,7 +7,7 @@ import com.tiuho22bangkit.gizi.data.GiziRepository
 import com.tiuho22bangkit.gizi.data.Injection
 import com.tiuho22bangkit.gizi.data.UserRepository
 import com.tiuho22bangkit.gizi.ui.profile.ProfileViewModel
-import com.tiuho22bangkit.gizi.ui.register.UserViewModel
+import com.tiuho22bangkit.gizi.ui.auth.UserViewModel
 
 class ViewModelFactory private constructor(
 //    private val mApplication: Application,

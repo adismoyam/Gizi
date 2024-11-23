@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/background_gradient"
-    tools:context=".ui.register.RegisterFragment">
+    tools:context=".ui.auth.RegisterFragment">
 
         <!-- Logo -->
         <ImageView
@@ -14,8 +14,8 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_marginTop="100dp"
+            android:contentDescription="@string/description_logo"
             android:src="@drawable/mother"
-            android:contentDescription="Logo"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@id/formContainer"
             app:layout_constraintStart_toStartOf="parent"
@@ -43,10 +43,12 @@
                 android:id="@+id/usernameEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Input Username"
+                android:hint="@string/username"
                 android:layout_marginBottom="12dp"
                 android:layout_marginTop="32dp"
+                android:importantForAutofill="no"
                 android:padding="12dp"
+                android:inputType="text"
                 android:background="@drawable/rounded_edittext" />
 
             <!-- Email -->
@@ -54,7 +56,8 @@
                 android:id="@+id/emailEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Input Email"
+                android:importantForAutofill="no"
+                android:hint="@string/email"
                 android:layout_marginBottom="12dp"
                 android:padding="12dp"
                 android:background="@drawable/rounded_edittext"
@@ -65,7 +68,8 @@
                 android:id="@+id/passwordEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Input Password"
+                android:hint="@string/password"
+                android:importantForAutofill="no"
                 android:layout_marginBottom="12dp"
                 android:padding="12dp"
                 android:background="@drawable/rounded_edittext"
@@ -76,7 +80,8 @@
                 android:id="@+id/confirmPasswordEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Confirm Password"
+                android:hint="@string/confirm_password"
+                android:importantForAutofill="no"
                 android:layout_marginBottom="24dp"
                 android:padding="12dp"
                 android:background="@drawable/rounded_edittext"
@@ -99,7 +104,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="16dp"
-                android:text="Already Have an Account? Login"
+                android:text="@string/have_account"
                 android:textSize="14sp" />
         </LinearLayout>
 

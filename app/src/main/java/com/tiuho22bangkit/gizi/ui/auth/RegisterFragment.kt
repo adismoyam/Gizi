@@ -1,4 +1,4 @@
-package com.tiuho22bangkit.gizi.ui.register
+package com.tiuho22bangkit.gizi.ui.auth
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,6 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.AppBarConfiguration
 import com.tiuho22bangkit.gizi.R
 import com.tiuho22bangkit.gizi.databinding.FragmentRegisterBinding
 
@@ -19,17 +23,23 @@ class RegisterFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        (activity as AppCompatActivity).supportActionBar?.hide()
         _binding = FragmentRegisterBinding.inflate(inflater, container, false)
         return binding.root
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val username = binding.usernameEditText.text.toString().trim()
-        val email = binding.emailEditText.text.toString().trim()
-        val password = binding.passwordEditText.text.toString().trim()
+        binding.loginText.setOnClickListener {
+            findNavController().navigate(R.id.navigation_login)
+        }
 
         binding.nextButton.setOnClickListener {
+
+            val username = binding.usernameEditText.text.toString().trim()
+            val email = binding.emailEditText.text.toString().trim()
+            val password = binding.passwordEditText.text.toString().trim()
 
             if (username.isEmpty() || email.isEmpty() || password.isEmpty()) {
                 Toast.makeText(requireContext(), "Semua bidang harus diisi", Toast.LENGTH_SHORT)
@@ -37,19 +47,12 @@ class RegisterFragment : Fragment() {
                 return@setOnClickListener
             }
 
-            val roleFragment = RoleFragment().apply {
-                arguments = Bundle().apply {
-                    putString("username", username)
-                    putString("email", email)
-                    putString("password", password)
-                }
+            val bundle = Bundle().apply {
+                putString("username", username)
+                putString("email", email)
+                putString("password", password)
             }
-
-            // Lakukan transaksi untuk mengganti fragment
-            parentFragmentManager.beginTransaction()
-                .replace(R.id.register_fragment, roleFragment)
-                .addToBackStack(null) // Tambahkan ke backstack jika ingin mendukung navigasi balik
-                .commit()
+            findNavController().navigate(R.id.navigation_role, bundle)
         }
     }
 

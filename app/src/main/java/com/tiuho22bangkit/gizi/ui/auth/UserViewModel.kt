@@ -1,4 +1,4 @@
-package com.tiuho22bangkit.gizi.ui.register
+package com.tiuho22bangkit.gizi.ui.auth
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

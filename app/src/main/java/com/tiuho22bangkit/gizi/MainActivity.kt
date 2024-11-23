@@ -1,6 +1,7 @@
 package com.tiuho22bangkit.gizi
 
 import android.os.Bundle
+import android.view.View
 import androidx.activity.enableEdgeToEdge
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
@@ -30,11 +31,23 @@ class MainActivity : AppCompatActivity() {
             WindowInsetsCompat.CONSUMED
         }
 
-
-
         val navView: BottomNavigationView = binding.navView
 
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
+
+        val bottomNav = findViewById<View>(R.id.nav_view)
+
+        // Atur visibilitas Bottom Navigation berdasarkan fragment
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            when (destination.id) {
+                R.id.navigation_register, R.id.navigation_login, R.id.navigation_role, R.id.navigation_start -> {
+                    bottomNav.visibility = View.GONE
+                }
+                else -> {
+                    bottomNav.visibility = View.VISIBLE
+                }
+            }
+        }
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         val appBarConfiguration = AppBarConfiguration(
