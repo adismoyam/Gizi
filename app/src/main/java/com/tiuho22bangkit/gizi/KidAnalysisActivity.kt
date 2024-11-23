@@ -10,6 +10,7 @@ import androidx.core.view.WindowInsetsCompat
 import com.bumptech.glide.Glide
 import com.tiuho22bangkit.gizi.data.local.KidEntity
 import com.tiuho22bangkit.gizi.databinding.ActivityKidAnalysisBinding
+import com.tiuho22bangkit.gizi.utility.calculateMonthAge
 
 class KidAnalysisActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -36,27 +37,28 @@ class KidAnalysisActivity : AppCompatActivity(), View.OnClickListener {
             intent.getParcelableExtra(DATA)
         }
 
-        binding.apply {
-            if (kid?.gender == "Laki-Laki") {
-                Glide.with(root.context)
-                    .load(kid.uri)
-                    .placeholder(R.drawable.baby_boy)
-                    .into(gambar)
-            } else {
-                Glide.with(root.context)
-                    .load(kid?.uri)
-                    .placeholder(R.drawable.baby_girl)
-                    .into(gambar)
+        if (kid != null) {
+            binding.apply {
+                if (kid.gender == "Laki-Laki") {
+                    Glide.with(root.context)
+                        .load(kid.uri)
+                        .placeholder(R.drawable.baby_boy)
+                        .into(gambar)
+                } else {
+                    Glide.with(root.context)
+                        .load(kid.uri)
+                        .placeholder(R.drawable.baby_girl)
+                        .into(gambar)
+                }
+                tvNamaAnak.text = kid.name
+                tvGender.text = String.format(getString(R.string.jenis_kelamin_profile), kid.gender)
+                tvTanggalLahir.text = String.format(getString(R.string.tanggal_lahir), kid.birthDate)
+                tvUsia.text = String.format(getString(R.string.usia_profile), calculateMonthAge(kid.birthDate))
+                tvTinggi.text = String.format(getString(R.string.tinggi_profile), kid.height)
+                tvBerat.text = String.format(getString(R.string.berat_profile), kid.weight)
             }
-            tvNamaAnak.text = kid?.name
-            tvGender.text = kid?.gender
-            tvTanggalLahir.text = kid?.birthDate
-            tvTinggi.text = kid?.height.toString()
-            tvBerat.text = kid?.weight.toString()
+
         }
-
-
-
 
 
     }
