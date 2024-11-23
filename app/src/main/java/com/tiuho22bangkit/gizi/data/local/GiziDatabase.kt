@@ -6,13 +6,14 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 
 @Database(
-    entities = [MomEntity::class, KidEntity::class],
-    version = 1,
+    entities = [MomEntity::class, KidEntity::class, UserEntity::class],
+    version = 2,
     exportSchema = false
 )
 abstract class GiziDatabase : RoomDatabase() {
     abstract fun momDao(): MomDao
     abstract fun kidDao(): KidDao
+    abstract fun userDao(): UserDao
 
     companion object {
         @Volatile

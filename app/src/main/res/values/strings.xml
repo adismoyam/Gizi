@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">Gizi</string>
     <string name="title_home">Home</string>
+    <string name="title_start">Start</string>
+    <string name="title_login">Login</string>
+    <string name="title_register">Register</string>
     <string name="title_article">Article</string>
     <string name="title_nutriai">NutriAI</string>
     <string name="title_medcheck">MedCheck</string>
@@ -25,4 +28,19 @@
     <string name="perempuan">Perempuan</string>
     <string name="tanggal_lahir">Tanggal Lahir</string>
     <string name="analisis">Analisis</string>
+    <string name="username">Nama Pengguna</string>
+    <string name="email">Email</string>
+    <string name="password">Kata Sandi</string>
+    <string name="confirm_password">Konfirmasi Kata Sandi</string>
+    <string name="sign_up">Daftar</string>
+    <string name="next">Selanjutnya</string>
+    <string name="start">Mulai</string>
+    <string name="login">Masuk</string>
+    <string name="pregnant">Hamil</string>
+    <string name="breastfeeding">Menyusui</string>
+    <string name="havetoddler">Memiliki Bayi</string>
+    <string name="role_title">Pilih Tipe Pengguna</string>
+    <string name="description_logo">Logo Aplikasi Gizi</string>
+    <string name="have_account">Sudah Punya Akun? <b>Masuk</b> </string>
+    <string name="dont_have_account">Belum Punya Akun? <b>Daftar</b> </string>
 </resources>

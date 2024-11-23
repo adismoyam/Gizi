@@ -1,5 +1,6 @@
 package com.tiuho22bangkit.gizi
 
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import androidx.activity.enableEdgeToEdge
@@ -9,7 +10,6 @@ import androidx.core.view.WindowInsetsCompat
 import com.bumptech.glide.Glide
 import com.tiuho22bangkit.gizi.data.local.KidEntity
 import com.tiuho22bangkit.gizi.databinding.ActivityKidAnalysisBinding
-import com.tiuho22bangkit.gizi.databinding.FragmentDetailBinding
 
 class KidAnalysisActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -29,12 +29,17 @@ class KidAnalysisActivity : AppCompatActivity(), View.OnClickListener {
             insets
         }
 
-        val kid = intent.getParcelableExtra(DATA, KidEntity::class.java)
+        val kid: KidEntity? = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            intent.getParcelableExtra(DATA, KidEntity::class.java)
+        } else {
+            @Suppress("DEPRECATION")
+            intent.getParcelableExtra(DATA)
+        }
 
         binding.apply {
             if (kid?.gender == "Laki-Laki") {
                 Glide.with(root.context)
-                    .load(kid?.uri)
+                    .load(kid.uri)
                     .placeholder(R.drawable.baby_boy)
                     .into(gambar)
             } else {
