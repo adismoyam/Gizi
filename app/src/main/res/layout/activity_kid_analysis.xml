@@ -29,10 +29,12 @@
         tools:text="@string/nama_anak" />
 
     <LinearLayout
-        android:id="@+id/linearLayout2"
+        android:id="@+id/linearLayout1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -43,19 +45,27 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textSize="24sp"
+            android:textSize="20sp"
             android:textStyle="bold"
-            tools:text="Jenis Kelamin" />
+            tools:text="@string/jenis_kelamin_profile" />
 
         <TextView
             android:id="@+id/tv_tanggal_lahir"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textSize="24sp"
+            android:textSize="20sp"
             android:textStyle="bold"
             tools:text="@string/tanggal_lahir" />
 
+        <TextView
+            android:id="@+id/tv_usia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            tools:text="@string/usia_profile" />
 
         <TextView
             android:id="@+id/tv_tinggi"
@@ -64,7 +74,7 @@
             android:layout_weight="1"
             android:textSize="20sp"
             android:textStyle="bold"
-            tools:text="@string/tinggi" />
+            tools:text="@string/tinggi_profile" />
 
         <TextView
             android:id="@+id/tv_berat"
@@ -73,17 +83,47 @@
             android:layout_weight="1"
             android:textSize="20sp"
             android:textStyle="bold"
-            tools:text="@string/berat" />
+            tools:text="@string/berat_profile" />
     </LinearLayout>
 
-    <Button
-        android:id="@+id/btn_analisis"
-        android:layout_width="wrap_content"
+    <TextView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/analisis"
+        android:gravity="center"
+        android:text="@string/warning_newest_data"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout1" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout1">
+
+        <Button
+            android:id="@+id/btn_ubah_data"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:layout_marginEnd="16dp"
+            android:layout_weight="1"
+            android:text="@string/Perbarui_data" />
+
+        <Button
+            android:id="@+id/btn_analisis"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_weight="1"
+            android:text="@string/analisis" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
