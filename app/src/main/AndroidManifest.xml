@@ -15,6 +15,9 @@
         android:theme="@style/Theme.Gizi"
         tools:targetApi="31">
         <activity
+            android:name=".UpdateKidActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.StartActivity"
             android:exported="false" />
         <activity
