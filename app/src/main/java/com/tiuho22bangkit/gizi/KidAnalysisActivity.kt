@@ -120,11 +120,8 @@ class KidAnalysisActivity : AppCompatActivity() {
                         }
                     }
                 }
-
-
             }
         )
-
         // Memanggil fungsi classify untuk melakukan inferensi
         stuntWastHelper.classifyInput(inputData)
     }
