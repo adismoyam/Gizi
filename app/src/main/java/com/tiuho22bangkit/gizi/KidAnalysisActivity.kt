@@ -66,14 +66,14 @@ class KidAnalysisActivity : AppCompatActivity() {
                 val genderInput = if (kid.gender == "Laki-laki") 1f else 0f
 
                 btnUbahData.setOnClickListener {
-                  val intent = Intent(this, UpdateKidActivity::class.java)
-                  intent.putExtra("id", kid?.id)
-                  intent.putExtra("name", kid?.name)
-                  intent.putExtra("gender", kid?.gender)
-                  intent.putExtra("birthdate", kid?.birthDate)
-                  intent.putExtra("height", kid?.height ?: 0f)
-                  intent.putExtra("weight", kid?.weight ?: 0f)
-                  startActivity(intent)
+                    val intent = Intent(root.context, UpdateKidActivity::class.java)
+                    intent.putExtra("id", kid.id)
+                    intent.putExtra("name", kid.name)
+                    intent.putExtra("gender", kid.gender)
+                    intent.putExtra("birthdate", kid.birthDate)
+                    intent.putExtra("height", kid.height)
+                    intent.putExtra("weight", kid.weight)
+                    root.context.startActivity(intent)
                 }
                 
                 btnAnalisis.setOnClickListener {
