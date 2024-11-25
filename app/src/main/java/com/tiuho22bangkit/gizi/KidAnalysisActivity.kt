@@ -62,6 +62,7 @@ class KidAnalysisActivity : AppCompatActivity(), View.OnClickListener {
         }
         binding.btnUbahData.setOnClickListener {
             val intent = Intent(this, UpdateKidActivity::class.java)
+            intent.putExtra("id", kid?.id)
             intent.putExtra("name", kid?.name)
             intent.putExtra("gender", kid?.gender)
             intent.putExtra("birthdate", kid?.birthDate)

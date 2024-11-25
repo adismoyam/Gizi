@@ -13,6 +13,7 @@ import com.tiuho22bangkit.gizi.data.local.GiziDatabase
 import com.tiuho22bangkit.gizi.data.local.KidDao
 import com.tiuho22bangkit.gizi.data.local.KidEntity
 import com.tiuho22bangkit.gizi.databinding.ActivityUpdateKidBinding
+import com.tiuho22bangkit.gizi.ui.profile.KidProfileAdapter
 import com.tiuho22bangkit.gizi.utility.DatePickerFragment
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -47,6 +48,7 @@ class UpdateKidActivity : AppCompatActivity(), DatePickerFragment.DialogDateList
         kidDao = giziDatabase.kidDao()
 
         // Get data from Intent
+        val idData = intent.getIntExtra("id", 0)
         val nameData = intent.getStringExtra("name")
         val genderData = intent.getStringExtra("gender")
         val birthdateData = intent.getStringExtra("birthdate")
@@ -114,6 +116,7 @@ class UpdateKidActivity : AppCompatActivity(), DatePickerFragment.DialogDateList
 
                 else -> {
                      val kid = KidEntity(
+                         id = idData,
                         name = name,
                         gender = gender,
                         birthDate = birthDate,
@@ -131,7 +134,7 @@ class UpdateKidActivity : AppCompatActivity(), DatePickerFragment.DialogDateList
                                     "Data anak berhasil disimpan",
                                     Toast.LENGTH_SHORT
                                 ).show()
-                                finish() // Tutup Activity setelah selesai
+                                finish()
                             }
                         } catch (e: Exception) {
                             withContext(Dispatchers.Main) {
