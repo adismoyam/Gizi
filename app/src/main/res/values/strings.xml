@@ -20,12 +20,12 @@
     <string name="tambah">Tambah</string>
     <string name="empty_kid">Belum ada data anak</string>
 
-    <string name="tanggal_lahir_profile">Tanggal Lahir</string>
+    <string name="tanggal_lahir">Tanggal Lahir</string>
     <string name="berat">Berat (kg)</string>
     <string name="tinggi">Tinggi (cm)</string>
 
     <string name="jenis_kelamin_profile">Jenis Kelamin\t\t: %1$s</string>
-    <string name="tanggal_lahir">Tanggal Lahir\t\t: %1$s</string>
+    <string name="tanggal_lahir_profile">Tanggal Lahir\t\t: %1$s</string>
     <string name="usia_profile">Usia\t\t\t\t\t\t\t\t\t\t\t\t\t: %1$d bulan</string>
     <string name="berat_profile">Berat\t\t\t\t\t\t\t\t\t\t\t\t: %1$.2f kg</string>
     <string name="tinggi_profile">Tinggi\t\t\t\t\t\t\t\t\t\t\t: %1$.2f cm</string>

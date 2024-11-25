@@ -1,5 +1,6 @@
 package com.tiuho22bangkit.gizi.utility
 
+import android.util.Log
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.time.temporal.ChronoUnit
@@ -38,4 +39,25 @@ fun calculateMonthAge(dateString: String): Long {
     val totalMonths = ChronoUnit.MONTHS.between(inputDate, currentDate)
     return totalMonths
 // Misalnya, dari "2022-05-01" ke "2024-11-23", outputnya adalah 30
+}
+
+fun scaleInputKidData(
+    gender: Float, monthAge: Float, height: Float, weight: Float
+): FloatArray {
+    // konversi ke Double agar perhitungan menjadi lebih akurat
+    val inputKidData = doubleArrayOf(gender.toDouble(), monthAge.toDouble(), height.toDouble(), weight.toDouble())
+
+    val mean = doubleArrayOf(0.49821, 11.99258, 73.132657, 9.259256)
+    val scale = doubleArrayOf(0.4999968, 7.19963506, 11.36078884, 3.30076366)
+
+    // mengskalakan data
+    val newDataScaled = DoubleArray(inputKidData.size) { index ->
+        (inputKidData[index] - mean[index]) / scale[index]
+    }
+
+    // melihat hasil
+    Log.d("scaleInputKidData", "Scaled Double Array: ${newDataScaled.contentToString()}")
+
+    // Mengonversi hasil akhir ke FloatArray dan di-return
+    return newDataScaled.map { it.toFloat() }.toFloatArray()
 }
