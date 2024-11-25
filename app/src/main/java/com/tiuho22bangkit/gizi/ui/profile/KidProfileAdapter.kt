@@ -45,8 +45,7 @@ class KidProfileAdapter : ListAdapter<KidEntity, KidProfileAdapter.MyViewHolder>
 
                 root.setOnClickListener {
                     val intent = Intent(root.context, KidAnalysisActivity::class.java)
-                    intent.putExtra(KidAnalysisActivity.DATA, kid)
-//                    intent.putExtra(KidAnalysisActivity.EXTRA_RESULT, history.result)
+                    intent.putExtra(KidAnalysisActivity.KID_DATA, kid)
                     root.context.startActivity(intent)
                 }
             }
