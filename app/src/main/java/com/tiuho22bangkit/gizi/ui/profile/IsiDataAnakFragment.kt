@@ -10,14 +10,13 @@ import android.widget.RadioGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.setFragmentResult
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.tiuho22bangkit.gizi.R
 import com.tiuho22bangkit.gizi.data.local.GiziDatabase
 import com.tiuho22bangkit.gizi.data.local.KidDao
 import com.tiuho22bangkit.gizi.data.local.KidEntity
-import com.tiuho22bangkit.gizi.ui.article.ArticleFragmentDirections
+import com.tiuho22bangkit.gizi.databinding.FragmentIsiDataAnakBinding
 import com.tiuho22bangkit.gizi.utility.DatePickerFragment
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -32,11 +31,19 @@ class IsiDataAnakFragment : Fragment(), DatePickerFragment.DialogDateListener {
     private lateinit var giziDatabase: GiziDatabase
     private lateinit var kidDao: KidDao
 
+    private var _binding: FragmentIsiDataAnakBinding? = null
+    private val binding get() = _binding!!
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        val view = inflater.inflate(R.layout.fragment_isi_data_anak, container, false)
+    ): View {
+        _binding = FragmentIsiDataAnakBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         giziDatabase = GiziDatabase.getInstance(requireContext())
         kidDao = giziDatabase.kidDao()
@@ -57,6 +64,10 @@ class IsiDataAnakFragment : Fragment(), DatePickerFragment.DialogDateListener {
                 childFragmentManager,  // karena fragment ini child dari Profile
                 DATE_PICKER_TAG
             )
+        }
+
+        binding.btnClose.setOnClickListener {
+            findNavController().navigate(R.id.action_navigation_isiDataAnakFragment_to_navigation_profile)
         }
 
         btnTambahData.setOnClickListener {
@@ -122,18 +133,19 @@ class IsiDataAnakFragment : Fragment(), DatePickerFragment.DialogDateListener {
                 }
             }
         }
-        return view
     }
 
     override fun onDialogDateSet(year: Int, month: Int, dayOfMonth: Int) {
-        // Siapkan date formatter-nya terlebih dahulu
         val calendar = Calendar.getInstance()
         calendar.set(year, month, dayOfMonth)
         val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-
-        // Set text dari textview once
         val formattedDate = dateFormat.format(calendar.time)
-        view?.findViewById<TextView>(R.id.tv_date)?.text = formattedDate
+        binding.tvDate.text = formattedDate
+    }
+
+    private fun showDatePicker() {
+        val datePickerFragment = DatePickerFragment()
+        datePickerFragment.show(childFragmentManager, "DatePicker")
     }
 
     companion object {
