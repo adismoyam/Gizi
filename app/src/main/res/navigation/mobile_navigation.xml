@@ -97,5 +97,9 @@
     <fragment
         android:id="@+id/isi_data_anak_fragment"
         android:name="com.tiuho22bangkit.gizi.ui.profile.IsiDataAnakFragment"
-        android:label="Isi Data Anak" />
+        android:label="Isi Data Anak" >
+        <action
+            android:id="@+id/action_navigation_isiDataAnakFragment_to_navigation_profile"
+            app:destination="@id/navigation_profile"/>
+    </fragment>
 </navigation>

@@ -1,5 +1,6 @@
 package com.tiuho22bangkit.gizi
 
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -8,6 +9,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.tiuho22bangkit.gizi.data.local.KidEntity
 import com.tiuho22bangkit.gizi.databinding.ActivityKidAnalysisBinding
@@ -25,7 +27,6 @@ class KidAnalysisActivity : AppCompatActivity() {
 
         binding = ActivityKidAnalysisBinding.inflate(layoutInflater)
         setContentView(binding.root)
-//        setContentView(R.layout.activity_kid_analysis)
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -64,6 +65,17 @@ class KidAnalysisActivity : AppCompatActivity() {
 
                 val genderInput = if (kid.gender == "Laki-laki") 1f else 0f
 
+                btnUbahData.setOnClickListener {
+                    val intent = Intent(root.context, UpdateKidActivity::class.java)
+                    intent.putExtra("id", kid.id)
+                    intent.putExtra("name", kid.name)
+                    intent.putExtra("gender", kid.gender)
+                    intent.putExtra("birthdate", kid.birthDate)
+                    intent.putExtra("height", kid.height)
+                    intent.putExtra("weight", kid.weight)
+                    root.context.startActivity(intent)
+                }
+                
                 btnAnalisis.setOnClickListener {
                     analyzeKidData(genderInput, monthAge.toFloat(), kid.height, kid.weight)
                 }

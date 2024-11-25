@@ -18,6 +18,7 @@
     <string name="description">Description</string>
     <string name="baca_di_web_browser">Buka di Web Browser</string>
     <string name="tambah">Tambah</string>
+    <string name="empty_kid">Belum ada data anak</string>
 
     <string name="tanggal_lahir">Tanggal Lahir</string>
     <string name="berat">Berat (kg)</string>
@@ -30,6 +31,7 @@
     <string name="tinggi_profile">Tinggi\t\t\t\t\t\t\t\t\t\t\t: %1$.2f cm</string>
 
     <string name="tambah_data">Tambah Data</string>
+    <string name="perbarui_data">Perbarui Data</string>
     <string name="kembali">Kembali</string>
     <string name="isi_data_anak">Isi Data Anak</string>
     <string name="nama_anak">Nama Anak</string>
