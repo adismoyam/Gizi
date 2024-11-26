@@ -98,5 +98,6 @@ dependencies {
     // gambar bulat
     implementation(libs.circleimageview)
 
-
+    // ViewPager2
+    implementation(libs.androidx.viewpager2)
 }

@@ -6,7 +6,7 @@
     <string name="title_register">Register</string>
     <string name="title_article">Article</string>
     <string name="title_nutriai">NutriAI</string>
-    <string name="title_medcheck">MedCheck</string>
+    <string name="title_medrec">MedRec</string>
     <string name="title_profile">Profile</string>
     <string name="article_description">Article Description</string>
     <string name="article_title">Article Title</string>
@@ -56,4 +56,11 @@
     <string name="have_account">Sudah Punya Akun? <b>Masuk</b> </string>
     <string name="dont_have_account">Belum Punya Akun? <b>Daftar</b> </string>
     <string name="warning_newest_data">Pastikan data yang ingin dianalisis adalah yang terbaru.</string>
+
+
+    <string name="content_tab_mom">Welcome Mom</string>
+    <string name="content_tab_kid">Welcome Kid</string>
+
+    <string name="tab_mom_medrec">Kehamilan</string>
+    <string name="tab_kid_medrec">Anak</string>
 </resources>
