@@ -80,10 +80,10 @@
         tools:layout="@layout/fragment_nutriai" />
 
     <fragment
-        android:id="@+id/navigation_medcheck"
-        android:name="com.tiuho22bangkit.gizi.ui.medcheck.MedcheckFragment"
-        android:label="@string/title_medcheck"
-        tools:layout="@layout/fragment_medcheck" />
+        android:id="@+id/navigation_medrec"
+        android:name="com.tiuho22bangkit.gizi.ui.medrec.MedrecFragment"
+        android:label="@string/title_medrec"
+        tools:layout="@layout/fragment_medrec" />
 
     <fragment
         android:id="@+id/navigation_profile"

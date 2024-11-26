@@ -55,7 +55,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.navigation_home,
                 R.id.navigation_article,
                 R.id.navigation_nutriai,
-                R.id.navigation_medcheck,
+                R.id.navigation_medrec,
                 R.id.navigation_profile
             )
         )

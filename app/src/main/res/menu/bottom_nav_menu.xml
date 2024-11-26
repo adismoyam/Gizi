@@ -17,9 +17,9 @@
         android:title="@string/title_nutriai" />
 
     <item
-        android:id="@+id/navigation_medcheck"
+        android:id="@+id/navigation_medrec"
         android:icon="@drawable/baseline_medical_information_24"
-        android:title="@string/title_medcheck" />
+        android:title="@string/title_medrec" />
 
     <item
         android:id="@+id/navigation_profile"
