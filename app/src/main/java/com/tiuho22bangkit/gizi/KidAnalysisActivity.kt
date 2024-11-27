@@ -9,11 +9,11 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.tiuho22bangkit.gizi.data.local.KidEntity
 import com.tiuho22bangkit.gizi.databinding.ActivityKidAnalysisBinding
 import com.tiuho22bangkit.gizi.helper.StuntWastClassifierHelper
+import com.tiuho22bangkit.gizi.ui.profile.UpdateKidActivity
 import com.tiuho22bangkit.gizi.utility.calculateMonthAge
 import com.tiuho22bangkit.gizi.utility.scaleInputKidData
 

@@ -14,10 +14,18 @@ data class MomEntity(
     val id: Int = 0,
 
     @field:ColumnInfo(name = "name")
-    val name: String,
+    val name: String? = null,
 
     @field:ColumnInfo(name = "uri")
     val uri: String? = null,
+
+    @field:ColumnInfo(name= "lastMenstrualPeriod")
+    val lastMenstrualPeriod: String,
+    // hari pertama haid terakhir (HPHT)
+
+    @field:ColumnInfo(name= "estimatedDeliveryDate")
+    val estimatedDeliveryDate: String,
+    // hari perkiraan lahir (HPL)
 
     @field:ColumnInfo(name = "birthDate")
     val birthDate: String,
@@ -40,6 +48,6 @@ data class MomEntity(
     // suhu tubuh
 
     @field:ColumnInfo(name = "heartRate")
-    val heartRate: Int,
+    val heartRate: Float,
     // jumlah detak jantung per menit (bpm)
 ) : Parcelable

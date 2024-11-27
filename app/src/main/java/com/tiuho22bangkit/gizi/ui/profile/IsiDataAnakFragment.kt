@@ -50,7 +50,7 @@ class IsiDataAnakFragment : Fragment(), DatePickerFragment.DialogDateListener {
 
         val kidNameET = view.findViewById<EditText>(R.id.kidName)
         val kidHeightET = view.findViewById<EditText>(R.id.kidHeight)
-        val kidWeightET = view.findViewById<EditText>(R.id.kitWeight)
+        val kidWeightET = view.findViewById<EditText>(R.id.kidWeight)
         val kidGenderRG = view.findViewById<RadioGroup>(R.id.rg_gender)
         val kidBirthDayTV = view.findViewById<TextView>(R.id.tv_date)
 
