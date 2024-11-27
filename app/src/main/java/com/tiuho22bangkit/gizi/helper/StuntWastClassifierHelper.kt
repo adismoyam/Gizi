@@ -1,13 +1,11 @@
 package com.tiuho22bangkit.gizi.helper
 
 import android.content.Context
-import android.net.Uri
 import android.util.Log
 import org.tensorflow.lite.Interpreter
 import java.io.IOException
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
-
 
 class StuntWastClassifierHelper(
     private val modelName: String = "model_1.tflite",
@@ -93,7 +91,6 @@ class StuntWastClassifierHelper(
             classifierListener?.onError("Error during inference: ${e.message}")
         }
     }
-
 
     interface ClassifierListener {
         fun onError(error: String)

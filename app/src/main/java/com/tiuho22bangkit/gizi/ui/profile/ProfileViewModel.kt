@@ -24,4 +24,5 @@ class ProfileViewModel(private val giziRepository: GiziRepository) : ViewModel()
             }
         }
     }
+
 }

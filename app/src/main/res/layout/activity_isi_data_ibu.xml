@@ -1,60 +1,31 @@
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:padding="16dp"
-    tools:context=".ui.profile.UpdateKidActivity">
-<LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="16dp"
-    app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent">
+    android:padding="16dp">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:text="@string/isi_data_anak" />
+        android:text="@string/isi_data_kehamilan" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/nama_anak" />
+        android:text="@string/nama_opsional" />
 
     <EditText
-        android:id="@+id/kidName"
+        android:id="@+id/name"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_gravity="start"
         android:layout_marginBottom="16dp"
-        android:hint="@string/nama_anak" />
-
-    <RadioGroup
-        android:id="@+id/rg_gender"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:orientation="horizontal">
-
-        <RadioButton
-            android:id="@+id/rb_boy"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/laki_laki" />
-
-        <RadioButton
-            android:id="@+id/rb_girl"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/perempuan" />
-    </RadioGroup>
+        android:inputType="textPersonName"
+        android:hint="@string/nama_opsional" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -64,7 +35,47 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/btn_date"
+            android:id="@+id/btn_lmp_date"
+            style="?attr/materialIconButtonFilledStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:contentDescription="@string/hari_pertama_haid_terakhir"
+            app:icon="@drawable/baseline_date_range_24" />
+
+        <TextView
+            android:id="@+id/tv_lmp_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/hari_pertama_haid_terakhir" />
+
+        <Button
+            android:id="@+id/btn_edd_date"
+            style="?attr/materialIconButtonFilledStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:contentDescription="@string/hari_perkiraan_lahir"
+            app:icon="@drawable/baseline_date_range_24" />
+
+        <TextView
+            android:id="@+id/tv_edd_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/hari_perkiraan_lahir" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_birth_date"
             style="?attr/materialIconButtonFilledStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -72,7 +83,7 @@
             app:icon="@drawable/baseline_date_range_24" />
 
         <TextView
-            android:id="@+id/tv_date"
+            android:id="@+id/tv_birth_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/tanggal_lahir" />
@@ -87,13 +98,54 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/tinggi" />
+            android:text="@string/tekanan_darah_sistolik_mmhg" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/berat" />
+            android:text="@string/tekanan_darah_diastolik_mmhg" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/et_systolic_blood_pressure"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:hint="@string/tekanan_darah_sistolik_mmhg"
+            android:inputType="numberDecimal" />
+
+        <EditText
+            android:id="@+id/et_diastolic_blood_pressure"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:hint="@string/tekanan_darah_diastolik_mmhg"
+            android:inputType="numberDecimal" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/suhu_tubuh_c" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/detak_jantung_bpm" />
     </LinearLayout>
 
     <LinearLayout
@@ -107,7 +159,7 @@
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_weight="1"
-            android:hint="@string/tinggi"
+            android:hint="@string/suhu_tubuh_c"
             android:inputType="numberDecimal" />
 
         <EditText
@@ -115,7 +167,7 @@
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_weight="1"
-            android:hint="@string/berat"
+            android:hint="@string/detak_jantung_bpm"
             android:inputType="numberDecimal" />
     </LinearLayout>
 
@@ -138,7 +190,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/perbarui_data" />
+            android:text="@string/tambah_data" />
     </LinearLayout>
 </LinearLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,10 +8,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tiuho22bangkit.gizi.KidAnalysisActivity
+import com.tiuho22bangkit.gizi.MomAnalysisActivity
 import com.tiuho22bangkit.gizi.R
 import com.tiuho22bangkit.gizi.databinding.FragmentProfileBinding
 import com.tiuho22bangkit.gizi.ui.ViewModelFactory
@@ -25,12 +27,7 @@ class ProfileFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val adapter by lazy {
-        KidProfileAdapter()// { kid ->
-//            val intent = Intent(requireContext(), KidAnalysisActivity::class.java).apply {
-//                putExtra(KidAnalysisActivity.EXTRA_KID_ID, kid.id.toInt())
-//            }
-//            startActivity(intent)
-//        }
+        KidProfileAdapter()
     }
 
     override fun onCreateView(
@@ -49,15 +46,21 @@ class ProfileFragment : Fragment() {
 
         // Mengamati perubahan pada LiveData kidData
         viewModel.kidData.observe(viewLifecycleOwner) { kidList ->
-            // Pastikan data sudah tersedia dan kirimkan ke adapter
             Log.d("ProfileFragment", "Kid list updated: $kidList")
             adapter.submitList(kidList)
         }
 
-
         val buttonTambahAnak: ImageButton = view.findViewById(R.id.tambah_anak)
         buttonTambahAnak.setOnClickListener {
             findNavController().navigate(R.id.action_navigation_profile_to_isiDataAnakFragment)
+        }
+
+        // TODO: Jika data ibu belum diisi, intent ke IsiDataIbuActivity.
+        // TODO: Jika sudah terisi, intent ke MomAnalysisActivity.
+
+        binding.circleImage.setOnClickListener {
+            val intent = Intent(requireContext(), IsiDataIbuActivity::class.java)
+            startActivity(intent)
         }
     }
 

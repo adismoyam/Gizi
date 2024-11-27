@@ -1,4 +1,4 @@
-package com.tiuho22bangkit.gizi
+package com.tiuho22bangkit.gizi.ui.medrec
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
