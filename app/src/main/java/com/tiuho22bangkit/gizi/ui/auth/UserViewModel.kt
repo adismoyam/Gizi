@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.tiuho22bangkit.gizi.data.UserRepository
-import com.tiuho22bangkit.gizi.data.local.UserEntity
+import com.tiuho22bangkit.gizi.data.local.entity.UserEntity
 import kotlinx.coroutines.launch
 
 class UserViewModel(private val repository: UserRepository ) : ViewModel() {

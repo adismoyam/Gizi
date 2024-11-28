@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.tiuho22bangkit.gizi.KidAnalysisActivity
 import com.tiuho22bangkit.gizi.R
-import com.tiuho22bangkit.gizi.data.local.KidEntity
+import com.tiuho22bangkit.gizi.data.local.entity.KidEntity
 import com.tiuho22bangkit.gizi.databinding.KidProfileCardBinding
 
 class KidProfileAdapter : ListAdapter<KidEntity, KidProfileAdapter.MyViewHolder>(DIFF_CALLBACK) {

@@ -4,6 +4,12 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.tiuho22bangkit.gizi.data.local.dao.KidDao
+import com.tiuho22bangkit.gizi.data.local.dao.MomDao
+import com.tiuho22bangkit.gizi.data.local.dao.UserDao
+import com.tiuho22bangkit.gizi.data.local.entity.KidEntity
+import com.tiuho22bangkit.gizi.data.local.entity.MomEntity
+import com.tiuho22bangkit.gizi.data.local.entity.UserEntity
 
 @Database(
     entities = [MomEntity::class, KidEntity::class, UserEntity::class],

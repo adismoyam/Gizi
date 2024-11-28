@@ -1,4 +1,4 @@
-package com.tiuho22bangkit.gizi.data.local
+package com.tiuho22bangkit.gizi.data.local.entity
 
 import android.os.Parcelable
 import androidx.room.ColumnInfo

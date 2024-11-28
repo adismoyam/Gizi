@@ -1,7 +1,7 @@
 package com.tiuho22bangkit.gizi.data
 
-import com.tiuho22bangkit.gizi.data.local.UserDao
-import com.tiuho22bangkit.gizi.data.local.UserEntity
+import com.tiuho22bangkit.gizi.data.local.dao.UserDao
+import com.tiuho22bangkit.gizi.data.local.entity.UserEntity
 
 class UserRepository(private val userDao: UserDao, private val appExecutors: AppExecutors) {
 

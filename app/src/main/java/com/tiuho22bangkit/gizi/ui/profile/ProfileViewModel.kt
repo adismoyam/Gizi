@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.tiuho22bangkit.gizi.data.GiziRepository
-import com.tiuho22bangkit.gizi.data.local.KidEntity
+import com.tiuho22bangkit.gizi.data.local.entity.KidEntity
 import kotlinx.coroutines.launch
 
 class ProfileViewModel(private val giziRepository: GiziRepository) : ViewModel() {
