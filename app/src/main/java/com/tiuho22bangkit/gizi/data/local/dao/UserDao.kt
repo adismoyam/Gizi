@@ -1,6 +1,7 @@
-package com.tiuho22bangkit.gizi.data.local
+package com.tiuho22bangkit.gizi.data.local.dao
 
 import androidx.room.*
+import com.tiuho22bangkit.gizi.data.local.entity.UserEntity
 
 @Dao
 interface UserDao {

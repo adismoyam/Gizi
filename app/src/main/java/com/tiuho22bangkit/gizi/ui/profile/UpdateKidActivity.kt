@@ -9,8 +9,8 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import com.tiuho22bangkit.gizi.R
 import com.tiuho22bangkit.gizi.data.local.GiziDatabase
-import com.tiuho22bangkit.gizi.data.local.KidDao
-import com.tiuho22bangkit.gizi.data.local.KidEntity
+import com.tiuho22bangkit.gizi.data.local.dao.KidDao
+import com.tiuho22bangkit.gizi.data.local.entity.KidEntity
 import com.tiuho22bangkit.gizi.databinding.ActivityUpdateKidBinding
 import com.tiuho22bangkit.gizi.utility.DatePickerFragment
 import kotlinx.coroutines.Dispatchers

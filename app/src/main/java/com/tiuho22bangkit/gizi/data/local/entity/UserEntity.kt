@@ -1,4 +1,4 @@
-package com.tiuho22bangkit.gizi.data.local
+package com.tiuho22bangkit.gizi.data.local.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
