@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".KidAnalysisActivity">
+    tools:context=".ui.analysis.KidAnalysisActivity">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/gambar"
@@ -56,7 +56,7 @@
             android:layout_weight="1"
             android:textSize="20sp"
             android:textStyle="bold"
-            tools:text="@string/tanggal_lahir_profile" />
+            tools:text="@string/tanggal_lahir_anak_profile" />
 
         <TextView
             android:id="@+id/tv_usia"
@@ -65,7 +65,7 @@
             android:layout_weight="1"
             android:textSize="20sp"
             android:textStyle="bold"
-            tools:text="@string/usia_profile" />
+            tools:text="@string/usia_anak_profile" />
 
         <TextView
             android:id="@+id/tv_tinggi"
@@ -74,7 +74,7 @@
             android:layout_weight="1"
             android:textSize="20sp"
             android:textStyle="bold"
-            tools:text="@string/tinggi_profile" />
+            tools:text="@string/tinggi_anak_profile" />
 
         <TextView
             android:id="@+id/tv_berat"
@@ -83,7 +83,7 @@
             android:layout_weight="1"
             android:textSize="20sp"
             android:textStyle="bold"
-            tools:text="@string/berat_profile" />
+            tools:text="@string/berat_anak_profile" />
     </LinearLayout>
 
     <TextView

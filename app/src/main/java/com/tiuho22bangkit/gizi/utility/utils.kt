@@ -1,9 +1,12 @@
 package com.tiuho22bangkit.gizi.utility
 
 import android.util.Log
+import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.time.temporal.ChronoUnit
+import java.util.Calendar
+import java.util.Locale
 
 //  fungsi untuk menghitung perbedaan waktu
 fun calculateTimeDifference(dateString: String): String {
@@ -117,4 +120,11 @@ private fun scaleInputMomData(
 
     Log.d("scaleInputPregnantData", "Scaled Double Array: ${scaledData.contentToString()}")
     return scaledData.map { it.toFloat() }.toFloatArray()
+}
+
+fun millisToDate(millis: Long): String {
+    val formatTanggal = SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault())
+    val kalender = Calendar.getInstance()
+    kalender.timeInMillis = millis
+    return formatTanggal.format(kalender.time)
 }

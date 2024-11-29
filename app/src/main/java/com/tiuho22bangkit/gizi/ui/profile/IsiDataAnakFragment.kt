@@ -59,11 +59,7 @@ class IsiDataAnakFragment : Fragment(), DatePickerFragment.DialogDateListener {
         // tanggal lahir handler
         val dateButton = view.findViewById<Button>(R.id.btn_date)
         dateButton.setOnClickListener {
-            val datePickerFragment = DatePickerFragment()
-            datePickerFragment.show(
-                childFragmentManager,  // karena fragment ini child dari Profile
-                DATE_PICKER_TAG
-            )
+            showDatePicker()
         }
 
         binding.btnClose.setOnClickListener {
@@ -93,6 +89,7 @@ class IsiDataAnakFragment : Fragment(), DatePickerFragment.DialogDateListener {
                 }
 
                 birthDate.isEmpty() -> {
+
                     Toast.makeText(requireContext(), "Pilih tanggal lahir anak", Toast.LENGTH_SHORT)
                         .show()
                 }
@@ -145,7 +142,7 @@ class IsiDataAnakFragment : Fragment(), DatePickerFragment.DialogDateListener {
 
     private fun showDatePicker() {
         val datePickerFragment = DatePickerFragment()
-        datePickerFragment.show(childFragmentManager, "DatePicker")
+        datePickerFragment.show(childFragmentManager, DATE_PICKER_TAG)
     }
 
     companion object {
