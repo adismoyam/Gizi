@@ -13,7 +13,10 @@ interface MomDao {
     fun insertMomData(mom: MomEntity)
 
     @Query("SELECT * FROM mom_table")
-    suspend fun getTheMom(): List<MomEntity>
+    fun getTheMom(): List<MomEntity>
+
+    @Query("SELECT COUNT(*) FROM mom_table")
+    fun checkTheMom(): Int
 
     @Update
     suspend fun updateTheMom(mom: MomEntity)

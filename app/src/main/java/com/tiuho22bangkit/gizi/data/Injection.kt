@@ -11,7 +11,9 @@ object Injection {
         val kidDao = database.kidDao()
         val appExecutors = AppExecutors()
         val momDao = database.momDao()
-        return GiziRepository.getInstance(apiService, kidDao, appExecutors, momDao)
+        val momAnalysisHistoryDao = database.momAnalysisHistory()
+        val kidAnalysisHistoryDao = database.kidAnalysisHistory()
+        return GiziRepository.getInstance(apiService, kidDao, appExecutors, momDao, momAnalysisHistoryDao, kidAnalysisHistoryDao)
     }
     fun provideUserRepository(context: Context): UserRepository {
         val database = GiziDatabase.getInstance(context)

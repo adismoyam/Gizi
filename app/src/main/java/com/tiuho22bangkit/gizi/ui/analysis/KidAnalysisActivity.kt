@@ -1,4 +1,4 @@
-package com.tiuho22bangkit.gizi
+package com.tiuho22bangkit.gizi.ui.analysis
 
 import android.content.Intent
 import android.os.Build
@@ -6,13 +6,16 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.bumptech.glide.Glide
+import com.tiuho22bangkit.gizi.R
 import com.tiuho22bangkit.gizi.data.local.entity.KidEntity
 import com.tiuho22bangkit.gizi.databinding.ActivityKidAnalysisBinding
 import com.tiuho22bangkit.gizi.helper.StuntWastClassifierHelper
+import com.tiuho22bangkit.gizi.ui.ViewModelFactory
 import com.tiuho22bangkit.gizi.ui.profile.UpdateKidActivity
 import com.tiuho22bangkit.gizi.utility.calculateMonthAge
 import com.tiuho22bangkit.gizi.utility.scaleInputKidData
@@ -20,6 +23,11 @@ import com.tiuho22bangkit.gizi.utility.scaleInputKidData
 class KidAnalysisActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityKidAnalysisBinding
+    private val viewModel: AnalysisViewModel by viewModels {
+        ViewModelFactory.getInstance(this)
+    }
+
+    private var kid: KidEntity? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,14 +42,24 @@ class KidAnalysisActivity : AppCompatActivity() {
             insets
         }
 
-        val kid: KidEntity? = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+        kid = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             intent.getParcelableExtra(KID_DATA, KidEntity::class.java)
         } else {
             @Suppress("DEPRECATION")
             intent.getParcelableExtra(KID_DATA)
         }
 
-        if (kid != null) {
+        if (kid == null) {
+            showToast("Kid data is missing.")
+            finish()
+            return
+        }
+
+        setupUI()
+    }
+
+    private fun setupUI(){
+        kid?.let{ kid ->
             binding.apply {
                 if (kid.gender == "Laki-Laki") {
                     Glide.with(root.context)
@@ -58,10 +76,11 @@ class KidAnalysisActivity : AppCompatActivity() {
 
                 tvNamaAnak.text = kid.name
                 tvGender.text = String.format(getString(R.string.jenis_kelamin_profile), kid.gender)
-                tvTanggalLahir.text = String.format(getString(R.string.tanggal_lahir_profile), kid.birthDate)
-                tvUsia.text = String.format(getString(R.string.usia_profile), monthAge)
-                tvTinggi.text = String.format(getString(R.string.tinggi_profile), kid.height)
-                tvBerat.text = String.format(getString(R.string.berat_profile), kid.weight)
+                tvTanggalLahir.text =
+                    String.format(getString(R.string.tanggal_lahir_anak_profile), kid.birthDate)
+                tvUsia.text = String.format(getString(R.string.usia_anak_profile), monthAge)
+                tvTinggi.text = String.format(getString(R.string.tinggi_anak_profile), kid.height)
+                tvBerat.text = String.format(getString(R.string.berat_anak_profile), kid.weight)
 
                 val genderInput = if (kid.gender == "Laki-laki") 1f else 0f
 
@@ -75,7 +94,7 @@ class KidAnalysisActivity : AppCompatActivity() {
                     intent.putExtra("weight", kid.weight)
                     root.context.startActivity(intent)
                 }
-                
+
                 btnAnalisis.setOnClickListener {
                     analyzeKidData(genderInput, monthAge.toFloat(), kid.height, kid.weight)
                 }
@@ -83,7 +102,12 @@ class KidAnalysisActivity : AppCompatActivity() {
         }
     }
 
-    private fun analyzeKidData(kidGender: Float, kidMonthAge: Float, kidHeight: Float, kidWeight: Float){
+    private fun analyzeKidData(
+        kidGender: Float,
+        kidMonthAge: Float,
+        kidHeight: Float,
+        kidWeight: Float
+    ) {
         val inputData = scaleInputKidData(kidGender, kidMonthAge, kidHeight, kidWeight)
 
         // Membuat instance NumericalClassifierHelper dan mengirimkan input data untuk klasifikasi
@@ -105,28 +129,41 @@ class KidAnalysisActivity : AppCompatActivity() {
                             Log.d("Hasil", results[1].joinToString(", "))
 
                             // Daftar label
-                            val labelWasting = listOf("Normal", "Risk of Overweight", "Severely Underweight", "Underweight")
-                            val labelStunting = listOf("Normal", "Severely Stunted", "Stunted", "Tall")
+                            val wastingLabel = listOf(
+                                "Normal",
+                                "Risk of Overweight",
+                                "Severely Underweight",
+                                "Underweight"
+                            )
+                            val stuntingLabel =
+                                listOf(
+                                    "Normal",
+                                    "Severely Stunted",
+                                    "Stunted",
+                                    "Tall"
+                                )
 
                             // Cari indeks dengan probabilitas tertinggi
                             val maxIndex1 = output1.indices.maxByOrNull { output1[it] } ?: -1
                             val maxIndex2 = output2.indices.maxByOrNull { output2[it] } ?: -1
 
                             // Dapatkan label dari indeks
-                            val label1 = if (maxIndex1 != -1) labelWasting[maxIndex1] else "Unknown"
-                            val label2 = if (maxIndex2 != -1) labelStunting[maxIndex2] else "Unknown"
+                            val labeledWastingResult =
+                                if (maxIndex1 != -1) wastingLabel[maxIndex1] else "Unknown"
+                            val labeledStuntingResult =
+                                if (maxIndex2 != -1) stuntingLabel[maxIndex2] else "Unknown"
 
-                            Log.d("Hasil", label1)
-                            Log.d("Hasil", label2)
+                            Log.d("Hasil", labeledWastingResult)
+                            Log.d("Hasil", labeledStuntingResult)
 
-
-                            val resultString1 = label1
-                            val resultString2 = label2
 
                             // Menampilkan kedua hasil di TextView
-                            binding.tvHasilWasting.text = "Results:\n\n$resultString1\n"
-                            binding.tvHasilStunting.text = "Results:\n\n$resultString2\n"
+                            binding.tvHasilWasting.text =
+                                "Risiko Wasting:\n\n$labeledWastingResult\n"
+                            binding.tvHasilStunting.text =
+                                "Risiko Stunting:\n\n$labeledStuntingResult\n"
 
+                            kid?.let { viewModel.saveKidAnalysisResult(it, labeledWastingResult, labeledStuntingResult) }
                         } else {
                             showToast("Unexpected results format.")
                         }

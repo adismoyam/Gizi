@@ -8,15 +8,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
-import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.tiuho22bangkit.gizi.KidAnalysisActivity
-import com.tiuho22bangkit.gizi.MomAnalysisActivity
 import com.tiuho22bangkit.gizi.R
 import com.tiuho22bangkit.gizi.databinding.FragmentProfileBinding
 import com.tiuho22bangkit.gizi.ui.ViewModelFactory
+import com.tiuho22bangkit.gizi.ui.analysis.MomAnalysisActivity
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class ProfileFragment : Fragment() {
     private val viewModel: ProfileViewModel by viewModels {
@@ -55,14 +57,26 @@ class ProfileFragment : Fragment() {
             findNavController().navigate(R.id.action_navigation_profile_to_isiDataAnakFragment)
         }
 
-        // TODO: Jika data ibu belum diisi, intent ke IsiDataIbuActivity.
-        // TODO: Jika sudah terisi, intent ke MomAnalysisActivity.
+        // Mengamati apakah data ibu sudah ada
+        viewModel.isMomDataAvailable.observe(viewLifecycleOwner) { isMomDataAvailable ->
+            val intent = if (isMomDataAvailable) {
+                // Jika data ibu sudah ada, navigasi ke MomAnalysisActivity
+                Intent(requireContext(), MomAnalysisActivity::class.java)
+//                    .putExtra(MomAnalysisActivity.MOM_DATA, mom)
+            } else {
+                // Jika data ibu belum ada, navigasi ke IsiDataIbuActivity
+                Intent(requireContext(), IsiDataIbuActivity::class.java)
+            }
 
-        binding.circleImage.setOnClickListener {
-            val intent = Intent(requireContext(), IsiDataIbuActivity::class.java)
-            startActivity(intent)
+            binding.circleImage.setOnClickListener {
+                startActivity(intent)
+            }
         }
+
     }
+
+
+
 
     override fun onResume() {
         super.onResume()

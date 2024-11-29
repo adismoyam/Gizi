@@ -133,7 +133,22 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="vertical"
+        android:layout_marginBottom="16dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/kadar_gula_darah_mmol_l" />
+
+        <EditText
+            android:id="@+id/et_blood_sugar_level"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:hint="@string/kadar_gula_darah_mmol_l"
+            android:inputType="numberDecimal" />
 
         <TextView
             android:layout_width="match_parent"
@@ -141,29 +156,22 @@
             android:layout_weight="1"
             android:text="@string/suhu_tubuh_c" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/detak_jantung_bpm" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:orientation="horizontal">
-
         <EditText
-            android:id="@+id/kidHeight"
+            android:id="@+id/et_body_temperature"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_weight="1"
             android:hint="@string/suhu_tubuh_c"
             android:inputType="numberDecimal" />
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/detak_jantung_bpm" />
+
         <EditText
-            android:id="@+id/kitWeight"
+            android:id="@+id/et_heart_rate"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_weight="1"

@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.tiuho22bangkit.gizi.KidAnalysisActivity
+import com.tiuho22bangkit.gizi.ui.analysis.KidAnalysisActivity
 import com.tiuho22bangkit.gizi.R
 import com.tiuho22bangkit.gizi.data.local.entity.KidEntity
 import com.tiuho22bangkit.gizi.databinding.KidProfileCardBinding

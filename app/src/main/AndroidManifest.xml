@@ -18,7 +18,7 @@
             android:name=".ui.profile.IsiDataIbuActivity"
             android:exported="false" />
         <activity
-            android:name=".MomAnalysisActivity"
+            android:name=".ui.analysis.MomAnalysisActivity"
             android:exported="false" />
         <activity
             android:name=".ui.profile.UpdateKidActivity"
@@ -27,7 +27,7 @@
             android:name=".ui.StartActivity"
             android:exported="false" />
         <activity
-            android:name=".KidAnalysisActivity"
+            android:name=".ui.analysis.KidAnalysisActivity"
             android:exported="false" />
         <activity
             android:name=".AnalyzeActivity"
