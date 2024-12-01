@@ -1,5 +1,6 @@
 package com.tiuho22bangkit.gizi.ui.analysis
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.tiuho22bangkit.gizi.data.GiziRepository
@@ -54,4 +55,7 @@ class AnalysisViewModel(private val giziRepository: GiziRepository) : ViewModel(
         }
     }
 
+    fun getKid(id: Int): LiveData<KidEntity> {
+        return giziRepository.getKid(id)
+    }
 }

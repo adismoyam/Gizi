@@ -55,7 +55,27 @@ class KidAnalysisActivity : AppCompatActivity() {
             return
         }
 
-        setupUI()
+        val id = kid!!.id
+        viewModel.getKid(id).observe(this) { kid ->
+            updateUI(kid)
+            setupUI()
+        }
+    }
+
+    private fun updateUI(kid: KidEntity) {
+        binding.apply {
+            Glide.with(root.context)
+                .load(kid.uri)
+                .placeholder(if (kid.gender == "Laki-Laki") R.drawable.baby_boy else R.drawable.baby_girl)
+                .into(gambar)
+
+            tvNamaAnak.text = kid.name
+            tvGender.text = String.format(getString(R.string.jenis_kelamin_profile), kid.gender)
+            tvTanggalLahir.text = String.format(getString(R.string.tanggal_lahir_anak_profile), kid.birthDate)
+            tvUsia.text = String.format(getString(R.string.usia_anak_profile), calculateMonthAge(kid.birthDate))
+            tvTinggi.text = String.format(getString(R.string.tinggi_anak_profile), kid.height)
+            tvBerat.text = String.format(getString(R.string.berat_anak_profile), kid.weight)
+        }
     }
 
     private fun setupUI(){
