@@ -89,7 +89,6 @@ class IsiDataAnakFragment : Fragment(), DatePickerFragment.DialogDateListener {
                 }
 
                 birthDate.isEmpty() -> {
-
                     Toast.makeText(requireContext(), "Pilih tanggal lahir anak", Toast.LENGTH_SHORT)
                         .show()
                 }

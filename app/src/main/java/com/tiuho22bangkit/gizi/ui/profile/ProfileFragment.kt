@@ -9,16 +9,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tiuho22bangkit.gizi.R
 import com.tiuho22bangkit.gizi.databinding.FragmentProfileBinding
 import com.tiuho22bangkit.gizi.ui.ViewModelFactory
 import com.tiuho22bangkit.gizi.ui.analysis.MomAnalysisActivity
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class ProfileFragment : Fragment() {
     private val viewModel: ProfileViewModel by viewModels {
@@ -46,42 +42,45 @@ class ProfileFragment : Fragment() {
 
         setupRVKidProfile()
 
-        // Mengamati perubahan pada LiveData kidData
-        viewModel.kidData.observe(viewLifecycleOwner) { kidList ->
-            Log.d("ProfileFragment", "Kid list updated: $kidList")
-            adapter.submitList(kidList)
-        }
 
         val buttonTambahAnak: ImageButton = view.findViewById(R.id.tambah_anak)
         buttonTambahAnak.setOnClickListener {
             findNavController().navigate(R.id.action_navigation_profile_to_isiDataAnakFragment)
         }
 
-        // Mengamati apakah data ibu sudah ada
-        viewModel.isMomDataAvailable.observe(viewLifecycleOwner) { isMomDataAvailable ->
-            val intent = if (isMomDataAvailable) {
-                // Jika data ibu sudah ada, navigasi ke MomAnalysisActivity
-                Intent(requireContext(), MomAnalysisActivity::class.java)
-//                    .putExtra(MomAnalysisActivity.MOM_DATA, mom)
-            } else {
-                // Jika data ibu belum ada, navigasi ke IsiDataIbuActivity
-                Intent(requireContext(), IsiDataIbuActivity::class.java)
-            }
-
-            binding.circleImage.setOnClickListener {
-                startActivity(intent)
-            }
+        binding.circleImage.setOnClickListener {
+            val intent = Intent(requireContext(), IsiDataIbuActivity::class.java)
+            startActivity(intent)
         }
+
+        momObserver()
+
 
     }
 
-
-
-
     override fun onResume() {
         super.onResume()
-        viewModel.kidData.observe(viewLifecycleOwner) { kidList ->
+        viewModel.loadKidData().observe(viewLifecycleOwner) { kidList ->
+            Log.d("ProfileFragment", "Kid list updated: $kidList")
             adapter.submitList(kidList)
+        }
+
+        viewModel.checkMomData()
+    }
+
+    private fun momObserver() {
+        viewModel.isMomDataAvailable.observe(viewLifecycleOwner) { isMomDataAvailable ->
+            if (isMomDataAvailable) {
+                viewModel.loadMomData().observe(viewLifecycleOwner) { mom ->
+                    binding.tvName.text = mom.name
+
+                    binding.circleImage.setOnClickListener {
+                        val intent = Intent(requireContext(), MomAnalysisActivity::class.java)
+                            .putExtra(MomAnalysisActivity.MOM_DATA, mom)
+                        startActivity(intent)
+                    }
+                }
+            }
         }
     }
 

@@ -21,6 +21,7 @@ class GiziRepository private constructor(
 ) {
 
     fun getAllKid(): LiveData<List<KidEntity>> = kidDao.getAllKids()
+    fun getTheMom(): LiveData<MomEntity> = momDao.getTheMom()
 
     fun addKidAnalysisHistory(kidAnalysisHistoryEntity: KidAnalysisHistoryEntity) {
         kidAnalysisHistoryDao.insertKidAnalysisHistoryData(kidAnalysisHistoryEntity)
@@ -34,9 +35,6 @@ class GiziRepository private constructor(
         return momDao.checkTheMom() > 0
     }
 
-    fun getTheMom(){
-        momDao.getTheMom()
-    }
 
     companion object {
         @Volatile
