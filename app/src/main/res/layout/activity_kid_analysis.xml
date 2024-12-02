@@ -23,8 +23,8 @@
         android:layout_height="wrap_content"
         android:textSize="32sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/gambar"
+        app:layout_constraintStart_toStartOf="@+id/gambar"
         app:layout_constraintTop_toBottomOf="@+id/gambar"
         tools:text="@string/nama_anak" />
 

@@ -1,5 +1,6 @@
 package com.tiuho22bangkit.gizi.ui.analysis
 
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -9,10 +10,16 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.bumptech.glide.Glide
 import com.tiuho22bangkit.gizi.R
 import com.tiuho22bangkit.gizi.data.local.entity.MomEntity
 import com.tiuho22bangkit.gizi.databinding.ActivityMomAnalysisBinding
+import com.tiuho22bangkit.gizi.helper.PregnancyClassifierHelper
 import com.tiuho22bangkit.gizi.ui.ViewModelFactory
+import com.tiuho22bangkit.gizi.ui.profile.UpdateKidActivity
+import com.tiuho22bangkit.gizi.utility.calculateMonthAge
+import com.tiuho22bangkit.gizi.utility.calculateYearAge
+import com.tiuho22bangkit.gizi.utility.scaleInputMomData
 
 class MomAnalysisActivity : AppCompatActivity() {
 
@@ -49,7 +56,125 @@ class MomAnalysisActivity : AppCompatActivity() {
             return
         }
 
-//        setupUI()
+        setupUI()
+    }
+
+    private fun setupUI() {
+        mom?.let { mom ->
+            binding.apply {
+                Glide.with(root.context)
+                    .load(mom.uri)
+                    .placeholder(R.drawable.mother)
+                    .into(gambar)
+
+                val yearAge = calculateYearAge(mom.birthDate)
+
+                if (mom.name != null) {
+                    binding.tvNama.text = mom.name
+                }
+
+                tvTanggalLahir.text =
+                    String.format(getString(R.string.tanggal_lahir_profile), mom.birthDate)
+
+                tvUsia.text = String.format(getString(R.string.usia_profile), yearAge)
+                tvTekananDarah.text = String.format(
+                    getString(R.string.tekanan_darah_profile),
+                    mom.systolicBloodPressure.toInt(),
+                    mom.diastolicBloodPressure.toInt()
+                )
+                tvKadarGulaDarah.text = String.format(
+                    getString(R.string.kadar_gula_darah_profile),
+                    mom.bloodSugarLevel
+                )
+                tvSuhuTubuh.text = String.format(
+                    getString(R.string.suhu_tubuh_profile),
+                    mom.bodyTemperature
+                )
+                tvDetakJantung.text = String.format(
+                    getString(R.string.detak_jantung_profile),
+                    mom.heartRate.toInt()
+                )
+
+
+//                btnUbahData.setOnClickListener {
+//                    val intent = Intent(root.context, UpdateKidActivity::class.java)
+//                    intent.putExtra("id", kid.id)
+//                    intent.putExtra("name", kid.name)
+//                    intent.putExtra("gender", kid.gender)
+//                    intent.putExtra("birthdate", kid.birthDate)
+//                    intent.putExtra("height", kid.height)
+//                    intent.putExtra("weight", kid.weight)
+//                    root.context.startActivity(intent)
+//                }
+
+                btnAnalisis.setOnClickListener {
+                    analyzeMomData(
+                        yearAge.toFloat(),
+                        mom.systolicBloodPressure,
+                        mom.diastolicBloodPressure,
+                        mom.bloodSugarLevel,
+                        mom.bodyTemperature,
+                        mom.heartRate
+                    )
+                }
+            }
+        }
+    }
+
+
+    private fun analyzeMomData(
+        momAge: Float,
+        systolicBloodPressure: Float,
+        diastolicBloodPressure: Float,
+        bloodSugarLevel: Float,
+        bodyTemperature: Float,
+        heartRate: Float
+    ) {
+
+        val inputData = scaleInputMomData(
+            momAge,
+            systolicBloodPressure,
+            diastolicBloodPressure,
+            bloodSugarLevel,
+            bodyTemperature,
+            heartRate
+        )
+
+        // Membuat instance PregClassicHelper dan mengirimkan input data untuk klasifikasi
+        val pregnancyHelper = PregnancyClassifierHelper(
+            context = this,
+            classifierListener = object : PregnancyClassifierHelper.ClassifierListener {
+                override fun onError(error: String) {
+                    // Menampilkan error dengan Toast
+                    showToast(error)
+                }
+
+                override fun onResults(results: Array<FloatArray>) {
+                    runOnUiThread {
+                        val output = results[0] // Output pertama
+                        Log.d("Hasil", results[0].joinToString(", "))
+
+                        val pregnancyLabel = listOf(
+                            "Normal",
+                            "Mid Risk",
+                            "High Risk"
+                        )
+
+                        val maxIndex = output.indices.maxByOrNull { output[it] } ?: -1
+
+                        val labeledPregnancy =
+                            if (maxIndex != -1) pregnancyLabel[maxIndex] else "Unknown"
+
+                        Log.d("Hasil", labeledPregnancy)
+
+                        binding.tvHasil.text = "Results:\n$labeledPregnancy"
+                        mom?.let { viewModel.saveMomAnalysisResult(it, labeledPregnancy) }
+                    }
+                }
+            }
+        )
+        // Memanggil fungsi classify untuk melakukan inferensi
+        pregnancyHelper.classifyInput(inputData)
     }
 
     private fun showToast(message: String) {

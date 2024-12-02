@@ -62,7 +62,7 @@ class IsiDataIbuActivity : AppCompatActivity(), DatePickerFragment.DialogDateLis
             val birthDate = binding.tvBirthDate.text.toString()
 
             val systolicBloodPressure = binding.etSystolicBloodPressure.text.toString().toFloatOrNull()
-            val diastolicBloodPressure = binding.etSystolicBloodPressure.text.toString().toFloatOrNull()
+            val diastolicBloodPressure = binding.etDiastolicBloodPressure.text.toString().toFloatOrNull()
 
             val bloodSugarLevel = binding.etBloodSugarLevel.text.toString().toFloatOrNull()
             val bodyTemperature = binding.etBodyTemperature.text.toString().toFloatOrNull()

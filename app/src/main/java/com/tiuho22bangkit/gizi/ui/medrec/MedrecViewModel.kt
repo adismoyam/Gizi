@@ -3,11 +3,17 @@ package com.tiuho22bangkit.gizi.ui.medrec
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.tiuho22bangkit.gizi.data.GiziRepository
 
-class MedrecViewModel : ViewModel() {
+class MedrecViewModel(private val giziRepository: GiziRepository) : ViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is Medrec Fragment"
+
+    init {
+        loadKidAnalysisHistoryData()
+        loadMomAnalysisHistoryData()
     }
-    val text: LiveData<String> = _text
+
+    fun loadKidAnalysisHistoryData() = giziRepository.getAllKidAnalysisHistory()
+    fun loadMomAnalysisHistoryData() = giziRepository.getAllMomAnalysisHistory()
+
 }

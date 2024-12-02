@@ -27,11 +27,11 @@
     <string name="berat">Berat (kg)</string>
     <string name="tinggi">Tinggi (cm)</string>
 
-    <string name="jenis_kelamin_profile">Jenis Kelamin\t\t: %1$s</string>
-    <string name="tanggal_lahir_anak_profile">Tanggal Lahir\t\t: %1$s</string>
-    <string name="usia_anak_profile">Usia\t\t\t\t\t\t\t\t\t\t\t\t\t: %1$d bulan</string>
-    <string name="berat_anak_profile">Berat\t\t\t\t\t\t\t\t\t\t\t\t: %1$.2f kg</string>
-    <string name="tinggi_anak_profile">Tinggi\t\t\t\t\t\t\t\t\t\t\t: %1$.2f cm</string>
+    <string name="jenis_kelamin_profile">Jenis Kelamin\t\t\t\t\t\t: %1$s</string>
+    <string name="tanggal_lahir_anak_profile">Tanggal Lahir\t\t\t\t\t\t: %1$s</string>
+    <string name="usia_anak_profile">Usia\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t: %1$d bulan</string>
+    <string name="berat_anak_profile">Berat\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t: %1$.2f kg</string>
+    <string name="tinggi_anak_profile">Tinggi\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t: %1$.2f cm</string>
 
     <string name="tambah_data">Tambah Data</string>
     <string name="perbarui_data">Perbarui Data</string>
@@ -75,10 +75,20 @@
     <string name="detak_jantung_bpm">Detak Jantung (bpm)</string>
 
     <string name="nama">Nama</string>
-    <string name="tanggal_lahir_profile">Tanggal Lahir\t\t: %1$s</string>
-    <string name="usia_profile">Usia\t\t\t\t\t\t\t\t\t\t\t\t\t: %1$d tahun</string>
-    <string name="tekanan_darah_profile">Tekanan Darah %1$d / %2$d mmHg</string>
-    <string name="kadar_gula_darah_profile">Kadar Gula Darah %1$1f mmol/L</string>
-    <string name="suhu_tubuh_profile">Suhu Tubuh %1$1f °C</string>
-    <string name="detak_jantung_profile">Detak Jantung %1$d bpm</string>
+    <string name="tanggal_lahir_profile">Tanggal Lahir\t\t\t\t\t\t: %1$s</string>
+    <string name="usia_profile">Usia\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t: %1$d tahun</string>
+    <string name="tekanan_darah_profile">Tekanan Darah \t\t\t\t: %1$d / %2$d mmHg</string>
+    <string name="kadar_gula_darah_profile">Kadar Gula Darah \t: %1$.1f mmol/L</string>
+    <string name="suhu_tubuh_profile">Suhu Tubuh \t\t\t\t\t\t\t: %1$.1f °C</string>
+    <string name="detak_jantung_profile">Detak Jantung \t\t\t\t\t: %1$d bpm</string>
+
+    <string name="pregnancy_risk_medrec">Risiko Kehamilan\n%1$s</string>
+    <string name="wasting_risk_medrec">Risiko Wasting\n%1$s</string>
+    <string name="stunting_risk_medrec">Risiko Stunting\n%1$s</string>
+    <string name="tanggal_analisis">Tanggal Analisis</string>
+
+    <string name="nama_anak_df">Nama Anak : %1$s</string>
+    <string name="data_saat_dianalisis">Data saat dianalisis pada \n%1$s</string>
+    <string name="detail_riwayat_analisis">Detail Riwayat Analisis</string>
+
 </resources>
