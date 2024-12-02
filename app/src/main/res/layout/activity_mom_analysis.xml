@@ -23,8 +23,8 @@
         android:layout_height="wrap_content"
         android:textSize="32sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/gambar"
+        app:layout_constraintStart_toStartOf="@+id/gambar"
         app:layout_constraintTop_toBottomOf="@+id/gambar"
         tools:text="@string/nama" />
 
@@ -60,7 +60,7 @@
             tools:text="@string/usia_profile" />
 
         <TextView
-            android:id="@+id/tv_tekanan_darah_diastolik"
+            android:id="@+id/tv_tekanan_darah"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -78,7 +78,7 @@
             tools:text="@string/kadar_gula_darah_profile" />
 
         <TextView
-            android:id="@+id/tv_body_temperature"
+            android:id="@+id/tv_suhu_tubuh"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -87,7 +87,7 @@
             tools:text="@string/suhu_tubuh_profile" />
 
         <TextView
-            android:id="@+id/tv_heart_rate"
+            android:id="@+id/tv_detak_jantung"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -109,15 +109,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout1" />
 
-<!--    <TextView-->
-<!--        android:id="@+id/tv_hasil"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_weight="1"-->
-<!--        android:gravity="center"-->
-<!--        android:textSize="16sp"-->
-<!--        android:textStyle="bold"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent" />-->
+    <TextView
+        android:id="@+id/tv_hasil"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@+id/tv_warning"
+        tools:layout_editor_absoluteX="0dp" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -127,7 +129,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout1">
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout1"
+        app:layout_constraintVertical_bias="0.656">
 
         <Button
             android:id="@+id/btn_ubah_data"

@@ -31,10 +31,15 @@ class GiziRepository private constructor(
         momAnalysisHistoryDao.insertMomAnalysisHistoryData(momAnalysisHistoryEntity)
     }
 
-    fun checkTheMom(): Boolean{
+    fun checkTheMom(): Boolean {
         return momDao.checkTheMom() > 0
     }
 
+    fun getAllKidAnalysisHistory(): LiveData<List<KidAnalysisHistoryEntity>> =
+        kidAnalysisHistoryDao.getAllKidAnalysisHistories()
+
+    fun getAllMomAnalysisHistory(): LiveData<List<MomAnalysisHistoryEntity>> =
+        momAnalysisHistoryDao.getAllMomAnalysisHistories()
 
     companion object {
         @Volatile

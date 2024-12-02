@@ -1,0 +1,114 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:text="@string/detail_riwayat_analisis"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/tv_datetime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/data_saat_dianalisis"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/tv_lmp_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="HPHT"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/tv_edd_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="HPL"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/tv_tanggal_lahir"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/tanggal_lahir_profile"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/tv_usia"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/usia_profile"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/tv_tekanan_darah"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/tekanan_darah_profile"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/tv_kadar_gula_darah"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/kadar_gula_darah_profile"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/tv_suhu_tubuh"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/suhu_tubuh_profile"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/tv_detak_jantung"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/detak_jantung_profile"
+        android:textSize="16sp" />
+
+
+    <TextView
+        android:id="@+id/tv_hasil"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="@string/pregnancy_risk_medrec"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_close"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Tutup" />
+
+        <Button
+            android:id="@+id/btn_hapus_riwayat"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Hapus Data Riwayat" />
+    </LinearLayout>
+</LinearLayout>

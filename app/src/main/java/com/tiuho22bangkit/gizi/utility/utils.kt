@@ -7,6 +7,8 @@ import java.time.format.DateTimeFormatter
 import java.time.temporal.ChronoUnit
 import java.util.Calendar
 import java.util.Locale
+import java.time.LocalDateTime
+import java.time.Period
 
 //  fungsi untuk menghitung perbedaan waktu
 fun calculateTimeDifference(dateString: String): String {
@@ -41,8 +43,7 @@ fun calculateMonthAge(dateString: String): Long {
 
     val totalMonths = ChronoUnit.MONTHS.between(inputDate, currentDate)
     return totalMonths
-// Misalnya, dari "2022-05-01" ke "2024-11-28", outputnya adalah 31
-}
+}   // Misalnya, dari "2022-05-01" ke "2024-11-28", outputnya adalah 31
 
 fun calculateYearAge(dateString: String): Long {
     val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
@@ -52,6 +53,17 @@ fun calculateYearAge(dateString: String): Long {
     val totalYears = ChronoUnit.YEARS.between(inputDate, currentDate)
     return totalYears
 // Misalnya, dari "2022-05-01" ke "2024-11-28", outputnya adalah 2
+}
+
+fun calculateMonthDifference(birthDate: String, timestamp: String): Long {
+    val birthDateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+    val timestampFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")
+
+    val birthDatee = LocalDate.parse(birthDate, birthDateFormatter)
+    val timestampp = LocalDateTime.parse(timestamp, timestampFormatter).toLocalDate()
+
+    // Hitung total bulan menggunakan ChronoUnit.MONTHS
+    return ChronoUnit.MONTHS.between(birthDatee, timestampp)
 }
 
 fun scaleInputKidData(
@@ -76,7 +88,7 @@ fun scaleInputKidData(
     return scaledData.map { it.toFloat() }.toFloatArray()
 }
 
-private fun scaleInputMomData(
+fun scaleInputMomData(
     age: Float,
     systolicBloodPressure: Float,
     diastolicBloodPressure: Float,
