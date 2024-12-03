@@ -19,6 +19,14 @@
     <string name="baca_di_web_browser">Buka di Web Browser</string>
     <string name="tambah">Tambah</string>
     <string name="empty_kid">Belum ada data anak</string>
+    <string name="wave">Hallo, Moms!</string>
+    <string name="nutrition_calculator_title">Nutrition Calculator</string>
+    <string name="reminder_title">Pengingat Imunisasi</string>
+    <string name="milestone_title">Milestone</string>
+    <string name="detection">Under-Five Disease Detection</string>
+    <string name="soon">Coming Soon</string>
+    <string name="news_title">Kabar Baby mu!</string>
+    <string name="card_news_description">Pada usia kehamilan 8 minggu, janin Moms mengalami perkembangan pesat. Jantungnya sudah berdetak, dan sebagian besar terbentuk dengan mata, hidung, dan telinga yang mulai terlihat. Tangan dan kaki kecilnya mulai tumbuh dengan jari-jari yang menyertainya.</string>
 
     <string name="hari_pertama_haid_terakhir">Hari Pertama Haid Terakhir (HPHT)</string>
     <string name="hari_perkiraan_lahir">Hari Perkiraan Lahir (HPL)</string>
