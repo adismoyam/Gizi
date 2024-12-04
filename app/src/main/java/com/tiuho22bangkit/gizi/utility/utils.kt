@@ -66,6 +66,16 @@ fun calculateMonthDifference(birthDate: String, timestamp: String): Long {
     return ChronoUnit.MONTHS.between(birthDatee, timestampp)
 }
 
+fun calculateYearDifference(birthDate: String, timestamp: String): Long {
+    val birthDateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+    val timestampFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")
+
+    val birthDatee = LocalDate.parse(birthDate, birthDateFormatter)
+    val timestampp = LocalDateTime.parse(timestamp, timestampFormatter).toLocalDate()
+
+    return ChronoUnit.YEARS.between(birthDatee, timestampp)
+}
+
 fun scaleInputKidData(
     gender: Float, monthAge: Float, height: Float, weight: Float
 ): FloatArray {

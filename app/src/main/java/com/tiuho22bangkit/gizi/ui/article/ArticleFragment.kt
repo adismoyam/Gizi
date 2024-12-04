@@ -68,7 +68,6 @@ class ArticleFragment : Fragment() {
     }
 
     private fun setArticleData(articlesList: List<ArticlesItem>) {
-
         // safe args
         val adapter = ArticleAdapter { article ->
             val action = ArticleFragmentDirections.actionToDetailFragment(article)

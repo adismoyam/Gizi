@@ -9,6 +9,8 @@ import com.tiuho22bangkit.gizi.data.UserRepository
 import com.tiuho22bangkit.gizi.ui.analysis.AnalysisViewModel
 import com.tiuho22bangkit.gizi.ui.profile.ProfileViewModel
 import com.tiuho22bangkit.gizi.ui.auth.UserViewModel
+import com.tiuho22bangkit.gizi.ui.home.HomeViewModel
+import com.tiuho22bangkit.gizi.ui.medrec.MedrecViewModel
 
 class ViewModelFactory private constructor(
 //    private val mApplication: Application,
@@ -21,6 +23,14 @@ class ViewModelFactory private constructor(
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return when {
+
+            modelClass.isAssignableFrom(HomeViewModel::class.java) -> {
+                HomeViewModel(giziRepository) as T
+            }
+
+            modelClass.isAssignableFrom(MedrecViewModel::class.java) -> {
+                MedrecViewModel(giziRepository) as T
+            }
 
             modelClass.isAssignableFrom(ProfileViewModel::class.java) -> {
                 ProfileViewModel(giziRepository) as T
