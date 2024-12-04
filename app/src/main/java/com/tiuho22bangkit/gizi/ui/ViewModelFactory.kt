@@ -36,6 +36,14 @@ class ViewModelFactory private constructor(
                 ProfileViewModel(giziRepository) as T
             }
 
+            modelClass.isAssignableFrom(HomeViewModel::class.java) -> {
+                HomeViewModel(giziRepository) as T
+            }
+
+            modelClass.isAssignableFrom(MedrecViewModel::class.java) -> {
+                MedrecViewModel(giziRepository) as T
+            }
+
             modelClass.isAssignableFrom(AnalysisViewModel::class.java) -> {
                 AnalysisViewModel(giziRepository) as T
             }
