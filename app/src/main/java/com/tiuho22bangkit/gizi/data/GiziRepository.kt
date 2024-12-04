@@ -24,6 +24,10 @@ class GiziRepository private constructor(
     fun getKid(id: Int): LiveData<KidEntity> {
         return kidDao.getKidById(id)
     }
+
+    fun getLastKidAnalysisHistory(): LiveData<KidAnalysisHistoryEntity> {
+        return kidAnalysisHistoryDao.getLastKidAnalysisHistory()
+    }
     fun getTheMom(): LiveData<MomEntity> = momDao.getTheMom()
 
     fun addKidAnalysisHistory(kidAnalysisHistoryEntity: KidAnalysisHistoryEntity) {
