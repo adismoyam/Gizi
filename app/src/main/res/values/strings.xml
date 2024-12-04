@@ -99,19 +99,4 @@
     <string name="data_saat_dianalisis">Data saat dianalisis pada \n%1$s</string>
     <string name="detail_riwayat_analisis">Detail Riwayat Analisis</string>
 
-    <!-- result wasting -->
-    <string name="wasting_normal">Berat badan anak Anda berada dalam kisaran normal sesuai dengan tinggi badannya. Tidak ada indikasi kekurangan gizi.</string>
-    <string name="wasting_Risk_of_Overweight">Berat badan anak Anda cenderung melebihi kisaran normal untuk tinggi badannya. Perhatikan pola makan dan aktivitas fisik untuk mencegah obesitas.</string>
-    <string name="wasting_Severely_Underweight">Berat badan anak Anda jauh di bawah kisaran normal untuk tinggi badannya. Hal ini menunjukkan adanya kekurangan gizi serius yang memerlukan perhatian segera.</string>
-    <string name="wasting_Underweight">Berat badan anak Anda sedikit di bawah kisaran normal untuk tinggi badannya. Perhatikan asupan nutrisi agar tumbuh kembangnya optimal.</string>
-    <string name="wasting_detail">Keterangan Kondisi Wasting</string>
-    <string name="condition_unknown">Kondisi Anak Anda Tidak Diketahui</string>
-
-    <!-- result Stunting -->
-    <string name="stunting_normal">Tinggi badan anak Anda sesuai dengan standar pertumbuhan berdasarkan usianya. Tumbuh kembangnya berjalan dengan baik.</string>
-    <string name="stunting_Severely_Stunted">Tinggi badan anak Anda sangat jauh di bawah standar pertumbuhan untuk usianya. Hal ini bisa menunjukkan adanya masalah gizi kronis yang serius.</string>
-    <string name="stunting_Stunted">Tinggi badan anak Anda di bawah standar pertumbuhan untuk usianya. Hal ini mungkin mengindikasikan adanya gangguan pertumbuhan akibat kekurangan gizi dalam jangka panjang.</string>
-    <string name="stunting_Tall">Tinggi badan anak Anda lebih tinggi dari rata-rata untuk usianya. Kondisi ini umumnya bukan masalah, tetapi tetap perlu memantau perkembangan secara menyeluruh.</string>
-    <string name="stunting_detail">Keterangan Kondisi Stunting</string>
-
 </resources>

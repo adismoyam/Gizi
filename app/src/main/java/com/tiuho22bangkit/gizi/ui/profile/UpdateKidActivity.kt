@@ -150,6 +150,7 @@ class UpdateKidActivity : AppCompatActivity(), DatePickerFragment.DialogDateList
                     }
                 }
             }
+            finish()
         }
 
         // Close button handler

@@ -8,9 +8,10 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="16dp"
         android:text="@string/detail_riwayat_analisis"
         android:textSize="20sp" />
+
 
     <TextView
         android:id="@+id/tv_datetime"
@@ -19,53 +20,112 @@
         android:text="@string/data_saat_dianalisis"
         android:textSize="16sp" />
 
-    <TextView
-        android:layout_marginTop="16dp"
-        android:id="@+id/tv_nama_anak"
+    <TableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/nama_anak_df"
-        android:textSize="16sp" />
+        android:layout_marginVertical="8dp">
 
-    <TextView
-        android:id="@+id/tv_gender"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/jenis_kelamin_profile"
-        android:textSize="16sp" />
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/tv_tanggal_lahir"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/tanggal_lahir_anak_profile"
-        android:textSize="16sp" />
+            <TextView
+                android:layout_weight="1"
+                android:text="Nama Anak"
+                android:textSize="16sp" />
 
-    <TextView
-        android:id="@+id/tv_usia"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/usia_anak_profile"
-        android:textSize="16sp" />
+            <TextView
+                android:id="@+id/tv_nama_anak_value"
+                android:layout_weight="1"
+                android:textSize="16sp"
+                tools:text=": Namanya Juga" />
+        </TableRow>
 
-    <TextView
-        android:id="@+id/tv_tinggi"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/tinggi_anak_profile"
-        android:textSize="16sp" />
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/tv_berat"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/berat_anak_profile"
-        android:textSize="16sp" />
+            <TextView
+                android:layout_weight="1"
+                android:text="@string/jenis_kelamin"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tv_jenis_kelamin_value"
+                android:layout_weight="1"
+                android:textSize="16sp"
+                tools:text=": Laki-laki" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_weight="1"
+                android:text="@string/tanggal_lahir"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tv_tanggal_lahir_value"
+                android:layout_weight="1"
+                android:textSize="16sp"
+                tools:text=": 1110-10-1" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_weight="1"
+                android:text="@string/usia"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tv_usia_anak_value"
+                android:layout_weight="1"
+                android:textSize="16sp"
+                tools:text=": 20 bulan" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_weight="1"
+                android:text="Tinggi"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tv_tinggi_anak_value"
+                android:layout_weight="1"
+                android:textSize="16sp"
+                tools:text=": 77 cm" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_weight="1"
+                android:text="Berat"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tv_berat_anak_value"
+                android:layout_weight="1"
+                android:textSize="16sp"
+                tools:text=": 20 kg" />
+        </TableRow>
+    </TableLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="12dp"
         android:orientation="horizontal">
 
         <TextView
@@ -73,18 +133,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textStyle="bold"
             android:text="@string/wasting_risk_medrec"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tv_hasil_stunting"
-            android:textStyle="bold"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/stunting_risk_medrec"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:textStyle="bold" />
     </LinearLayout>
 
 
@@ -98,16 +158,16 @@
             android:id="@+id/btn_close"
             style="?android:attr/buttonBarButtonStyle"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:layout_weight="1"
-            android:text="Tutup" />
+            android:text="@string/tutup" />
 
         <Button
             android:id="@+id/btn_hapus_riwayat"
             style="?android:attr/buttonBarButtonStyle"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:layout_weight="1"
-            android:text="Hapus Data Riwayat" />
+            android:text="@string/hapus_data" />
     </LinearLayout>
 </LinearLayout>

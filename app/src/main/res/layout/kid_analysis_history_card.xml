@@ -17,7 +17,7 @@
             android:id="@+id/tv_nama_anak"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/nama"
+            android:text="@string/nama_anak"
             android:textSize="20sp"
             android:textStyle="bold"
             card_view:layout_constraintBottom_toTopOf="@+id/guideline2"
