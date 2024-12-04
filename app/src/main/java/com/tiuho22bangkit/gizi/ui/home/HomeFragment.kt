@@ -1,5 +1,6 @@
 package com.tiuho22bangkit.gizi.ui.home
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -10,6 +11,7 @@ import android.widget.ImageButton
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -51,7 +53,32 @@ class HomeFragment : Fragment() {
         binding.add.setOnClickListener {
             findNavController().navigate(R.id.action_navigation_home_to_isiDataAnakFragment)
         }
+        setupCardDescription()
     }
+
+    private fun setupCardDescription() {
+        viewModel.lastKidAnalysisHistory.observe(viewLifecycleOwner, Observer { kid ->
+            val stuntingResult = kid.stuntingRiskResult
+            val wastingResult = kid.wastingRiskResult
+
+            binding.tvStuntingDescription.text = when (stuntingResult) {
+                "Normal" -> getString(R.string.stunting_normal)
+                "Severely Stunted" -> getString(R.string.stunting_Severely_Stunted)
+                "Stunted" -> getString(R.string.stunting_Stunted)
+                "Tall" -> getString(R.string.stunting_Tall)
+                else -> getString(R.string.condition_unknown)
+            }
+
+            binding.tvWastingDescription.text = when (wastingResult) {
+                "Normal" -> getString(R.string.wasting_normal)
+                "Risk of Overweight" -> getString(R.string.wasting_Risk_of_Overweight)
+                "Severely Underweight" -> getString(R.string.wasting_Severely_Underweight)
+                "Underweight" -> getString(R.string.wasting_Underweight)
+                else -> getString(R.string.condition_unknown)
+            }
+        })
+    }
+
 
     private fun setupRVKidProfile() {
         binding.rvKids.apply {

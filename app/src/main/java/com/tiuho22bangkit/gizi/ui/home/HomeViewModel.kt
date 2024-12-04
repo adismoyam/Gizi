@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.tiuho22bangkit.gizi.data.GiziRepository
+import com.tiuho22bangkit.gizi.data.local.entity.KidAnalysisHistoryEntity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -23,6 +24,8 @@ class HomeViewModel(private val giziRepository: GiziRepository) : ViewModel() {
             _isMomDataAvailable.postValue(giziRepository.checkTheMom())
         }
     }
+
+    val lastKidAnalysisHistory: LiveData<KidAnalysisHistoryEntity> = giziRepository.getLastKidAnalysisHistory()
 
     fun loadMomData() = giziRepository.getTheMom()
 }

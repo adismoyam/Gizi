@@ -17,6 +17,9 @@ interface KidAnalysisHistoryDao {
     @Query("SELECT * FROM kid_analysis_history_table")
     fun getAllKidAnalysisHistories(): LiveData<List<KidAnalysisHistoryEntity>>
 
+    @Query("SELECT * FROM kid_analysis_history_table ORDER BY id DESC LIMIT 1")
+    fun getLastKidAnalysisHistory(): LiveData<KidAnalysisHistoryEntity>
+
     @Query("SELECT * FROM kid_analysis_history_table WHERE id = :kidAnalysisHistoryId")
     fun getKidAnalysisHistoryById(kidAnalysisHistoryId: Int): KidAnalysisHistoryEntity?
 
