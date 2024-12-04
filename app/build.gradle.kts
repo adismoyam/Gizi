@@ -14,7 +14,7 @@ android {
 
     defaultConfig {
         applicationId = "com.tiuho22bangkit.gizi"
-        minSdk = 31
+        minSdk = 33
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"

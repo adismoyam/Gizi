@@ -14,12 +14,6 @@ import kotlinx.coroutines.launch
 
 class AnalysisViewModel(private val giziRepository: GiziRepository) : ViewModel() {
 
-    fun addKidAnalysisHistory(kidAnalysisHistory: KidAnalysisHistoryEntity) {
-        viewModelScope.launch {
-            giziRepository.addKidAnalysisHistory(kidAnalysisHistory)
-        }
-    }
-
     fun saveKidAnalysisResult(kid: KidEntity, wastingResult: String, stuntingResult: String) {
         val resultData = KidAnalysisHistoryEntity(
             name = kid.name,
@@ -39,6 +33,7 @@ class AnalysisViewModel(private val giziRepository: GiziRepository) : ViewModel(
 
     fun saveMomAnalysisResult(mom: MomEntity, result: String){
         val resultData = MomAnalysisHistoryEntity(
+            name = mom.name,
             lastMenstrualPeriod = mom.lastMenstrualPeriod,
             estimatedDeliveryDate = mom.estimatedDeliveryDate,
             birthDate = mom.birthDate,

@@ -11,6 +11,7 @@ import android.widget.ImageButton
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.tiuho22bangkit.gizi.R
 import com.tiuho22bangkit.gizi.databinding.FragmentProfileBinding
 import com.tiuho22bangkit.gizi.ui.ViewModelFactory
@@ -42,7 +43,6 @@ class ProfileFragment : Fragment() {
 
         setupRVKidProfile()
 
-
         val buttonTambahAnak: ImageButton = view.findViewById(R.id.tambah_anak)
         buttonTambahAnak.setOnClickListener {
             findNavController().navigate(R.id.action_navigation_profile_to_isiDataAnakFragment)
@@ -52,10 +52,7 @@ class ProfileFragment : Fragment() {
             val intent = Intent(requireContext(), IsiDataIbuActivity::class.java)
             startActivity(intent)
         }
-
         momObserver()
-
-
     }
 
     override fun onResume() {
@@ -72,6 +69,10 @@ class ProfileFragment : Fragment() {
             if (isMomDataAvailable) {
                 viewModel.loadMomData().observe(viewLifecycleOwner) { mom ->
                     binding.tvName.text = mom.name
+                    Glide.with(this)
+                        .load(mom.uri)
+                        .placeholder(R.drawable.mother)
+                        .into(binding.circleImage)
 
                     binding.circleImage.setOnClickListener {
                         val intent = Intent(requireContext(), MomAnalysisActivity::class.java)

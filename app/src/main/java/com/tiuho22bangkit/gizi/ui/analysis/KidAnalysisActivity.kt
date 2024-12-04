@@ -140,7 +140,6 @@ class KidAnalysisActivity : AppCompatActivity() {
 
                 override fun onResults(results: Array<FloatArray>) {
                     runOnUiThread {
-                        // Asumsikan output pertama berada di results[0] dan output kedua di results[1]
                         if (results.size == 2) {
                             val output1 = results[0] // Output pertama
                             val output2 = results[1] // Output kedua
