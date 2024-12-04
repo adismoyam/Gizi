@@ -29,17 +29,21 @@ class KidProfileAdapter : ListAdapter<KidEntity, KidProfileAdapter.MyViewHolder>
         RecyclerView.ViewHolder(binding.root) {
         fun bind(kid: KidEntity) {
             binding.apply {
-                if (kid.gender == "Laki-Laki") {
-                    Glide.with(root.context)
-                        .load(kid.uri)
-                        .placeholder(R.drawable.baby_boy)
-                        .into(imgItemPhoto)
-                } else {
-                    Glide.with(root.context)
-                        .load(kid.uri)
-                        .placeholder(R.drawable.baby_girl)
-                        .into(imgItemPhoto)
-                }
+                Glide.with(root.context)
+                    .load(kid.uri)
+                    .placeholder(R.drawable.bocil)
+                    .into(imgItemPhoto)
+//                if (kid.gender == "Laki-Laki") {
+//                    Glide.with(root.context)
+//                        .load(kid.uri)
+//                        .placeholder(R.drawable.bocil)
+//                        .into(imgItemPhoto)
+//                } else {
+//                    Glide.with(root.context)
+//                        .load(kid.uri)
+//                        .placeholder(R.drawable.baby_girl)
+//                        .into(imgItemPhoto)
+//                }
 
                 tvItemName.text = kid.name
 

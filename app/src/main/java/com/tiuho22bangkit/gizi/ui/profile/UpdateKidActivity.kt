@@ -1,5 +1,6 @@
 package com.tiuho22bangkit.gizi.ui.profile
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -12,6 +13,7 @@ import com.tiuho22bangkit.gizi.data.local.GiziDatabase
 import com.tiuho22bangkit.gizi.data.local.dao.KidDao
 import com.tiuho22bangkit.gizi.data.local.entity.KidEntity
 import com.tiuho22bangkit.gizi.databinding.ActivityUpdateKidBinding
+import com.tiuho22bangkit.gizi.ui.analysis.KidAnalysisActivity
 import com.tiuho22bangkit.gizi.utility.DatePickerFragment
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -132,7 +134,9 @@ class UpdateKidActivity : AppCompatActivity(), DatePickerFragment.DialogDateList
                                     "Data anak berhasil disimpan",
                                     Toast.LENGTH_SHORT
                                 ).show()
-                                finish()
+                                val intent = Intent(this@UpdateKidActivity, KidAnalysisActivity::class.java)
+                                intent.putExtra(KidAnalysisActivity.KID_DATA, kid)
+                                startActivity(intent)
                             }
                         } catch (e: Exception) {
                             withContext(Dispatchers.Main) {
