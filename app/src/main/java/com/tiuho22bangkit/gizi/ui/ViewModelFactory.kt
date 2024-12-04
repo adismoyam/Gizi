@@ -9,6 +9,7 @@ import com.tiuho22bangkit.gizi.data.UserRepository
 import com.tiuho22bangkit.gizi.ui.analysis.AnalysisViewModel
 import com.tiuho22bangkit.gizi.ui.profile.ProfileViewModel
 import com.tiuho22bangkit.gizi.ui.auth.UserViewModel
+import com.tiuho22bangkit.gizi.ui.home.HomeViewModel
 
 class ViewModelFactory private constructor(
 //    private val mApplication: Application,
@@ -28,6 +29,10 @@ class ViewModelFactory private constructor(
 
             modelClass.isAssignableFrom(AnalysisViewModel::class.java) -> {
                 AnalysisViewModel(giziRepository) as T
+            }
+
+            modelClass.isAssignableFrom(HomeViewModel::class.java) -> {
+                HomeViewModel(giziRepository) as T
             }
 
             modelClass.isAssignableFrom(UserViewModel::class.java) -> {

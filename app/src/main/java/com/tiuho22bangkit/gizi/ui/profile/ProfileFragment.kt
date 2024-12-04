@@ -64,7 +64,6 @@ class ProfileFragment : Fragment() {
             Log.d("ProfileFragment", "Kid list updated: $kidList")
             adapter.submitList(kidList)
         }
-
         viewModel.checkMomData()
     }
 
