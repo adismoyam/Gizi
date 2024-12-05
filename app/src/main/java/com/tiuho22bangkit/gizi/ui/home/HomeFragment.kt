@@ -53,7 +53,7 @@ class HomeFragment : Fragment() {
 
         setupRVKidProfile()
         binding.add.setOnClickListener {
-            findNavController().navigate(R.id.action_navigation_home_to_isiDataAnakFragment)
+            findNavController().navigate(R.id.navigation_role)
         }
         setupCardDescription()
 
@@ -71,25 +71,31 @@ class HomeFragment : Fragment() {
 
     private fun setupCardDescription() {
         viewModel.lastKidAnalysisHistory.observe(viewLifecycleOwner, Observer { kid ->
-            val stuntingResult = kid.stuntingRiskResult
-            val wastingResult = kid.wastingRiskResult
+            if (kid != null) {
+                val stuntingResult = kid.stuntingRiskResult ?: getString(R.string.condition_unknown)
+                val wastingResult = kid.wastingRiskResult ?: getString(R.string.condition_unknown)
 
-            binding.tvStuntingDescription.text = when (stuntingResult) {
-                "Normal" -> getString(R.string.stunting_normal)
-                "Severely Stunted" -> getString(R.string.stunting_Severely_Stunted)
-                "Stunted" -> getString(R.string.stunting_Stunted)
-                "Tall" -> getString(R.string.stunting_Tall)
-                else -> getString(R.string.condition_unknown)
-            }
+                binding.tvStuntingDescription.text = when (stuntingResult) {
+                    "Normal" -> getString(R.string.stunting_normal)
+                    "Severely Stunted" -> getString(R.string.stunting_Severely_Stunted)
+                    "Stunted" -> getString(R.string.stunting_Stunted)
+                    "Tall" -> getString(R.string.stunting_Tall)
+                    else -> getString(R.string.condition_unknown)
+                }
 
-            binding.tvWastingDescription.text = when (wastingResult) {
-                "Normal" -> getString(R.string.wasting_normal)
-                "Risk of Overweight" -> getString(R.string.wasting_Risk_of_Overweight)
-                "Severely Underweight" -> getString(R.string.wasting_Severely_Underweight)
-                "Underweight" -> getString(R.string.wasting_Underweight)
-                else -> getString(R.string.condition_unknown)
+                binding.tvWastingDescription.text = when (wastingResult) {
+                    "Normal" -> getString(R.string.wasting_normal)
+                    "Risk of Overweight" -> getString(R.string.wasting_Risk_of_Overweight)
+                    "Severely Underweight" -> getString(R.string.wasting_Severely_Underweight)
+                    "Underweight" -> getString(R.string.wasting_Underweight)
+                    else -> getString(R.string.condition_unknown)
+                }
+            } else {
+                binding.tvStuntingDescription.text = getString(R.string.condition_unknown)
+                binding.tvWastingDescription.text = getString(R.string.condition_unknown)
             }
         })
+
     }
 
 

@@ -37,9 +37,9 @@ data class KidAnalysisHistoryEntity(
     // hasil analisis
 
     @field:ColumnInfo(name = "wastingResult")
-    val wastingRiskResult: String,
+    val wastingRiskResult: String? = null,
 
     @field:ColumnInfo(name = "stuntingResult")
-    val stuntingRiskResult: String
+    val stuntingRiskResult: String? = null,
 
 ) : Parcelable
