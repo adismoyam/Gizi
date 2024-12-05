@@ -1,7 +1,7 @@
 package com.tiuho22bangkit.gizi.ui.auth
 
-import android.content.Intent
 import android.os.Bundle
+import android.util.Patterns
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,7 +10,6 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.AppBarConfiguration
 import com.tiuho22bangkit.gizi.R
 import com.tiuho22bangkit.gizi.databinding.FragmentRegisterBinding
 
@@ -40,9 +39,22 @@ class RegisterFragment : Fragment() {
             val username = binding.usernameEditText.text.toString().trim()
             val email = binding.emailEditText.text.toString().trim()
             val password = binding.passwordEditText.text.toString().trim()
+            val confirmPassword = binding.confirmPasswordEditText.text.toString().trim()
 
             if (username.isEmpty() || email.isEmpty() || password.isEmpty()) {
                 Toast.makeText(requireContext(), "Semua bidang harus diisi", Toast.LENGTH_SHORT)
+                    .show()
+                return@setOnClickListener
+            }
+
+            if (password.length < 8 || confirmPassword.length < 8) {
+                Toast.makeText(requireContext(), "Password tidak boleh kurang dari 8 karakter", Toast.LENGTH_SHORT)
+                    .show()
+                return@setOnClickListener
+            }
+
+            if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+                Toast.makeText(requireContext(), "Format email tidak valid", Toast.LENGTH_SHORT)
                     .show()
                 return@setOnClickListener
             }

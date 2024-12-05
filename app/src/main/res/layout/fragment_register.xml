@@ -52,7 +52,7 @@
                 android:background="@drawable/rounded_edittext" />
 
             <!-- Email -->
-            <EditText
+            <com.tiuho22bangkit.gizi.ui.component.EmailEditText
                 android:id="@+id/emailEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -64,7 +64,7 @@
                 android:inputType="textEmailAddress" />
 
             <!-- Password -->
-            <EditText
+            <com.tiuho22bangkit.gizi.ui.component.PasswordEditText
                 android:id="@+id/passwordEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -76,7 +76,7 @@
                 android:inputType="textPassword" />
 
             <!-- Confirm Password -->
-            <EditText
+            <com.tiuho22bangkit.gizi.ui.component.ConfirmPasswordEditText
                 android:id="@+id/confirmPasswordEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

@@ -42,6 +42,7 @@
     <string name="isi_data_kehamilan">Isi Data Kehamilan</string>
     <string name="laki_laki">Laki-laki</string>
     <string name="perempuan">Perempuan</string>
+    <string name="logout">Keluar</string>
 
     <string name="analisis">Analisis</string>
     <string name="Perbarui_data">Perbarui Data</string>
