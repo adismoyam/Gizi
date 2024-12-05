@@ -24,6 +24,14 @@ class ViewModelFactory private constructor(
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return when {
 
+            modelClass.isAssignableFrom(HomeViewModel::class.java) -> {
+                HomeViewModel(giziRepository) as T
+            }
+
+            modelClass.isAssignableFrom(MedrecViewModel::class.java) -> {
+                MedrecViewModel(giziRepository) as T
+            }
+
             modelClass.isAssignableFrom(ProfileViewModel::class.java) -> {
                 ProfileViewModel(giziRepository) as T
             }
