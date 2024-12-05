@@ -1,5 +1,6 @@
 package com.tiuho22bangkit.gizi.ui
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -30,6 +31,13 @@ class StartFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val sharedPreferences = requireContext().getSharedPreferences("AuthPrefs", Context.MODE_PRIVATE)
+        val token = sharedPreferences.getString("auth_token", null)
+
+        if (token != null) {
+            findNavController().navigate(R.id.navigation_home)
+        }
 
         binding.startButton.setOnClickListener {
             val extras = FragmentNavigatorExtras(

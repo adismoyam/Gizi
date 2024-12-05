@@ -8,10 +8,10 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="PLACEHOLDER" />
-                  <option name="mobileSdkAppId" value="" />
-                  <option name="projectId" value="" />
-                  <option name="projectNumber" value="" />
+                  <option name="appId" value="com.tiuho22bangkit.gizi" />
+                  <option name="mobileSdkAppId" value="1:1005631098859:android:c7e59182a8380ce46793ae" />
+                  <option name="projectId" value="capstone-bangkit-2024" />
+                  <option name="projectNumber" value="1005631098859" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />
