@@ -8,7 +8,7 @@ import com.tiuho22bangkit.gizi.data.remote.ChatbotApiConfig
 object Injection {
     fun provideGiziRepository(context: Context): GiziRepository {
         val apiService = ApiConfig.getApiService()
-        val chatbotApiService = ChatbotApiConfig.getApiService()
+        val chatbotApiService = ChatbotApiConfig.getChatbotApiService()
         val database = GiziDatabase.getInstance(context)
         val kidDao = database.kidDao()
         val appExecutors = AppExecutors()

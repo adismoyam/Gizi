@@ -10,9 +10,9 @@ import com.tiuho22bangkit.gizi.data.local.entity.KidAnalysisHistoryEntity
 import com.tiuho22bangkit.gizi.data.local.entity.MomAnalysisHistoryEntity
 import com.tiuho22bangkit.gizi.data.local.entity.MomEntity
 import com.tiuho22bangkit.gizi.data.remote.ApiService
+import com.tiuho22bangkit.gizi.data.remote.ChatRequest
+import com.tiuho22bangkit.gizi.data.remote.ChatResponse
 import com.tiuho22bangkit.gizi.data.remote.ChatbotApiService
-import com.tiuho22bangkit.gizi.data.remote.MessageRequest
-import com.tiuho22bangkit.gizi.data.remote.MessageResponse
 
 class GiziRepository private constructor(
     private val apiService: ApiService,
@@ -24,17 +24,18 @@ class GiziRepository private constructor(
     private val kidAnalysisHistoryDao: KidAnalysisHistoryDao
 ) {
 
-    suspend fun sendMessageToChatbot(message: String): String? {
+    suspend fun sendMessageToChatbot(prompt: String): ChatResponse? {
         return try {
-            val response = chatbotApiService.sendMessage(MessageRequest(message))
+            val request = ChatRequest(prompt)
+            val response = chatbotApiService.sendMessage(request)
             if (response.isSuccessful) {
-                response.body()?.reply
+                response.body()
             } else {
-                response.errorBody()?.string() ?: "Unknown error"
+                null
             }
         } catch (e: Exception) {
             e.printStackTrace()
-            "Error: ${e.message}"
+            null
         }
     }
 

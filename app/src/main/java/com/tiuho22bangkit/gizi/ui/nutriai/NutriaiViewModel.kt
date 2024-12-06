@@ -9,13 +9,13 @@ import kotlinx.coroutines.launch
 
 class NutriaiViewModel(private val repository: GiziRepository) : ViewModel() {
 
-    private val _chatResponse = MutableLiveData<String>()
-    val chatResponse: LiveData<String> = _chatResponse
+    private val _response = MutableLiveData<String>()
+    val response: LiveData<String> = _response
 
-    fun sendMessage(message: String) {
+    fun sendMessage(prompt: String) {
         viewModelScope.launch {
-            val response = repository.sendMessageToChatbot(message)
-            _chatResponse.value = response
+            val result = repository.sendMessageToChatbot(prompt)
+            _response.postValue(result?.response ?: "Failed to get response")
         }
     }
 }

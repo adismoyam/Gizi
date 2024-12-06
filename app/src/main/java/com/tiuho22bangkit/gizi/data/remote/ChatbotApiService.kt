@@ -4,17 +4,6 @@ import retrofit2.Response
 import retrofit2.http.*
 
 interface ChatbotApiService {
-    @POST("/chatbot")
-    suspend fun sendMessage(@Body messageRequest: MessageRequest): Response<MessageResponse>
-
-    @GET("/chatbot")
-    suspend fun getMessage(): Response<MessageResponse>
+    @POST("/chatbot/")
+    suspend fun sendMessage(@Body chatRequest: ChatRequest): Response<ChatResponse>
 }
-
-data class MessageRequest(
-    val message: String
-)
-
-data class MessageResponse(
-    val reply: String
-)

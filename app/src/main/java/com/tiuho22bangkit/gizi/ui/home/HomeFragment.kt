@@ -1,31 +1,24 @@
 package com.tiuho22bangkit.gizi.ui.home
 
-import android.annotation.SuppressLint
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tiuho22bangkit.gizi.R
 import com.tiuho22bangkit.gizi.databinding.FragmentHomeBinding
-import com.tiuho22bangkit.gizi.databinding.FragmentProfileBinding
 import com.tiuho22bangkit.gizi.ui.ViewModelFactory
-import com.tiuho22bangkit.gizi.ui.analysis.MomAnalysisActivity
-import com.tiuho22bangkit.gizi.ui.profile.IsiDataIbuActivity
+import com.tiuho22bangkit.gizi.ui.article.ArticleAdapter
 import com.tiuho22bangkit.gizi.ui.profile.KidProfileAdapter
-import com.tiuho22bangkit.gizi.ui.profile.ProfileViewModel
 
 class HomeFragment : Fragment() {
 
@@ -40,6 +33,10 @@ class HomeFragment : Fragment() {
         KidProfileAdapter()
     }
 
+    private val articleAdapter by lazy {
+        ArticleAdapter()
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -52,6 +49,22 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        setupRVArticle()
+
+        viewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
+            showLoading(isLoading)
+        }
+
+        articleObserver()
+
+        viewModel.errorMessage.observe(viewLifecycleOwner) { error ->
+            if (error != null && (viewModel.allArticles.value == null || viewModel.allArticles.value!!.isEmpty())) {
+                showError(error)
+            } else {
+                hideError()
+            }
+        }
 
         setupRVKidProfile()
         binding.add.setOnClickListener {
@@ -72,6 +85,28 @@ class HomeFragment : Fragment() {
             Toast.makeText(requireContext(), "Berhasil logout", Toast.LENGTH_SHORT).show()
 
             findNavController().navigate(R.id.navigation_start)
+        }
+    }
+
+    private fun articleObserver() {
+        viewModel.allArticles .observe(viewLifecycleOwner) { article ->
+            val limitArticle = article.take(5)
+            articleAdapter.submitList(limitArticle)
+            binding.articleHome.visibility = View.VISIBLE
+        }
+    }
+
+    private fun setupRVArticle() {
+        binding.articleHome.apply {
+            layoutManager =
+                LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+            adapter = this@HomeFragment.articleAdapter
+
+            addItemDecoration(
+                DividerItemDecoration(
+                    context, (layoutManager as LinearLayoutManager).orientation
+                )
+            )
         }
     }
 
@@ -104,6 +139,21 @@ class HomeFragment : Fragment() {
 
     }
 
+    private fun showLoading(isLoading: Boolean) {
+        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.INVISIBLE
+    }
+
+    private fun hideError() {
+        binding.tvErrorMessage.visibility = View.GONE
+    }
+
+    private fun showError(message: String) {
+        binding.tvErrorMessage.text = message
+        binding.tvErrorMessage.visibility = View.VISIBLE
+        if (viewModel.allArticles.value.isNullOrEmpty()) {
+            binding.articleHome.visibility = View.INVISIBLE
+        }
+    }
 
     private fun setupRVKidProfile() {
         binding.rvKids.apply {
@@ -120,6 +170,7 @@ class HomeFragment : Fragment() {
             adapter.submitList(kidList)
         }
         viewModel.checkMomData()
+        articleObserver()
     }
 
     override fun onDestroyView() {

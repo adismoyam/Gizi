@@ -28,6 +28,8 @@ class NutriaiFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        val factory = ViewModelFactory.getInstance(requireContext())
+        viewModel = ViewModelProvider(this, factory).get(NutriaiViewModel::class.java)
         _binding = FragmentNutriaiBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -35,25 +37,17 @@ class NutriaiFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val factory = ViewModelFactory.getInstance(requireContext())
-        viewModel = ViewModelProvider(this, factory)[NutriaiViewModel::class.java]
-
+        val inputField = binding.inputField
         val sendButton = binding.sendButton
-        val inputMessage = binding.inputMessage
-        val chatContainer = binding.chatContainer
+        val responseText = binding.responseText
 
         sendButton.setOnClickListener {
-            val message = inputMessage.text.toString()
-            if (message.isNotBlank()) {
-                viewModel.sendMessage(message)
-                inputMessage.text.clear()
-            }
+            val message = inputField.text.toString()
+            viewModel.sendMessage(message)
         }
 
-        viewModel.chatResponse.observe(viewLifecycleOwner) { response ->
-            val textView = TextView(requireContext())
-            textView.text = response
-            chatContainer.addView(textView)
+        viewModel.response.observe(viewLifecycleOwner) { response ->
+            responseText.text = response
         }
     }
     override fun onDestroyView() {
