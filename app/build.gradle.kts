@@ -24,6 +24,7 @@ android {
 
 
         buildConfigField("String", "BASE_URL", "\"https://newsapi.org/v2/\"")
+        buildConfigField("String", "CHATBOT_BASE_URL", "\"https://fitur-1005631098859.us-central1.run.app\"")
         buildConfigField("String", "API_KEY", "\"a2c7c8f11d164471a4b66dc1696b5186\"")
     }
 

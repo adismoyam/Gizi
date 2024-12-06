@@ -6,15 +6,21 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import com.tiuho22bangkit.gizi.data.GiziRepository
+import com.tiuho22bangkit.gizi.data.remote.ApiConfig
+import com.tiuho22bangkit.gizi.data.remote.ChatbotApiService
 import com.tiuho22bangkit.gizi.databinding.FragmentNutriaiBinding
+import com.tiuho22bangkit.gizi.databinding.FragmentProfileBinding
+import com.tiuho22bangkit.gizi.ui.ViewModelFactory
+import com.tiuho22bangkit.gizi.ui.profile.ProfileViewModel
 
 class NutriaiFragment : Fragment() {
 
-    private var _binding: FragmentNutriaiBinding? = null
+    private lateinit var viewModel: NutriaiViewModel
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
+    private var _binding: FragmentNutriaiBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -22,19 +28,34 @@ class NutriaiFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val notificationsViewModel =
-            ViewModelProvider(this).get(NutriaiViewModel::class.java)
-
         _binding = FragmentNutriaiBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-
-        val textView: TextView = binding.textNutriai
-        notificationsViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
-        return root
+        return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val factory = ViewModelFactory.getInstance(requireContext())
+        viewModel = ViewModelProvider(this, factory)[NutriaiViewModel::class.java]
+
+        val sendButton = binding.sendButton
+        val inputMessage = binding.inputMessage
+        val chatContainer = binding.chatContainer
+
+        sendButton.setOnClickListener {
+            val message = inputMessage.text.toString()
+            if (message.isNotBlank()) {
+                viewModel.sendMessage(message)
+                inputMessage.text.clear()
+            }
+        }
+
+        viewModel.chatResponse.observe(viewLifecycleOwner) { response ->
+            val textView = TextView(requireContext())
+            textView.text = response
+            chatContainer.addView(textView)
+        }
+    }
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

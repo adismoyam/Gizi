@@ -10,15 +10,33 @@ import com.tiuho22bangkit.gizi.data.local.entity.KidAnalysisHistoryEntity
 import com.tiuho22bangkit.gizi.data.local.entity.MomAnalysisHistoryEntity
 import com.tiuho22bangkit.gizi.data.local.entity.MomEntity
 import com.tiuho22bangkit.gizi.data.remote.ApiService
+import com.tiuho22bangkit.gizi.data.remote.ChatbotApiService
+import com.tiuho22bangkit.gizi.data.remote.MessageRequest
+import com.tiuho22bangkit.gizi.data.remote.MessageResponse
 
 class GiziRepository private constructor(
     private val apiService: ApiService,
+    private val chatbotApiService: ChatbotApiService,
     private val kidDao: KidDao,
     private val appExecutors: AppExecutors,
     private val momDao: MomDao,
     private val momAnalysisHistoryDao: MomAnalysisHistoryDao,
     private val kidAnalysisHistoryDao: KidAnalysisHistoryDao
 ) {
+
+    suspend fun sendMessageToChatbot(message: String): String? {
+        return try {
+            val response = chatbotApiService.sendMessage(MessageRequest(message))
+            if (response.isSuccessful) {
+                response.body()?.reply
+            } else {
+                response.errorBody()?.string() ?: "Unknown error"
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            "Error: ${e.message}"
+        }
+    }
 
     fun getAllKid(): LiveData<List<KidEntity>> = kidDao.getAllKids()
     fun getKid(id: Int): LiveData<KidEntity> {
@@ -53,6 +71,7 @@ class GiziRepository private constructor(
         private var instance: GiziRepository? = null
         fun getInstance(
             apiService: ApiService,
+            chatbotApiService: ChatbotApiService,
             kidDao: KidDao,
             appExecutors: AppExecutors,
             momDao: MomDao,
@@ -63,6 +82,7 @@ class GiziRepository private constructor(
             instance ?: synchronized(this) {
                 instance ?: GiziRepository(
                     apiService,
+                    chatbotApiService,
                     kidDao,
                     appExecutors,
                     momDao,

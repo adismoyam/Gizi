@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -44,6 +45,7 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        (activity as AppCompatActivity).supportActionBar?.hide()
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -56,6 +58,10 @@ class HomeFragment : Fragment() {
             findNavController().navigate(R.id.navigation_role)
         }
         setupCardDescription()
+
+        binding.buttonChatbot.setOnClickListener {
+            findNavController().navigate(R.id.navigation_nutriai)
+        }
 
         binding.buttonLogout.setOnClickListener {
             val sharedPreferences = requireContext().getSharedPreferences("AuthPrefs", Context.MODE_PRIVATE)

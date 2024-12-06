@@ -146,4 +146,6 @@
     <string name="stunting_Tall">Tinggi badan anak Anda lebih tinggi dari rata-rata untuk usianya. Kondisi ini umumnya bukan masalah, tetapi tetap perlu memantau perkembangan secara menyeluruh.</string>
     <string name="stunting_detail">Keterangan Kondisi Stunting</string>
 
+    <string name="chatbot">Gunakan gizi-bot untuk konsultasi masalah kesehatan anak</string>
+    <string name="article_home">Artikel</string>
 </resources>
