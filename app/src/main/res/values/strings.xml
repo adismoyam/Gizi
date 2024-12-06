@@ -66,6 +66,11 @@
     <string name="content_tab_mom">Welcome Mom</string>
     <string name="content_tab_kid">Welcome Kid</string>
 
+    <string name="tab_rekomendasi_article">Rekomendasi</string>
+    <string name="tab_kehamilan_article">Kehamilan</string>
+    <string name="tab_nutrisi_article">Nutrisi</string>
+    <string name="tab_parenting_article">Parenting</string>
+
     <string name="tab_mom_medrec">Kehamilan</string>
     <string name="tab_kid_medrec">Anak</string>
 
@@ -90,7 +95,6 @@
 
     <string name="data_saat_dianalisis">Data saat dianalisis pada \n%1$s</string>
     <string name="detail_riwayat_analisis">Detail Riwayat Analisis</string>
-
 
 
     <string name="berat">Berat (kg)</string>

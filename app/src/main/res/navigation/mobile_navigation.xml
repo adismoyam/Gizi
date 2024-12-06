@@ -9,7 +9,7 @@
         android:id="@+id/navigation_home"
         android:name="com.tiuho22bangkit.gizi.ui.home.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" >
+        tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_navigation_home_to_isiDataAnakFragment"
             app:destination="@id/isi_data_anak_fragment" />
@@ -19,7 +19,7 @@
         android:id="@+id/navigation_start"
         android:name="com.tiuho22bangkit.gizi.ui.StartFragment"
         android:label="@string/title_start"
-        tools:layout="@layout/fragment_start" >
+        tools:layout="@layout/fragment_start">
         <action
             android:id="@+id/action_fragmentStart_to_fragmentLogin"
             app:destination="@id/navigation_login"
@@ -31,7 +31,7 @@
         android:id="@+id/navigation_register"
         android:name="com.tiuho22bangkit.gizi.ui.auth.RegisterFragment"
         android:label="@string/title_register"
-        tools:layout="@layout/fragment_register" >
+        tools:layout="@layout/fragment_register">
         <action
             android:id="@+id/action_registerFragment_to_roleFragment"
             app:destination="@id/navigation_role" />
@@ -41,7 +41,7 @@
         android:id="@+id/navigation_role"
         android:name="com.tiuho22bangkit.gizi.ui.auth.RoleFragment"
         android:label="@string/title_register"
-        tools:layout="@layout/fragment_role" >
+        tools:layout="@layout/fragment_role">
         <argument
             android:name="username"
             app:argType="string" />
@@ -61,21 +61,10 @@
 
     <fragment
         android:id="@+id/navigation_article"
-        android:name="com.tiuho22bangkit.gizi.ui.article.ArticleFragment"
+        android:name="com.tiuho22bangkit.gizi.ui.article.RemakeArticleFragment"
         android:label="@string/title_article"
-        tools:layout="@layout/fragment_article">
-        <action
-            android:id="@+id/action_to_detailFragment"
-            app:destination="@id/detail_fragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/detail_fragment"
-        android:name="com.tiuho22bangkit.gizi.ui.article.detail.DetailFragment"
-        android:label="Detail Fragment">
-        <argument
-            android:name="article"
-            app:argType="com.tiuho22bangkit.gizi.data.remote.ArticlesItem" />
-    </fragment>
+        tools:layout="@layout/fragment_article"/>
+
 
     <fragment
         android:id="@+id/navigation_nutriai"
@@ -101,9 +90,29 @@
     <fragment
         android:id="@+id/isi_data_anak_fragment"
         android:name="com.tiuho22bangkit.gizi.ui.profile.IsiDataAnakFragment"
-        android:label="Isi Data Anak" >
+        android:label="Isi Data Anak">
         <action
             android:id="@+id/action_navigation_isiDataAnakFragment_to_navigation_profile"
-            app:destination="@id/navigation_profile"/>
+            app:destination="@id/navigation_profile" />
     </fragment>
+    <fragment
+        android:id="@+id/rekomendasiFragment"
+        android:name="com.tiuho22bangkit.gizi.ui.article.rekomendasi.RekomendasiFragment"
+        android:label="fragment_rekomendasi"
+        tools:layout="@layout/fragment_rekomendasi"/>
+    <fragment
+        android:id="@+id/kehamilanFragment"
+        android:name="com.tiuho22bangkit.gizi.ui.article.kehamilan.KehamilanFragment"
+        android:label="fragment_kehamilan"
+        tools:layout="@layout/fragment_kehamilan"/>
+    <fragment
+        android:id="@+id/nutrisiFragment"
+        android:name="com.tiuho22bangkit.gizi.ui.article.nutrisi.NutrisiFragment"
+        android:label="fragment_nutrisi"
+        tools:layout="@layout/fragment_nutrisi"/>
+    <fragment
+        android:id="@+id/parentingFragment"
+        android:name="com.tiuho22bangkit.gizi.ui.article.parenting.ParentingFragment"
+        android:label="fragment_parenting"
+        tools:layout="@layout/fragment_parenting"/>
 </navigation>
