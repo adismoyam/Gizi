@@ -22,7 +22,7 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
-
+        buildConfigField("String", "PUNYANYA_JUMAIN", "\"https://article-131795739000.us-central1.run.app/\"")
         buildConfigField("String", "BASE_URL", "\"https://newsapi.org/v2/\"")
         buildConfigField("String", "API_KEY", "\"a2c7c8f11d164471a4b66dc1696b5186\"")
     }
