@@ -1,6 +1,7 @@
 package com.tiuho22bangkit.gizi.ui.profile
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -88,7 +89,7 @@ class IsiDataAnakFragment : Fragment(), DatePickerFragment.DialogDateListener {
                         .show()
                 }
 
-                birthDate.isEmpty() -> {
+                birthDate.isEmpty() || birthDate == getString(R.string.tanggal_lahir) -> {
                     Toast.makeText(requireContext(), "Pilih tanggal lahir anak", Toast.LENGTH_SHORT)
                         .show()
                 }

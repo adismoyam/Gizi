@@ -17,6 +17,9 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".ui.article.detail.DetailActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.profile.IsiDataIbuActivity"
             android:exported="false" />
         <activity
