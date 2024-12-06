@@ -13,24 +13,26 @@ import androidx.cardview.widget.CardView
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.tiuho22bangkit.gizi.R
 import com.tiuho22bangkit.gizi.databinding.FragmentLoginBinding
 import com.tiuho22bangkit.gizi.databinding.FragmentRoleBinding
 import com.tiuho22bangkit.gizi.ui.ViewModelFactory
+import com.tiuho22bangkit.gizi.ui.analysis.MomAnalysisActivity
+import com.tiuho22bangkit.gizi.ui.profile.IsiDataIbuActivity
+import com.tiuho22bangkit.gizi.ui.profile.ProfileViewModel
 import java.util.UUID
 
 class RoleFragment : Fragment() {
-    private val userViewModel: UserViewModel by viewModels {
+    private val viewModel: ProfileViewModel by viewModels {
         ViewModelFactory.getInstance(requireContext())
     }
 
     private var _binding: FragmentRoleBinding? = null
     private val binding get() = _binding!!
     private lateinit var selectedRole: String
-
-    private lateinit var database: DatabaseReference
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,68 +47,34 @@ class RoleFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        database = FirebaseDatabase.getInstance().getReferenceFromUrl("https://capstone-bangkit-2024-default-rtdb.firebaseio.com/")
-
-        val username = arguments?.getString("username")
-        val email = arguments?.getString("email")
-        val password = arguments?.getString("password")
-        val token = generateToken()
-        val encodedEmail = encodeEmail(email!!)
-
         binding.rolePregnant.setOnClickListener {
-            selectedRole = "Pregnant"
+            viewModel.isMomDataAvailable.observe(viewLifecycleOwner) { isMomDataAvailable ->
+                if (isMomDataAvailable) {
+                    viewModel.loadMomData().observe(viewLifecycleOwner) { mom ->
+                        val intent = Intent(requireContext(), MomAnalysisActivity::class.java)
+                            .putExtra(MomAnalysisActivity.MOM_DATA, mom)
+                        startActivity(intent)
+                    }
+                } else {
+                    val intent = Intent(requireContext(), IsiDataIbuActivity::class.java)
+                    startActivity(intent)
+                }
+            }
             highlightSelectedRole(binding.rolePregnant)
         }
 
-        binding.roleBreastfeeding.setOnClickListener {
-            selectedRole = "Breastfeeding"
-            highlightSelectedRole(binding.roleBreastfeeding)
-        }
-
         binding.roleHavingToddler.setOnClickListener {
-            selectedRole = "Having Toddler"
+            findNavController().navigate(R.id.action_navigation_role_to_isiDataAnakFragment)
             highlightSelectedRole(binding.roleHavingToddler)
         }
 
-        binding.registerButton.setOnClickListener {
-            if (::selectedRole.isInitialized) {
-                database = FirebaseDatabase.getInstance().getReference("users")
-                database.child(encodedEmail).child("username").setValue(username)
-                database.child(encodedEmail).child("email").setValue(encodedEmail)
-                database.child(encodedEmail).child("password").setValue(password)
-                database.child(encodedEmail).child("token").setValue(token)
-                database.child(encodedEmail).child("role").setValue(selectedRole)
-                findNavController().navigate(R.id.navigation_login)
-                Toast.makeText(requireContext(), "Buat Akun Berhasil! Silahkan Login!", Toast.LENGTH_SHORT).show()
-            } else {
-                Toast.makeText(requireContext(), "Pilih Tipe Pengguna terlebih dahulu!", Toast.LENGTH_SHORT).show()
-            }
+        binding.backButton.setOnClickListener {
+            findNavController().navigate(R.id.navigation_home)
         }
-        observeViewModel()
-    }
-
-    private fun encodeEmail(email: String): String {
-        return email.replace(".", ",")
-    }
-
-    private fun observeViewModel() {
-        userViewModel.registerResult.observe(viewLifecycleOwner, Observer { result ->
-            result.onSuccess {
-                Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
-                findNavController().navigate(R.id.navigation_login)
-            }.onFailure {
-                Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
-            }
-        })
-    }
-
-    private fun generateToken(): String {
-        return UUID.randomUUID().toString()
     }
 
     private fun highlightSelectedRole(selectedCard: CardView) {
         binding.rolePregnant.setCardBackgroundColor(resources.getColor(android.R.color.white))
-        binding.roleBreastfeeding.setCardBackgroundColor(resources.getColor(android.R.color.white))
         binding.roleHavingToddler.setCardBackgroundColor(resources.getColor(android.R.color.white))
 
         selectedCard.setCardBackgroundColor(resources.getColor(R.color.purple_200))

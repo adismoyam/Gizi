@@ -11,6 +11,7 @@ import com.tiuho22bangkit.gizi.ui.profile.ProfileViewModel
 import com.tiuho22bangkit.gizi.ui.auth.UserViewModel
 import com.tiuho22bangkit.gizi.ui.home.HomeViewModel
 import com.tiuho22bangkit.gizi.ui.medrec.MedrecViewModel
+import com.tiuho22bangkit.gizi.ui.nutriai.NutriaiViewModel
 
 class ViewModelFactory private constructor(
 //    private val mApplication: Application,
@@ -28,15 +29,21 @@ class ViewModelFactory private constructor(
                 HomeViewModel(giziRepository) as T
             }
 
-//            modelClass.isAssignableFrom(HomeViewModel::class.java) -> {
-//                HomeViewModel(giziRepository) as T
-//            }
-
+            modelClass.isAssignableFrom(MedrecViewModel::class.java) -> {
+                MedrecViewModel(giziRepository) as T
+            }
 
             modelClass.isAssignableFrom(ProfileViewModel::class.java) -> {
                 ProfileViewModel(giziRepository) as T
             }
 
+            modelClass.isAssignableFrom(NutriaiViewModel::class.java) -> {
+                NutriaiViewModel(giziRepository) as T
+            }
+
+            modelClass.isAssignableFrom(HomeViewModel::class.java) -> {
+                HomeViewModel(giziRepository) as T
+            }
 
             modelClass.isAssignableFrom(MedrecViewModel::class.java) -> {
                 MedrecViewModel(giziRepository) as T

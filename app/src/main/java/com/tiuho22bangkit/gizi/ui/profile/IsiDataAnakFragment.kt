@@ -119,7 +119,7 @@ class IsiDataAnakFragment : Fragment(), DatePickerFragment.DialogDateListener {
                             kidDao.insertKidData(kid)
                             withContext(Dispatchers.Main) {
                                 Toast.makeText(requireContext(), "Data anak berhasil disimpan", Toast.LENGTH_SHORT).show()
-                                findNavController().navigateUp()
+                                findNavController().navigate(R.id.navigation_home)
                             }
                         } catch (e: Exception) {
                             withContext(Dispatchers.Main) {

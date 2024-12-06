@@ -52,12 +52,13 @@
     <string name="confirm_password">Konfirmasi Kata Sandi</string>
     <string name="sign_up">Daftar</string>
     <string name="next">Selanjutnya</string>
+    <string name="back">Batalkan</string>
     <string name="start">Mulai</string>
     <string name="login">Masuk</string>
-    <string name="pregnant">Hamil</string>
+    <string name="pregnant">Masa Kehamilan</string>
     <string name="breastfeeding">Menyusui</string>
-    <string name="havetoddler">Memiliki Bayi</string>
-    <string name="role_title">Pilih Tipe Pengguna</string>
+    <string name="havetoddler">Tumbuh Kembang Anak</string>
+    <string name="role_title">Ingin Tambah Data Baru?</string>
     <string name="description_logo">Logo Aplikasi Gizi</string>
     <string name="have_account">Sudah Punya Akun? <b>Masuk</b> </string>
     <string name="dont_have_account">Belum Punya Akun? <b>Daftar</b> </string>
@@ -140,7 +141,7 @@
     <string name="wasting_Severely_Underweight">Berat badan anak Anda jauh di bawah kisaran normal untuk tinggi badannya. Hal ini menunjukkan adanya kekurangan gizi serius yang memerlukan perhatian segera.</string>
     <string name="wasting_Underweight">Berat badan anak Anda sedikit di bawah kisaran normal untuk tinggi badannya. Perhatikan asupan nutrisi agar tumbuh kembangnya optimal.</string>
     <string name="wasting_detail">Keterangan Kondisi Wasting</string>
-    <string name="condition_unknown">Kondisi Anak Anda Tidak Diketahui</string>
+    <string name="condition_unknown">Kondisi Anak Anda Tidak Diketahui, Silahkan Isi Data dan Analisis Terlebih Dahulu</string>
 
     <!-- result Stunting -->
     <string name="stunting_normal">Tinggi badan anak Anda sesuai dengan standar pertumbuhan berdasarkan usianya. Tumbuh kembangnya berjalan dengan baik.</string>
@@ -149,4 +150,6 @@
     <string name="stunting_Tall">Tinggi badan anak Anda lebih tinggi dari rata-rata untuk usianya. Kondisi ini umumnya bukan masalah, tetapi tetap perlu memantau perkembangan secara menyeluruh.</string>
     <string name="stunting_detail">Keterangan Kondisi Stunting</string>
 
+    <string name="chatbot">Gunakan gizi-bot untuk konsultasi masalah kesehatan anak</string>
+    <string name="article_home">Artikel</string>
 </resources>

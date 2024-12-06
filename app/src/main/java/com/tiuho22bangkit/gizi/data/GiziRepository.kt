@@ -10,15 +10,34 @@ import com.tiuho22bangkit.gizi.data.local.entity.KidAnalysisHistoryEntity
 import com.tiuho22bangkit.gizi.data.local.entity.MomAnalysisHistoryEntity
 import com.tiuho22bangkit.gizi.data.local.entity.MomEntity
 import com.tiuho22bangkit.gizi.data.remote.ApiService
+import com.tiuho22bangkit.gizi.data.remote.ChatRequest
+import com.tiuho22bangkit.gizi.data.remote.ChatResponse
+import com.tiuho22bangkit.gizi.data.remote.ChatbotApiService
 
 class GiziRepository private constructor(
     private val apiService: ApiService,
+    private val chatbotApiService: ChatbotApiService,
     private val kidDao: KidDao,
     private val appExecutors: AppExecutors,
     private val momDao: MomDao,
     private val momAnalysisHistoryDao: MomAnalysisHistoryDao,
     private val kidAnalysisHistoryDao: KidAnalysisHistoryDao
 ) {
+
+    suspend fun sendMessageToChatbot(prompt: String): ChatResponse? {
+        return try {
+            val request = ChatRequest(prompt)
+            val response = chatbotApiService.sendMessage(request)
+            if (response.isSuccessful) {
+                response.body()
+            } else {
+                null
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            null
+        }
+    }
 
     fun getAllKid(): LiveData<List<KidEntity>> = kidDao.getAllKids()
     fun getKid(id: Int): LiveData<KidEntity> {
@@ -53,6 +72,7 @@ class GiziRepository private constructor(
         private var instance: GiziRepository? = null
         fun getInstance(
             apiService: ApiService,
+            chatbotApiService: ChatbotApiService,
             kidDao: KidDao,
             appExecutors: AppExecutors,
             momDao: MomDao,
@@ -63,6 +83,7 @@ class GiziRepository private constructor(
             instance ?: synchronized(this) {
                 instance ?: GiziRepository(
                     apiService,
+                    chatbotApiService,
                     kidDao,
                     appExecutors,
                     momDao,

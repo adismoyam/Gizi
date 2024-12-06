@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:text="@string/role_title"
         android:textStyle="bold"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textAlignment="center"
         android:paddingVertical="16dp"
         android:textSize="32sp"
@@ -30,7 +30,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/role_breastfeeding"
+        app:layout_constraintBottom_toTopOf="@+id/role_having_toddler"
         android:layout_margin="16dp"
         app:cardCornerRadius="16dp">
 
@@ -55,9 +55,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/pregnant"
-            android:textColor="@color/black"
+            android:textColor="@color/pink"
             android:textStyle="bold"
-            android:textSize="32sp"
+            android:textSize="28sp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -70,57 +70,12 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/role_breastfeeding"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/role_pregnant"
-        android:layout_margin="16dp"
-        app:cardCornerRadius="16dp">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <ImageView
-                android:id="@+id/role_image_bf"
-                android:layout_width="200dp"
-                android:layout_height="160dp"
-                android:importantForAccessibility="no"
-                android:src="@drawable/role_breastfeeding"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/role_title_bf"
-                android:scaleType="centerCrop" />
-
-            <TextView
-                android:id="@+id/role_title_bf"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="@string/breastfeeding"
-                android:textColor="@color/black"
-                android:textStyle="bold"
-                android:textSize="32sp"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/role_image_bf"
-                android:textAlignment="textEnd"
-                android:layout_marginEnd="16dp"/>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
         android:id="@+id/role_having_toddler"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/role_breastfeeding"
+        app:layout_constraintTop_toBottomOf="@+id/role_pregnant"
         android:layout_margin="16dp"
         app:cardCornerRadius="16dp">
 
@@ -145,9 +100,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@string/havetoddler"
-                android:textColor="@color/black"
+                android:textColor="@color/pink"
                 android:textStyle="bold"
-                android:textSize="32sp"
+                android:textSize="28sp"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -160,10 +115,10 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/registerButton"
+        android:id="@+id/backButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/sign_up"
+        android:text="@string/back"
         android:textColor="@android:color/white"
         android:padding="12dp"
         android:layout_margin="16dp"

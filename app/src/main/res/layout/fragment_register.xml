@@ -89,10 +89,10 @@
 
             <!-- Register Button -->
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/nextButton"
+                android:id="@+id/registerButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/next"
+                android:text="@string/sign_up"
                 android:textColor="@android:color/white"
                 android:padding="12dp"
                 android:background="@drawable/rounded_button" />

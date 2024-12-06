@@ -1,30 +1,24 @@
 package com.tiuho22bangkit.gizi.ui.home
 
-import android.annotation.SuppressLint
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
-import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tiuho22bangkit.gizi.R
 import com.tiuho22bangkit.gizi.databinding.FragmentHomeBinding
-import com.tiuho22bangkit.gizi.databinding.FragmentProfileBinding
 import com.tiuho22bangkit.gizi.ui.ViewModelFactory
-import com.tiuho22bangkit.gizi.ui.analysis.MomAnalysisActivity
-import com.tiuho22bangkit.gizi.ui.profile.IsiDataIbuActivity
+import com.tiuho22bangkit.gizi.ui.article.ArticleAdapter
 import com.tiuho22bangkit.gizi.ui.profile.KidProfileAdapter
-import com.tiuho22bangkit.gizi.ui.profile.ProfileViewModel
 
 class HomeFragment : Fragment() {
 
@@ -39,11 +33,16 @@ class HomeFragment : Fragment() {
         KidProfileAdapter()
     }
 
+    private val articleAdapter by lazy {
+        ArticleAdapter()
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        (activity as AppCompatActivity).supportActionBar?.hide()
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -51,11 +50,31 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setupRVArticle()
+
+        viewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
+            showLoading(isLoading)
+        }
+
+        articleObserver()
+
+        viewModel.errorMessage.observe(viewLifecycleOwner) { error ->
+            if (error != null && (viewModel.allArticles.value == null || viewModel.allArticles.value!!.isEmpty())) {
+                showError(error)
+            } else {
+                hideError()
+            }
+        }
+
         setupRVKidProfile()
         binding.add.setOnClickListener {
-            findNavController().navigate(R.id.action_navigation_home_to_isiDataAnakFragment)
+            findNavController().navigate(R.id.navigation_role)
         }
         setupCardDescription()
+
+        binding.buttonChatbot.setOnClickListener {
+            findNavController().navigate(R.id.navigation_nutriai)
+        }
 
         binding.buttonLogout.setOnClickListener {
             val sharedPreferences = requireContext().getSharedPreferences("AuthPrefs", Context.MODE_PRIVATE)
@@ -69,29 +88,72 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun setupCardDescription() {
-        viewModel.lastKidAnalysisHistory.observe(viewLifecycleOwner, Observer { kid ->
-            val stuntingResult = kid.stuntingRiskResult
-            val wastingResult = kid.wastingRiskResult
-
-            binding.tvStuntingDescription.text = when (stuntingResult) {
-                "Normal" -> getString(R.string.stunting_normal)
-                "Severely Stunted" -> getString(R.string.stunting_Severely_Stunted)
-                "Stunted" -> getString(R.string.stunting_Stunted)
-                "Tall" -> getString(R.string.stunting_Tall)
-                else -> getString(R.string.condition_unknown)
-            }
-
-            binding.tvWastingDescription.text = when (wastingResult) {
-                "Normal" -> getString(R.string.wasting_normal)
-                "Risk of Overweight" -> getString(R.string.wasting_Risk_of_Overweight)
-                "Severely Underweight" -> getString(R.string.wasting_Severely_Underweight)
-                "Underweight" -> getString(R.string.wasting_Underweight)
-                else -> getString(R.string.condition_unknown)
-            }
-        })
+    private fun articleObserver() {
+        viewModel.allArticles .observe(viewLifecycleOwner) { article ->
+            val limitArticle = article.take(5)
+            articleAdapter.submitList(limitArticle)
+            binding.articleHome.visibility = View.VISIBLE
+        }
     }
 
+    private fun setupRVArticle() {
+        binding.articleHome.apply {
+            layoutManager =
+                LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+            adapter = this@HomeFragment.articleAdapter
+
+            addItemDecoration(
+                DividerItemDecoration(
+                    context, (layoutManager as LinearLayoutManager).orientation
+                )
+            )
+        }
+    }
+
+    private fun setupCardDescription() {
+        viewModel.lastKidAnalysisHistory.observe(viewLifecycleOwner, Observer { kid ->
+            if (kid != null) {
+                val stuntingResult = kid.stuntingRiskResult ?: getString(R.string.condition_unknown)
+                val wastingResult = kid.wastingRiskResult ?: getString(R.string.condition_unknown)
+
+                binding.tvStuntingDescription.text = when (stuntingResult) {
+                    "Normal" -> getString(R.string.stunting_normal)
+                    "Severely Stunted" -> getString(R.string.stunting_Severely_Stunted)
+                    "Stunted" -> getString(R.string.stunting_Stunted)
+                    "Tall" -> getString(R.string.stunting_Tall)
+                    else -> getString(R.string.condition_unknown)
+                }
+
+                binding.tvWastingDescription.text = when (wastingResult) {
+                    "Normal" -> getString(R.string.wasting_normal)
+                    "Risk of Overweight" -> getString(R.string.wasting_Risk_of_Overweight)
+                    "Severely Underweight" -> getString(R.string.wasting_Severely_Underweight)
+                    "Underweight" -> getString(R.string.wasting_Underweight)
+                    else -> getString(R.string.condition_unknown)
+                }
+            } else {
+                binding.tvStuntingDescription.text = getString(R.string.condition_unknown)
+                binding.tvWastingDescription.text = getString(R.string.condition_unknown)
+            }
+        })
+
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.INVISIBLE
+    }
+
+    private fun hideError() {
+        binding.tvErrorMessage.visibility = View.GONE
+    }
+
+    private fun showError(message: String) {
+        binding.tvErrorMessage.text = message
+        binding.tvErrorMessage.visibility = View.VISIBLE
+        if (viewModel.allArticles.value.isNullOrEmpty()) {
+            binding.articleHome.visibility = View.INVISIBLE
+        }
+    }
 
     private fun setupRVKidProfile() {
         binding.rvKids.apply {
@@ -108,6 +170,7 @@ class HomeFragment : Fragment() {
             adapter.submitList(kidList)
         }
         viewModel.checkMomData()
+        articleObserver()
     }
 
     override fun onDestroyView() {
