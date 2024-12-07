@@ -97,6 +97,8 @@
     <string name="data_saat_dianalisis">Data saat dianalisis pada \n%1$s</string>
     <string name="detail_riwayat_analisis">Detail Riwayat Analisis</string>
 
+    <string name="send">Kirim</string>
+    <string name="write_message">Tulis Sesuatu</string>
 
     <string name="berat">Berat (kg)</string>
     <string name="tinggi">Tinggi (cm)</string>

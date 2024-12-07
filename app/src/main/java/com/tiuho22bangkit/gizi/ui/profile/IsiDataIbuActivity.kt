@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import com.tiuho22bangkit.gizi.R
 import com.tiuho22bangkit.gizi.data.local.GiziDatabase
 import com.tiuho22bangkit.gizi.data.local.dao.MomDao
 import com.tiuho22bangkit.gizi.data.local.entity.MomEntity
@@ -68,22 +69,16 @@ class IsiDataIbuActivity : AppCompatActivity(), DatePickerFragment.DialogDateLis
             val bodyTemperature = binding.etBodyTemperature.text.toString().toFloatOrNull()
             val heartRate = binding.etHeartRate.text.toString().toFloatOrNull()
 
-            // Validasi input
             when {
-//                name.isEmpty() -> {
-//                    binding.kidName.error = "Nama anak harus diisi"
-//                    binding.kidName.requestFocus()
-//                }
-
-                lmpDate.isEmpty() -> {
+                lmpDate.isEmpty() || lmpDate == getString(R.string.hari_pertama_haid_terakhir)-> {
                     Toast.makeText(this, "Pilih tanggal HPHT", Toast.LENGTH_SHORT).show()
                 }
 
-                eddDate.isEmpty() -> {
+                eddDate.isEmpty() || eddDate == getString(R.string.hari_perkiraan_lahir) -> {
                     Toast.makeText(this, "Pilih tanggal HPL", Toast.LENGTH_SHORT).show()
                 }
 
-                birthDate.isEmpty() -> {
+                birthDate.isEmpty() || birthDate == getString(R.string.tanggal_lahir)-> {
                     Toast.makeText(this, "Pilih tanggal lahir", Toast.LENGTH_SHORT).show()
                 }
 
