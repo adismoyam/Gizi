@@ -5,5 +5,5 @@ import retrofit2.http.*
 
 interface ChatbotApiService {
     @POST("/chatbot/")
-    suspend fun sendMessage(@Body chatRequest: ChatRequest): Response<ChatResponse>
+    suspend fun sendMessage(@Body chatRequest: ChatRequest): ChatResponse
 }

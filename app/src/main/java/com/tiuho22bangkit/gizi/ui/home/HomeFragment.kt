@@ -75,17 +75,6 @@ class HomeFragment : Fragment() {
         binding.buttonChatbot.setOnClickListener {
             findNavController().navigate(R.id.navigation_nutriai)
         }
-
-        binding.buttonLogout.setOnClickListener {
-            val sharedPreferences = requireContext().getSharedPreferences("AuthPrefs", Context.MODE_PRIVATE)
-            val editor = sharedPreferences.edit()
-            editor.remove("auth_token")
-            editor.apply()
-
-            Toast.makeText(requireContext(), "Berhasil logout", Toast.LENGTH_SHORT).show()
-
-            findNavController().navigate(R.id.navigation_start)
-        }
     }
 
     private fun articleObserver() {

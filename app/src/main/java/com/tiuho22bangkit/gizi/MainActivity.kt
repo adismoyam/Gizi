@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
         // Atur visibilitas Bottom Navigation berdasarkan fragment
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
-                R.id.navigation_register, R.id.navigation_login, R.id.navigation_role, R.id.navigation_start -> {
+                R.id.navigation_register, R.id.navigation_login, R.id.navigation_role, R.id.navigation_start, R.id.navigation_nutriai -> {
                     bottomNav.visibility = View.GONE
                 }
                 else -> {

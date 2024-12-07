@@ -1,5 +1,6 @@
 package com.tiuho22bangkit.gizi.ui.profile
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -8,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -53,6 +55,17 @@ class ProfileFragment : Fragment() {
             startActivity(intent)
         }
         momObserver()
+
+        binding.buttonLogout.setOnClickListener {
+            val sharedPreferences = requireContext().getSharedPreferences("AuthPrefs", Context.MODE_PRIVATE)
+            val editor = sharedPreferences.edit()
+            editor.remove("auth_token")
+            editor.apply()
+
+            Toast.makeText(requireContext(), "Berhasil logout", Toast.LENGTH_SHORT).show()
+
+            findNavController().navigate(R.id.navigation_start)
+        }
     }
 
     override fun onResume() {

@@ -24,19 +24,8 @@ class GiziRepository private constructor(
     private val kidAnalysisHistoryDao: KidAnalysisHistoryDao
 ) {
 
-    suspend fun sendMessageToChatbot(prompt: String): ChatResponse? {
-        return try {
-            val request = ChatRequest(prompt)
-            val response = chatbotApiService.sendMessage(request)
-            if (response.isSuccessful) {
-                response.body()
-            } else {
-                null
-            }
-        } catch (e: Exception) {
-            e.printStackTrace()
-            null
-        }
+    suspend fun sendMessageToChatbot(prompt: String): ChatResponse {
+        return chatbotApiService.sendMessage(ChatRequest(prompt))
     }
 
     fun getAllKid(): LiveData<List<KidEntity>> = kidDao.getAllKids()

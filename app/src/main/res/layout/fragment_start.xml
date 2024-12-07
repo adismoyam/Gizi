@@ -13,7 +13,7 @@
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:contentDescription="@string/description_logo"
-        android:src="@drawable/mother"
+        android:src="@drawable/app_logo2"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/startButton"
         app:layout_constraintStart_toStartOf="parent"
