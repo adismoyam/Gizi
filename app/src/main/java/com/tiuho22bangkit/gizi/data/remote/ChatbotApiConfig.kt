@@ -20,7 +20,7 @@ class ChatbotApiConfig {
                 .writeTimeout(30, TimeUnit.SECONDS)
                 .build()
             val retrofit = Retrofit.Builder()
-                .baseUrl("https://fitur-1005631098859.us-central1.run.app")
+                .baseUrl(BuildConfig.CHATBOT_BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
                 .build()

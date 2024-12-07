@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.text.HtmlCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
@@ -46,10 +47,25 @@ class NutriaiFragment : Fragment() {
             viewModel.sendMessage(message)
         }
 
+
         viewModel.response.observe(viewLifecycleOwner) { response ->
-            responseText.text = response
+            // Helper function untuk memproses markdown-like text menjadi HTML
+            val formattedResponse = response
+                .replace("\n", "<br>") // Ganti \n dengan <br> untuk baris baru
+                .replace("## (.*?)<br>".toRegex(), "<h2>$1</h2>") // Ganti ## heading dengan <h2>
+                .replace("\\*\\*(.*?)\\*\\*".toRegex(), "<b>$1</b>") // Ganti **teks** dengan <b>teks</b>
+                .replace("\\*(.*?)\\*".toRegex(), "<i>$1</i>") // Ganti *teks* dengan <i>teks</i>
+                .replace("^\\* (.*?)<br>".toRegex(RegexOption.MULTILINE), "<li>$1</li>") // Ganti * item dengan <li>item</li>
+                .replace("<li>(.*?)</li>".toRegex(), "<ul><li>$1</li></ul>") // Bungkus semua <li> dalam <ul>
+
+            // Gunakan HtmlCompat.fromHtml untuk menampilkan teks dengan format HTML
+            responseText.text = HtmlCompat.fromHtml(
+                formattedResponse,
+                HtmlCompat.FROM_HTML_MODE_LEGACY
+            )
         }
     }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
