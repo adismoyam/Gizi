@@ -69,10 +69,10 @@ class RegisterFragment : Fragment() {
             }
 
             database = FirebaseDatabase.getInstance().getReference("users")
-            database.child(encodedEmail).child("username").setValue(username)
-            database.child(encodedEmail).child("email").setValue(encodedEmail)
-            database.child(encodedEmail).child("password").setValue(password)
-            database.child(encodedEmail).child("token").setValue(token)
+            database.child(token).child("username").setValue(username)
+            database.child(token).child("email").setValue(encodedEmail)
+            database.child(token).child("password").setValue(password)
+            database.child(token).child("token").setValue(token)
             findNavController().navigate(R.id.navigation_login)
             Toast.makeText(requireContext(), "Buat Akun Berhasil! Silahkan Login!", Toast.LENGTH_SHORT).show()
 //            val bundle = Bundle().apply {

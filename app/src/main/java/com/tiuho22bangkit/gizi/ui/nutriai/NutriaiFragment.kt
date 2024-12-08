@@ -1,11 +1,13 @@
 package com.tiuho22bangkit.gizi.ui.nutriai
 
+import android.content.Context
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -46,13 +48,18 @@ class NutriaiFragment : Fragment() {
         val inputField = binding.inputField
         val sendButton = binding.sendButton
 
+        val sharedPreferences = requireContext().getSharedPreferences("AuthPrefs", Context.MODE_PRIVATE)
+        val id = sharedPreferences.getString("auth_token", null)
+
         chatAdapter = ChatAdapter(messages)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.adapter = chatAdapter
 
         sendButton.setOnClickListener {
             val userMessage = inputField.text.toString()
-            if (userMessage.isNotBlank()) {
+            if (userMessage.isEmpty()) {
+                Toast.makeText(requireContext(), "Kolom Input Tidak Boleh Kosong!", Toast.LENGTH_SHORT).show()
+            } else {
                 // Tambahkan pesan pengguna ke RecyclerView
                 messages.add(ChatMessage(userMessage, true))
                 chatAdapter.notifyItemInserted(messages.size - 1)
@@ -62,7 +69,7 @@ class NutriaiFragment : Fragment() {
                 binding.loadingIndicator.visibility = View.VISIBLE
                 startLoadingAnimation()
 
-                viewModel.sendChatToApi(userMessage)
+                viewModel.sendChatToApi(id!!, userMessage)
                 inputField.text.clear()
             }
         }

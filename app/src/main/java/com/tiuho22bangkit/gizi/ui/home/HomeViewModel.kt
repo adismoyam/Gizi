@@ -5,8 +5,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.tiuho22bangkit.gizi.data.GiziRepository
 import com.tiuho22bangkit.gizi.data.local.entity.KidAnalysisHistoryEntity
+import com.tiuho22bangkit.gizi.data.local.entity.KidEntity
 import com.tiuho22bangkit.gizi.data.remote.ApiConfig
 import com.tiuho22bangkit.gizi.data.remote.JumainResponseItem
 import kotlinx.coroutines.Dispatchers
@@ -34,6 +39,30 @@ class HomeViewModel(private val giziRepository: GiziRepository) : ViewModel() {
         checkMomData()
         findArticles()
     }
+
+    fun loadKidDataFromFirebase(token: String): LiveData<List<KidEntity>> {
+        val liveData = MutableLiveData<List<KidEntity>>()
+        val databaseReference = FirebaseDatabase.getInstance().getReference("kids")
+        databaseReference.orderByChild("token").equalTo(token)
+            .addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    val kidList = mutableListOf<KidEntity>()
+                    for (data in snapshot.children) {
+                        val kid = data.getValue(KidEntity::class.java)
+                        if (kid != null) {
+                            kidList.add(kid)
+                        }
+                    }
+                    liveData.postValue(kidList)
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    Log.e("FirebaseError", "Error fetching data: ${error.message}")
+                }
+            })
+        return liveData
+    }
+
 
     fun findArticles() {
         _isLoading.value = true

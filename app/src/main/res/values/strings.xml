@@ -29,13 +29,16 @@
     <string name="card_news_description">Pada usia kehamilan 8 minggu, janin Moms mengalami perkembangan pesat. Jantungnya sudah berdetak, dan sebagian besar terbentuk dengan mata, hidung, dan telinga yang mulai terlihat. Tangan dan kaki kecilnya mulai tumbuh dengan jari-jari yang menyertainya.</string>
 
 
-    <string name="jenis_kelamin_profile">Jenis Kelamin\t\t\t\t\t\t: %1$s</string>
-    <string name="tanggal_lahir_anak_profile">Tanggal Lahir\t\t\t\t\t\t: %1$s</string>
+    <string name="jenis_kelamin_profile">Jenis Kelamin\t\t\t\t\t\t\t\t: %1$s</string>
+    <string name="tanggal_lahir_anak_profile">Tanggal Lahir\t\t\t\t\t\t\t\t\t: %1$s</string>
     <string name="usia_anak_profile">Usia\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t: %1$d bulan</string>
     <string name="berat_anak_profile">Berat\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t: %1$.2f kg</string>
     <string name="tinggi_anak_profile">Tinggi\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t: %1$.2f cm</string>
 
     <string name="tambah_data">Tambah Data</string>
+    <string name="update_data">Ubah Data Anak</string>
+    <string name="add_data">Tambah Data Anak</string>
+    <string name="analyze_data">Analisis Data Anak</string>
     <string name="perbarui_data">Perbarui Data</string>
     <string name="kembali">Kembali</string>
     <string name="isi_data_anak">Isi Data Anak</string>
@@ -96,6 +99,11 @@
 
     <string name="data_saat_dianalisis">Data saat dianalisis pada \n%1$s</string>
     <string name="detail_riwayat_analisis">Detail Riwayat Analisis</string>
+
+    <string name="wasting_result">Berat Ideal Antara 10–14 kg</string>
+    <string name="stunting_result">Tinggi Ideal Antara 84–92 cm</string>
+
+    <string name="stunting_description">stunting description</string>
 
     <string name="send">Kirim</string>
     <string name="write_message">Tulis Sesuatu</string>

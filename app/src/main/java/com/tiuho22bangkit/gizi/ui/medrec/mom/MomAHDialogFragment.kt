@@ -1,5 +1,6 @@
 package com.tiuho22bangkit.gizi.ui.medrec.mom
 
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -30,7 +31,12 @@ class MomAHDialogFragment : DialogFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val momAHEntity: MomAnalysisHistoryEntity? =
-            arguments?.getParcelable(ARG_MOM_ANALYSIS_DATA, MomAnalysisHistoryEntity::class.java)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                arguments?.getParcelable(ARG_MOM_ANALYSIS_DATA, MomAnalysisHistoryEntity::class.java)
+            } else {
+                @Suppress("DEPRECATION")
+                arguments?.getParcelable(ARG_MOM_ANALYSIS_DATA)
+            }
 
         binding.apply {
             momAHEntity?.let {

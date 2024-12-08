@@ -1,5 +1,6 @@
 package com.tiuho22bangkit.gizi.ui.medrec.kid
 
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -17,7 +18,7 @@ class KidAHDialogFragment : DialogFragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentKidahDialogBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -27,7 +28,12 @@ class KidAHDialogFragment : DialogFragment() {
 
         // Ambil data dari   arguments
         val kidAHEntity: KidAnalysisHistoryEntity? =
-            arguments?.getParcelable(ARG_KID_ANALYSIS_DATA, KidAnalysisHistoryEntity::class.java)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                arguments?.getParcelable(ARG_KID_ANALYSIS_DATA, KidAnalysisHistoryEntity::class.java)
+            } else {
+                @Suppress("DEPRECATION")
+                arguments?.getParcelable(ARG_KID_ANALYSIS_DATA)
+            }
 
         binding.apply {
             kidAHEntity?.let {

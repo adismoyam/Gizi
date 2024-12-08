@@ -50,7 +50,7 @@ class AnalysisViewModel(private val giziRepository: GiziRepository) : ViewModel(
         }
     }
 
-    fun getKid(id: Int): LiveData<KidEntity> {
-        return giziRepository.getKid(id)
+    fun getKid(id: String): LiveData<KidEntity?> {
+        return giziRepository.getKidFromFirebase(id)
     }
 }

@@ -17,7 +17,7 @@ import com.tiuho22bangkit.gizi.data.local.entity.UserEntity
 
 @Database(
     entities = [MomEntity::class, KidEntity::class, UserEntity::class, MomAnalysisHistoryEntity::class, KidAnalysisHistoryEntity::class],
-    version = 6,
+    version = 10,
     exportSchema = false
 )
 abstract class GiziDatabase : RoomDatabase() {

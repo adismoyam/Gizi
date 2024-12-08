@@ -32,7 +32,7 @@ class UpdateKidActivity : AppCompatActivity(), DatePickerFragment.DialogDateList
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
 
-        // Setup binding
+        supportActionBar?.hide()
         binding = ActivityUpdateKidBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -48,7 +48,7 @@ class UpdateKidActivity : AppCompatActivity(), DatePickerFragment.DialogDateList
         kidDao = giziDatabase.kidDao()
 
         // Get data from Intent
-        val idData = intent.getIntExtra("id", 0)
+        val idData = intent.getStringExtra("id")
         val nameData = intent.getStringExtra("name")
         val genderData = intent.getStringExtra("gender")
         val birthdateData = intent.getStringExtra("birthdate")
@@ -116,7 +116,7 @@ class UpdateKidActivity : AppCompatActivity(), DatePickerFragment.DialogDateList
 
                 else -> {
                      val kid = KidEntity(
-                         id = idData,
+                         id = idData!!,
                         name = name,
                         gender = gender,
                         birthDate = birthDate,
@@ -134,9 +134,12 @@ class UpdateKidActivity : AppCompatActivity(), DatePickerFragment.DialogDateList
                                     "Data anak berhasil disimpan",
                                     Toast.LENGTH_SHORT
                                 ).show()
-                                val intent = Intent(this@UpdateKidActivity, KidAnalysisActivity::class.java)
-                                intent.putExtra(KidAnalysisActivity.KID_DATA, kid)
+                                val intent = Intent(this@UpdateKidActivity, KidAnalysisActivity::class.java).apply {
+                                    putExtra(KidAnalysisActivity.KID_DATA, kid)
+                                    flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
+                                }
                                 startActivity(intent)
+                                finish()
                             }
                         } catch (e: Exception) {
                             withContext(Dispatchers.Main) {
@@ -150,7 +153,6 @@ class UpdateKidActivity : AppCompatActivity(), DatePickerFragment.DialogDateList
                     }
                 }
             }
-            finish()
         }
 
         // Close button handler

@@ -18,7 +18,7 @@ interface KidDao {
     fun getAllKids(): LiveData<List<KidEntity>>
 
     @Query("SELECT * FROM kid_table WHERE id = :kidId")
-    fun getKidById(kidId: Int): LiveData<KidEntity>
+    fun getKidById(kidId: String): LiveData<KidEntity>
 
     @Update
     fun updateKid(kid: KidEntity)

@@ -16,6 +16,7 @@ import com.tiuho22bangkit.gizi.data.local.entity.KidEntity
 import com.tiuho22bangkit.gizi.databinding.ActivityKidAnalysisBinding
 import com.tiuho22bangkit.gizi.helper.StuntWastClassifierHelper
 import com.tiuho22bangkit.gizi.ui.ViewModelFactory
+import com.tiuho22bangkit.gizi.ui.profile.KidAnalysisDialogFragment
 import com.tiuho22bangkit.gizi.ui.profile.UpdateKidActivity
 import com.tiuho22bangkit.gizi.utility.calculateMonthAge
 import com.tiuho22bangkit.gizi.utility.scaleInputKidData
@@ -33,6 +34,7 @@ class KidAnalysisActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
 
+        supportActionBar?.hide()
         binding = ActivityKidAnalysisBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -40,6 +42,10 @@ class KidAnalysisActivity : AppCompatActivity() {
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
+        }
+
+        binding.btnClose.setOnClickListener {
+            finish()
         }
 
         kid = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
@@ -57,8 +63,13 @@ class KidAnalysisActivity : AppCompatActivity() {
 
         val id = kid!!.id
         viewModel.getKid(id).observe(this) { kid ->
-            updateUI(kid)
-            setupUI()
+            if (kid == null) {
+                showToast("Kid data not found in the database.")
+                finish()
+            } else {
+                updateUI(kid)
+                setupUI()
+            }
         }
     }
 
@@ -175,12 +186,11 @@ class KidAnalysisActivity : AppCompatActivity() {
                             Log.d("Hasil", labeledWastingResult)
                             Log.d("Hasil", labeledStuntingResult)
 
+                            val heightResult = kidHeight.toInt().toString()
+                            val weightResult = kidWeight.toInt().toString()
 
-                            // Menampilkan kedua hasil di TextView
-                            binding.tvHasilWasting.text =
-                                "Risiko Wasting:\n\n$labeledWastingResult\n"
-                            binding.tvHasilStunting.text =
-                                "Risiko Stunting:\n\n$labeledStuntingResult\n"
+                            val dialog = KidAnalysisDialogFragment.newInstance(labeledWastingResult, labeledStuntingResult, heightResult, weightResult)
+                            dialog.show(supportFragmentManager, "AnalysisResultDialog")
 
                             kid?.let { viewModel.saveKidAnalysisResult(it, labeledWastingResult, labeledStuntingResult) }
                         } else {

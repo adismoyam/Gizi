@@ -1,6 +1,13 @@
 package com.tiuho22bangkit.gizi.data
 
+import android.content.Context
+import android.util.Log
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.tiuho22bangkit.gizi.data.local.dao.KidAnalysisHistoryDao
 import com.tiuho22bangkit.gizi.data.local.dao.KidDao
 import com.tiuho22bangkit.gizi.data.local.dao.MomAnalysisHistoryDao
@@ -24,13 +31,37 @@ class GiziRepository private constructor(
     private val kidAnalysisHistoryDao: KidAnalysisHistoryDao
 ) {
 
-    suspend fun sendMessageToChatbot(prompt: String): ChatResponse {
-        return chatbotApiService.sendMessage(ChatRequest(prompt))
+
+    suspend fun sendMessageToChatbot(id: String, prompt: String): ChatResponse {
+        return chatbotApiService.sendMessage(ChatRequest(id, prompt))
     }
 
     fun getAllKid(): LiveData<List<KidEntity>> = kidDao.getAllKids()
-    fun getKid(id: Int): LiveData<KidEntity> {
+    fun getKid(id: String): LiveData<KidEntity> {
         return kidDao.getKidById(id)
+    }
+
+    fun getKidFromFirebase(id: String): LiveData<KidEntity?> {
+        val result = MutableLiveData<KidEntity?>()
+        val database = FirebaseDatabase.getInstance().reference.child("kids").child(id)
+
+        database.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()) {
+                    val kid = snapshot.getValue(KidEntity::class.java)
+                    result.value = kid
+                } else {
+                    result.value = null
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Log.e("FirebaseError", "Error fetching data: ${error.message}")
+                result.value = null
+            }
+        })
+
+        return result
     }
 
     fun getLastKidAnalysisHistory(): LiveData<KidAnalysisHistoryEntity> {

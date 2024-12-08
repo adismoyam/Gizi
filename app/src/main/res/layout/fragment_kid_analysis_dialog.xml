@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    app:cardCornerRadius="16dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/dialog"/>
+
+        <TextView
+            android:id="@+id/tv_wasting_result"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Wasting Result"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_wasting_ideal_result"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/wasting_result"
+            android:layout_marginBottom="16dp"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/tv_stunting_result"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Stunting Result"
+            android:textStyle="bold"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tv_stunting_ideal_result"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/stunting_result"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/tv_stunting_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Wasting Result"
+            android:textStyle="bold"
+            android:layout_marginVertical="16dp"
+            android:layout_gravity="center"
+            android:textAlignment="center"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/btn_close"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/logout"
+            android:background="@drawable/rounded_button"
+            android:textColor="@android:color/white"/>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
