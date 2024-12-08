@@ -12,10 +12,10 @@ class NutriaiViewModel(private val repository: GiziRepository) : ViewModel() {
     private val _response = MutableLiveData<String>()
     val response: LiveData<String> = _response
 
-    fun sendChatToApi(prompt: String) {
+    fun sendChatToApi(id: String, prompt: String) {
         viewModelScope.launch {
             try {
-                val result = repository.sendMessageToChatbot(prompt) // Panggil fungsi API dari repository
+                val result = repository.sendMessageToChatbot(id, prompt) // Panggil fungsi API dari repository
                 _response.value = result.response // Pastikan sesuai dengan format API
             } catch (e: Exception) {
                 _response.value = "Error: ${e.message}" // Tangani error

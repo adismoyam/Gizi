@@ -10,24 +10,28 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class KidEntity(
     @field:ColumnInfo(name = "id")
-    @field:PrimaryKey(autoGenerate = true)
-    val id: Int = 0,
+    @field:PrimaryKey(autoGenerate = false)
+    val id: String = "",
 
     @field:ColumnInfo(name = "name")
-    val name: String,
+    val name: String = "",
 
     @field:ColumnInfo(name = "uri")
     val uri: String? = null,
 
+    @field:ColumnInfo(name = "token")
+    val token: String? = null,
+
     @field:ColumnInfo(name = "gender")
-    val gender: String,
+    val gender: String = "",
 
     @field:ColumnInfo(name = "birthDate")
-    val birthDate: String,
+    val birthDate: String = "",
 
     @field:ColumnInfo(name = "height")
-    val height: Float,
+    val height: Float = 0f,
 
     @field:ColumnInfo(name = "weight")
-    val weight: Float,
+    val weight: Float = 0f,
 ) : Parcelable
+

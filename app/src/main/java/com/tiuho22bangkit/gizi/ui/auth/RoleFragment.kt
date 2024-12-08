@@ -69,7 +69,7 @@ class RoleFragment : Fragment() {
         }
 
         binding.backButton.setOnClickListener {
-            findNavController().navigate(R.id.navigation_home)
+            findNavController().navigateUp()
         }
     }
 

@@ -35,7 +35,7 @@
             android:layout_toEndOf="@id/img_item_photo"
             android:elevation="0dp"
             android:gravity="center"
-            android:maxLines="2"
+            android:maxLines="1"
             android:padding="8dp"
             android:textSize="16sp"
             android:textStyle="bold"

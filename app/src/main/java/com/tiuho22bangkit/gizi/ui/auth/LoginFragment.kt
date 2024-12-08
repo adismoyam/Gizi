@@ -87,7 +87,7 @@ class LoginFragment : Fragment() {
                                     val storedPassword = userSnapshot.child("password").getValue(String::class.java)
                                     if (storedPassword == password) {
 
-                                        val userId = userSnapshot.key ?: ""
+                                        val userId = userSnapshot.child("token").getValue(String::class.java) //.key ?: ""
                                         val sharedPreference = requireContext().getSharedPreferences("AuthPrefs", Context.MODE_PRIVATE)
                                         val editor = sharedPreference.edit()
                                         editor.putString("auth_token", userId)

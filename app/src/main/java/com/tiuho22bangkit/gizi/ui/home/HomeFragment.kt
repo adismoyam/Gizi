@@ -144,17 +144,36 @@ class HomeFragment : Fragment() {
         }
     }
 
+    private fun getUserToken(): String? {
+        val sharedPreferences = requireContext().getSharedPreferences("AuthPrefs", Context.MODE_PRIVATE)
+        return sharedPreferences.getString("auth_token", null)
+    }
+
     private fun setupRVKidProfile() {
         binding.rvKids.apply {
-            layoutManager =
-                LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+            layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
             adapter = this@HomeFragment.adapter
+        }
+
+        val userToken = getUserToken()
+        if (userToken != null) {
+            viewModel.loadKidDataFromFirebase(userToken).observe(viewLifecycleOwner) { kidList ->
+                if (kidList.isNotEmpty()) {
+                    adapter.submitList(kidList)
+                } else {
+                    Toast.makeText(requireContext(), "Data Anak Kosong.", Toast.LENGTH_SHORT).show()
+                }
+            }
+        } else {
+            Toast.makeText(requireContext(), "User token not found.", Toast.LENGTH_SHORT).show()
         }
     }
 
+
     override fun onResume() {
         super.onResume()
-        viewModel.loadKidData().observe(viewLifecycleOwner) { kidList ->
+        val token = getUserToken()!!
+        viewModel.loadKidDataFromFirebase(token).observe(viewLifecycleOwner) { kidList ->
             Log.d("ProfileFragment", "Kid list updated: $kidList")
             adapter.submitList(kidList)
         }

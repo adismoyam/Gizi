@@ -1,7 +1,7 @@
 package com.tiuho22bangkit.gizi.ui.profile
 
+import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +13,8 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import com.tiuho22bangkit.gizi.R
 import com.tiuho22bangkit.gizi.data.local.GiziDatabase
 import com.tiuho22bangkit.gizi.data.local.dao.KidDao
@@ -25,6 +27,7 @@ import kotlinx.coroutines.withContext
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
+import java.util.UUID
 
 
 class IsiDataAnakFragment : Fragment(), DatePickerFragment.DialogDateListener {
@@ -34,6 +37,8 @@ class IsiDataAnakFragment : Fragment(), DatePickerFragment.DialogDateListener {
 
     private var _binding: FragmentIsiDataAnakBinding? = null
     private val binding get() = _binding!!
+
+    private lateinit var database: DatabaseReference
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,6 +50,8 @@ class IsiDataAnakFragment : Fragment(), DatePickerFragment.DialogDateListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        database = FirebaseDatabase.getInstance().getReferenceFromUrl("https://capstone-bangkit-2024-default-rtdb.firebaseio.com/")
 
         giziDatabase = GiziDatabase.getInstance(requireContext())
         kidDao = giziDatabase.kidDao()
@@ -64,10 +71,11 @@ class IsiDataAnakFragment : Fragment(), DatePickerFragment.DialogDateListener {
         }
 
         binding.btnClose.setOnClickListener {
-            findNavController().navigate(R.id.action_navigation_isiDataAnakFragment_to_navigation_profile)
+            findNavController().navigateUp()
         }
 
         btnTambahData.setOnClickListener {
+            val id = generateUUID()
             val name = kidNameET.text.toString().trim()
             val gender = when (kidGenderRG.checkedRadioButtonId) {
                 R.id.rb_boy -> "Laki-Laki"
@@ -77,6 +85,10 @@ class IsiDataAnakFragment : Fragment(), DatePickerFragment.DialogDateListener {
             val birthDate = kidBirthDayTV.text.toString()
             val height = kidHeightET.text.toString().toFloatOrNull()
             val weight = kidWeightET.text.toString().toFloatOrNull()
+            val uri = ""
+
+            val sharedPreferences = requireContext().getSharedPreferences("AuthPrefs", Context.MODE_PRIVATE)
+            val token = sharedPreferences.getString("auth_token", null)
 
             when {
                 name.isEmpty() -> {
@@ -105,31 +117,47 @@ class IsiDataAnakFragment : Fragment(), DatePickerFragment.DialogDateListener {
                 }
 
                 else -> {
-                    val kid = KidEntity(
-                        name = name,
-                        gender = gender,
-                        birthDate = birthDate,
-                        height = height,
-                        weight = weight
-                    )
+                    database = FirebaseDatabase.getInstance().getReference("kids")
+                    database.child(id).child("id").setValue(id)
+                    database.child(id).child("name").setValue(name)
+                    database.child(id).child("gender").setValue(gender)
+                    database.child(id).child("weight").setValue(weight)
+                    database.child(id).child("height").setValue(height)
+                    database.child(id).child("birthDate").setValue(birthDate)
+                    database.child(id).child("token").setValue(token)
+                    database.child(id).child("uri").setValue(uri)
+
+                    Toast.makeText(requireContext(), "Data anak berhasil disimpan", Toast.LENGTH_SHORT).show()
+                    findNavController().navigate(R.id.navigation_home)
+//                    val kid = KidEntity(
+//                        name = name,
+//                        gender = gender,
+//                        birthDate = birthDate,
+//                        height = height,
+//                        weight = weight
+//                    )
 
                     // simpan ke database
-                    lifecycleScope.launch(Dispatchers.IO) {
-                        try {
-                            kidDao.insertKidData(kid)
-                            withContext(Dispatchers.Main) {
-                                Toast.makeText(requireContext(), "Data anak berhasil disimpan", Toast.LENGTH_SHORT).show()
-                                findNavController().navigate(R.id.navigation_home)
-                            }
-                        } catch (e: Exception) {
-                            withContext(Dispatchers.Main) {
-                                Toast.makeText(requireContext(), "Terjadi kesalahan, coba lagi", Toast.LENGTH_SHORT).show()
-                            }
-                        }
-                    }
+//                    lifecycleScope.launch(Dispatchers.IO) {
+//                        try {
+//                            kidDao.insertKidData(kid)
+//                            withContext(Dispatchers.Main) {
+//                                Toast.makeText(requireContext(), "Data anak berhasil disimpan", Toast.LENGTH_SHORT).show()
+//                                findNavController().navigate(R.id.navigation_home)
+//                            }
+//                        } catch (e: Exception) {
+//                            withContext(Dispatchers.Main) {
+//                                Toast.makeText(requireContext(), "Terjadi kesalahan, coba lagi", Toast.LENGTH_SHORT).show()
+//                            }
+//                        }
+//                    }
                 }
             }
         }
+    }
+
+    private fun generateUUID(): String {
+        return UUID.randomUUID().toString()
     }
 
     override fun onDialogDateSet(year: Int, month: Int, dayOfMonth: Int) {
