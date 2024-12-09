@@ -6,7 +6,7 @@
     android:background="@drawable/background_gradient"
     tools:context=".ui.nutriai.NutriaiFragment">
 
-        <androidx.recyclerview.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/chat_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -15,6 +15,39 @@
             app:layout_constraintTop_toBottomOf="@id/header"
             app:layout_constraintBottom_toTopOf="@id/footer"
             tools:listitem="@layout/item_chat_message" />
+
+    <TextView
+        android:id="@+id/title_info"
+        android:layout_width="match_parent"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:layout_height="wrap_content"
+        android:text="@string/title_info"
+        app:layout_constraintTop_toBottomOf="@id/header"
+        app:layout_constraintBottom_toTopOf="@id/footer"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:padding="12dp" />
+
+    <TextView
+        android:id="@+id/title_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/title_description"
+        app:layout_constraintTop_toBottomOf="@id/title_info"
+        android:textStyle="bold"
+        android:background="@drawable/bg_bot_message"
+        android:textSize="16sp"
+        android:layout_marginHorizontal="20dp"
+        android:padding="12dp" />
+
+    <ImageView
+        android:id="@+id/loading_gif"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/header"
+        app:layout_constraintBottom_toTopOf="@id/footer"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/footer"

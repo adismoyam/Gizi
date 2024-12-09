@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.bumptech.glide.Glide
+import com.google.firebase.database.FirebaseDatabase
 import com.tiuho22bangkit.gizi.R
 import com.tiuho22bangkit.gizi.data.local.entity.KidEntity
 import com.tiuho22bangkit.gizi.databinding.ActivityKidAnalysisBinding
@@ -44,7 +45,7 @@ class KidAnalysisActivity : AppCompatActivity() {
             insets
         }
 
-        binding.btnClose.setOnClickListener {
+        binding.btnBack.setOnClickListener {
             finish()
         }
 
@@ -124,6 +125,14 @@ class KidAnalysisActivity : AppCompatActivity() {
                     intent.putExtra("height", kid.height)
                     intent.putExtra("weight", kid.weight)
                     root.context.startActivity(intent)
+                }
+
+                btnDelete.setOnClickListener {
+                    val database = FirebaseDatabase.getInstance()
+                    val kidRef = database.getReference("kids").child(kid.id)
+                        kidRef.removeValue()
+                    showToast("Data Anak Berhasil di Hapus!")
+                    finish()
                 }
 
                 btnAnalisis.setOnClickListener {

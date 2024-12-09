@@ -33,8 +33,8 @@
         android:label="@string/title_register"
         tools:layout="@layout/fragment_register">
         <action
-            android:id="@+id/action_registerFragment_to_roleFragment"
-            app:destination="@id/navigation_role" />
+            android:id="@+id/action_registerFragment_to_verifyFragment"
+            app:destination="@id/navigation_verify" />
     </fragment>
 
     <fragment
@@ -61,6 +61,25 @@
         android:name="com.tiuho22bangkit.gizi.ui.auth.LoginFragment"
         android:label="@string/title_login"
         tools:layout="@layout/fragment_login" />
+
+    <fragment
+        android:id="@+id/navigation_verify"
+        android:name="com.tiuho22bangkit.gizi.ui.auth.VerifyFragment"
+        android:label="@string/title_verify"
+        tools:layout="@layout/fragment_verify" >
+        <argument
+            android:name="email"
+            app:argType="string" />
+        <argument
+            android:name="username"
+            app:argType="string" />
+        <argument
+            android:name="password"
+            app:argType="string" />
+        <argument
+            android:name="token"
+            app:argType="string" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_article"

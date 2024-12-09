@@ -3,6 +3,7 @@
     <string name="title_home">Home</string>
     <string name="title_start">Start</string>
     <string name="title_login">Login</string>
+    <string name="title_verify">Verify</string>
     <string name="title_register">Register</string>
     <string name="title_article">Article</string>
     <string name="title_nutriai">NutriAI</string>
@@ -57,6 +58,8 @@
     <string name="next">Selanjutnya</string>
     <string name="back">Batalkan</string>
     <string name="start">Mulai</string>
+    <string name="title_logo">GIZI</string>
+    <string name="slogan">Nutrisi Tepat, Untuk Masa Depan Hebat!</string>
     <string name="login">Masuk</string>
     <string name="pregnant">Masa Kehamilan</string>
     <string name="breastfeeding">Menyusui</string>
@@ -107,6 +110,8 @@
 
     <string name="send">Kirim</string>
     <string name="write_message">Tulis Sesuatu</string>
+    <string name="title_info">Tulis Sesuatu Seperti:</string>
+    <string name="title_description">Berikan saya resep masakan ayam curry untuk balita</string>
 
     <string name="berat">Berat (kg)</string>
     <string name="tinggi">Tinggi (cm)</string>

@@ -129,28 +129,6 @@ class IsiDataAnakFragment : Fragment(), DatePickerFragment.DialogDateListener {
 
                     Toast.makeText(requireContext(), "Data anak berhasil disimpan", Toast.LENGTH_SHORT).show()
                     findNavController().navigate(R.id.navigation_home)
-//                    val kid = KidEntity(
-//                        name = name,
-//                        gender = gender,
-//                        birthDate = birthDate,
-//                        height = height,
-//                        weight = weight
-//                    )
-
-                    // simpan ke database
-//                    lifecycleScope.launch(Dispatchers.IO) {
-//                        try {
-//                            kidDao.insertKidData(kid)
-//                            withContext(Dispatchers.Main) {
-//                                Toast.makeText(requireContext(), "Data anak berhasil disimpan", Toast.LENGTH_SHORT).show()
-//                                findNavController().navigate(R.id.navigation_home)
-//                            }
-//                        } catch (e: Exception) {
-//                            withContext(Dispatchers.Main) {
-//                                Toast.makeText(requireContext(), "Terjadi kesalahan, coba lagi", Toast.LENGTH_SHORT).show()
-//                            }
-//                        }
-//                    }
                 }
             }
         }

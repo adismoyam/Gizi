@@ -8,6 +8,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import com.tiuho22bangkit.gizi.R
 import com.tiuho22bangkit.gizi.data.local.GiziDatabase
 import com.tiuho22bangkit.gizi.data.local.dao.KidDao
@@ -115,8 +117,18 @@ class UpdateKidActivity : AppCompatActivity(), DatePickerFragment.DialogDateList
                 }
 
                 else -> {
+                    val database = FirebaseDatabase.getInstance()
+                    val kidRef = database.getReference("kids").child(idData!!)
+                    val kidUpdate = mapOf(
+                        "name" to name,
+                        "gender" to gender,
+                        "weight" to weight,
+                        "height" to height,
+                        "birthDate" to birthDate,
+                    )
+                    kidRef.updateChildren(kidUpdate)
                      val kid = KidEntity(
-                         id = idData!!,
+                         id = idData,
                         name = name,
                         gender = gender,
                         birthDate = birthDate,
