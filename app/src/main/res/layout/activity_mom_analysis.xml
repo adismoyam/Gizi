@@ -26,7 +26,7 @@
         app:layout_constraintEnd_toEndOf="@+id/gambar"
         app:layout_constraintStart_toStartOf="@+id/gambar"
         app:layout_constraintTop_toBottomOf="@+id/gambar"
-        tools:text="@string/nama" />
+        tools:text="@string/nama_value" />
 
 
     <LinearLayout

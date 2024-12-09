@@ -126,7 +126,7 @@ class IsiDataIbuActivity : AppCompatActivity(), DatePickerFragment.DialogDateLis
                             momDao.insertMomData(mom)
                             withContext(Dispatchers.Main) {
                                 Toast.makeText(this@IsiDataIbuActivity, "Data berhasil disimpan", Toast.LENGTH_SHORT).show()
-                                finish() // Kembali ke activity sebelumnya
+                                finish()
                             }
                         } catch (e: Exception) {
                             withContext(Dispatchers.Main) {

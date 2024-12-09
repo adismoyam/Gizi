@@ -100,7 +100,7 @@ class UpdateKidActivity : AppCompatActivity(), DatePickerFragment.DialogDateList
                     Toast.makeText(this, "Pilih jenis kelamin anak", Toast.LENGTH_SHORT).show()
                 }
 
-                birthDate.isEmpty() -> {
+                birthDate.isEmpty() || birthDate == getString(R.string.tanggal_lahir) -> {
                     Toast.makeText(this, "Pilih tanggal lahir anak", Toast.LENGTH_SHORT).show()
                 }
 
@@ -115,8 +115,8 @@ class UpdateKidActivity : AppCompatActivity(), DatePickerFragment.DialogDateList
                 }
 
                 else -> {
-                     val kid = KidEntity(
-                         id = idData!!,
+                    val kid = KidEntity(
+                        id = idData!!,
                         name = name,
                         gender = gender,
                         birthDate = birthDate,
@@ -134,9 +134,13 @@ class UpdateKidActivity : AppCompatActivity(), DatePickerFragment.DialogDateList
                                     "Data anak berhasil disimpan",
                                     Toast.LENGTH_SHORT
                                 ).show()
-                                val intent = Intent(this@UpdateKidActivity, KidAnalysisActivity::class.java).apply {
+                                val intent = Intent(
+                                    this@UpdateKidActivity,
+                                    KidAnalysisActivity::class.java
+                                ).apply {
                                     putExtra(KidAnalysisActivity.KID_DATA, kid)
-                                    flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
+                                    flags =
+                                        Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
                                 }
                                 startActivity(intent)
                                 finish()
