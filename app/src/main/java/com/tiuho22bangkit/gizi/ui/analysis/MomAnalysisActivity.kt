@@ -17,6 +17,7 @@ import com.tiuho22bangkit.gizi.databinding.ActivityMomAnalysisBinding
 import com.tiuho22bangkit.gizi.helper.PregnancyClassifierHelper
 import com.tiuho22bangkit.gizi.ui.ViewModelFactory
 import com.tiuho22bangkit.gizi.ui.profile.UpdateKidActivity
+import com.tiuho22bangkit.gizi.ui.profile.UpdateMomActivity
 import com.tiuho22bangkit.gizi.utility.calculateMonthAge
 import com.tiuho22bangkit.gizi.utility.calculateYearAge
 import com.tiuho22bangkit.gizi.utility.scaleInputMomData
@@ -96,16 +97,11 @@ class MomAnalysisActivity : AppCompatActivity() {
                 )
 
 
-//                btnUbahData.setOnClickListener {
-//                    val intent = Intent(root.context, UpdateKidActivity::class.java)
-//                    intent.putExtra("id", kid.id)
-//                    intent.putExtra("name", kid.name)
-//                    intent.putExtra("gender", kid.gender)
-//                    intent.putExtra("birthdate", kid.birthDate)
-//                    intent.putExtra("height", kid.height)
-//                    intent.putExtra("weight", kid.weight)
-//                    root.context.startActivity(intent)
-//                }
+                btnUbahData.setOnClickListener {
+                    val intent = Intent(root.context, UpdateMomActivity::class.java)
+                    intent.putExtra("mom_data", mom)
+                    root.context.startActivity(intent)
+                }
 
                 btnAnalisis.setOnClickListener {
                     analyzeMomData(
