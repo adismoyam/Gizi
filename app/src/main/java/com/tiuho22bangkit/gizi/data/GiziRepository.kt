@@ -41,6 +41,7 @@ class GiziRepository private constructor(
         return kidDao.getKidById(id)
     }
 
+
     fun getKidFromFirebase(id: String): LiveData<KidEntity?> {
         val result = MutableLiveData<KidEntity?>()
         val database = FirebaseDatabase.getInstance().reference.child("kids").child(id)

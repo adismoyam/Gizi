@@ -1,6 +1,5 @@
 package com.tiuho22bangkit.gizi.ui.analysis
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
@@ -83,16 +82,19 @@ class KidAnalysisActivity : AppCompatActivity() {
 
             tvNamaAnak.text = kid.name
             tvGender.text = String.format(getString(R.string.jenis_kelamin_profile), kid.gender)
-            tvTanggalLahir.text = String.format(getString(R.string.tanggal_lahir_anak_profile), kid.birthDate)
-            tvUsia.text = String.format(getString(R.string.usia_anak_profile), calculateMonthAge(kid.birthDate))
+            tvTanggalLahir.text =
+                String.format(getString(R.string.tanggal_lahir_anak_profile), kid.birthDate)
+            tvUsia.text = String.format(
+                getString(R.string.usia_anak_profile),
+                calculateMonthAge(kid.birthDate)
+            )
             tvTinggi.text = String.format(getString(R.string.tinggi_anak_profile), kid.height)
             tvBerat.text = String.format(getString(R.string.berat_anak_profile), kid.weight)
         }
     }
 
-    @SuppressLint("SuspiciousIndentation")
-    private fun setupUI(){
-        kid?.let{ kid ->
+    private fun setupUI() {
+        kid?.let { kid ->
             binding.apply {
                 if (kid.gender == "Laki-Laki") {
                     Glide.with(root.context)
@@ -131,7 +133,7 @@ class KidAnalysisActivity : AppCompatActivity() {
                 btnDelete.setOnClickListener {
                     val database = FirebaseDatabase.getInstance()
                     val kidRef = database.getReference("kids").child(kid.id)
-                        kidRef.removeValue()
+                    kidRef.removeValue()
                     showToast("Data Anak Berhasil di Hapus!")
                     finish()
                 }
@@ -199,10 +201,21 @@ class KidAnalysisActivity : AppCompatActivity() {
                             val heightResult = kidHeight.toInt().toString()
                             val weightResult = kidWeight.toInt().toString()
 
-                            val dialog = KidAnalysisDialogFragment.newInstance(labeledWastingResult, labeledStuntingResult, heightResult, weightResult)
+                            val dialog = KidAnalysisDialogFragment.newInstance(
+                                labeledWastingResult,
+                                labeledStuntingResult,
+                                heightResult,
+                                weightResult
+                            )
                             dialog.show(supportFragmentManager, "AnalysisResultDialog")
 
-                            kid?.let { viewModel.saveKidAnalysisResult(it, labeledWastingResult, labeledStuntingResult) }
+                            kid?.let {
+                                viewModel.saveKidAnalysisResult(
+                                    it,
+                                    labeledWastingResult,
+                                    labeledStuntingResult
+                                )
+                            }
                         } else {
                             showToast("Unexpected results format.")
                         }

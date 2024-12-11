@@ -117,11 +117,7 @@
             android:id="@+id/action_navigation_isiDataAnakFragment_to_navigation_profile"
             app:destination="@id/navigation_profile" />
     </fragment>
-    <fragment
-        android:id="@+id/rekomendasiFragment"
-        android:name="com.tiuho22bangkit.gizi.ui.article.rekomendasi.RekomendasiFragment"
-        android:label="fragment_rekomendasi"
-        tools:layout="@layout/fragment_rekomendasi"/>
+
     <fragment
         android:id="@+id/kehamilanFragment"
         android:name="com.tiuho22bangkit.gizi.ui.article.kehamilan.KehamilanFragment"
