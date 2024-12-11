@@ -12,6 +12,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
+import com.tiuho22bangkit.gizi.R
 import com.tiuho22bangkit.gizi.data.remote.ChatMessage
 import com.tiuho22bangkit.gizi.databinding.FragmentNutriaiBinding
 import com.tiuho22bangkit.gizi.ui.ViewModelFactory
@@ -55,6 +57,12 @@ class NutriaiFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.adapter = chatAdapter
 
+        val imageView = binding.loadingGif
+        Glide.with(this)
+            .asGif()
+            .load(R.drawable.bot) // ganti dengan GIF di folder drawable
+            .into(imageView)
+
         sendButton.setOnClickListener {
             val userMessage = inputField.text.toString()
             if (userMessage.isEmpty()) {
@@ -65,8 +73,12 @@ class NutriaiFragment : Fragment() {
                 chatAdapter.notifyItemInserted(messages.size - 1)
                 recyclerView.scrollToPosition(messages.size - 1)
 
-                binding.pageTitle.visibility = View.GONE
-                binding.loadingIndicator.visibility = View.VISIBLE
+                binding.apply {
+                    pageTitle.visibility = View.GONE
+                    loadingIndicator.visibility = View.VISIBLE
+                    titleInfo.visibility = View.GONE
+                    titleDescription.visibility = View.GONE
+                }
                 startLoadingAnimation()
 
                 viewModel.sendChatToApi(id!!, userMessage)
@@ -98,6 +110,7 @@ class NutriaiFragment : Fragment() {
     private var isLoading = false
 
     private fun startLoadingAnimation() {
+        binding.loadingGif.visibility = View.VISIBLE
         isLoading = true
         val loadingText = binding.loadingIndicator
         val handler = Handler(Looper.getMainLooper())
@@ -118,6 +131,7 @@ class NutriaiFragment : Fragment() {
     }
 
     private fun stopLoadingAnimation() {
+        binding.loadingGif.visibility = View.GONE
         isLoading = false
     }
 

@@ -8,6 +8,7 @@
     tools:context=".ui.article.detail.DetailActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/first_child"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 

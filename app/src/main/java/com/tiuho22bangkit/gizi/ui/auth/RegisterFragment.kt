@@ -10,6 +10,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.navigation.fragment.findNavController
+import com.google.firebase.auth.ActionCodeSettings
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.tiuho22bangkit.gizi.R
@@ -22,11 +24,13 @@ class RegisterFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var database: DatabaseReference
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        auth = FirebaseAuth.getInstance()
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         (activity as AppCompatActivity).supportActionBar?.hide()
         _binding = FragmentRegisterBinding.inflate(inflater, container, false)
@@ -68,19 +72,42 @@ class RegisterFragment : Fragment() {
                 return@setOnClickListener
             }
 
-            database = FirebaseDatabase.getInstance().getReference("users")
-            database.child(token).child("username").setValue(username)
-            database.child(token).child("email").setValue(encodedEmail)
-            database.child(token).child("password").setValue(password)
-            database.child(token).child("token").setValue(token)
-            findNavController().navigate(R.id.navigation_login)
-            Toast.makeText(requireContext(), "Buat Akun Berhasil! Silahkan Login!", Toast.LENGTH_SHORT).show()
-//            val bundle = Bundle().apply {
-//                putString("username", username)
-//                putString("email", email)
-//                putString("password", password)
-//            }
-//            findNavController().navigate(R.id.navigation_role, bundle)
+            auth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        val user = auth.currentUser
+                        user?.sendEmailVerification()?.addOnCompleteListener { emailTask ->
+                            if (emailTask.isSuccessful) {
+                                Toast.makeText(
+                                    requireContext(),
+                                    "Email verifikasi telah dikirim. Periksa email Anda.",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                                findNavController().navigate(R.id.navigation_login)
+                            } else {
+                                Toast.makeText(
+                                    requireContext(),
+                                    "Gagal mengirim email verifikasi.",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
+                        }
+                    } else {
+                        Toast.makeText(
+                            requireContext(),
+                            "Registrasi gagal: ${task.exception?.message}",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                }
+
+//            database = FirebaseDatabase.getInstance().getReference("users")
+//            database.child(token).child("username").setValue(username)
+//            database.child(token).child("email").setValue(encodedEmail)
+//            database.child(token).child("password").setValue(password)
+//            database.child(token).child("token").setValue(token)
+//            findNavController().navigate(R.id.navigation_login)
+//            Toast.makeText(requireContext(), "Buat Akun Berhasil! Silahkan Login!", Toast.LENGTH_SHORT).show()
         }
     }
 
