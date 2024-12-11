@@ -1,5 +1,6 @@
 package com.tiuho22bangkit.gizi.ui.analysis
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
@@ -90,6 +91,7 @@ class KidAnalysisActivity : AppCompatActivity() {
         }
     }
 
+    @SuppressLint("SuspiciousIndentation")
     private fun setupUI(){
         kid?.let{ kid ->
             binding.apply {

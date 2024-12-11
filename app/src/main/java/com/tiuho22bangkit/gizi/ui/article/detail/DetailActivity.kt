@@ -4,6 +4,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -11,15 +12,18 @@ import androidx.core.text.HtmlCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.bumptech.glide.Glide
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import com.tiuho22bangkit.gizi.R
-import com.tiuho22bangkit.gizi.data.local.entity.KidEntity
 import com.tiuho22bangkit.gizi.data.remote.JumainResponseItem
 import com.tiuho22bangkit.gizi.databinding.ActivityDetailBinding
-import com.tiuho22bangkit.gizi.ui.analysis.KidAnalysisActivity.Companion.KID_DATA
+import java.util.UUID
 
 class DetailActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityDetailBinding
+    private lateinit var database: DatabaseReference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,12 +64,39 @@ class DetailActivity : AppCompatActivity() {
                     val intent = Intent(Intent.ACTION_VIEW, Uri.parse(article.url))
                     startActivity(intent)
                 }
+                var isMarkedAsRead = false
+
+                main.setOnScrollChangeListener { _, _, scrollY, _, _ ->
+                    val view = main.getChildAt(0)
+                    val diff = (view.bottom - (main.height + scrollY))
+
+                    if (diff == 0 && !isMarkedAsRead) {
+                        isMarkedAsRead = true
+                        markArticleAsRead(it.id)
+                    }
+                }
             }
         } ?: run {
             Toast.makeText(this, "Article not found", Toast.LENGTH_SHORT).show()
             finish()
         }
+        database = FirebaseDatabase.getInstance().getReferenceFromUrl("https://capstone-bangkit-2024-default-rtdb.firebaseio.com/")
     }
+
+    private fun markArticleAsRead(articleId: String) {
+        val id = UUID.randomUUID().toString()
+        database = FirebaseDatabase.getInstance().getReference("achievement")
+        val currentUser = FirebaseAuth.getInstance().currentUser
+
+        currentUser?.let { user ->
+            val uid = user.uid
+            database.child(id).child("articleId").setValue(articleId)
+            database.child(id).child("userId").setValue(uid)
+            Toast.makeText(this, "Artikel telah ditandai sebagai dibaca!", Toast.LENGTH_SHORT).show()
+
+        } ?: Log.e("Firebase", "Pengguna tidak terautentikasi")
+    }
+
 
     companion object {
         const val ARTICLE = "article"
