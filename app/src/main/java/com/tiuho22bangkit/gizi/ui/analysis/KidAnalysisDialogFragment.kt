@@ -1,4 +1,4 @@
-package com.tiuho22bangkit.gizi.ui.profile
+package com.tiuho22bangkit.gizi.ui.analysis
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import com.tiuho22bangkit.gizi.R
-import com.tiuho22bangkit.gizi.databinding.FragmentHomeBinding
 import com.tiuho22bangkit.gizi.databinding.FragmentKidAnalysisDialogBinding
 
 class KidAnalysisDialogFragment : DialogFragment() {

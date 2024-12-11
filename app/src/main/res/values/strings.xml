@@ -14,7 +14,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="error_message_here">error_message_here</string>
     <string name="author">Author</string>
-    <string name="published_at">Published At</string>
+    <string name="published_at">Diunggah pada : %1$s</string>
     <string name="article_content">Article Content</string>
     <string name="description">Description</string>
     <string name="baca_di_web_browser">Buka di Web Browser</string>
@@ -39,7 +39,8 @@
     <string name="tambah_data">Tambah Data</string>
     <string name="update_data">Ubah Data Anak</string>
     <string name="add_data">Tambah Data Anak</string>
-    <string name="analyze_data">Analisis Data Anak</string>
+    <string name="analyze_kid_data">Analisis Data Anak</string>
+    <string name="analyze_pregnancy_data">Analisis Data Kehamilan</string>
     <string name="perbarui_data">Perbarui Data</string>
     <string name="kembali">Kembali</string>
     <string name="isi_data_anak">Isi Data Anak</string>
@@ -167,4 +168,6 @@
 
     <string name="chatbot">Gunakan gizi-bot untuk konsultasi masalah kesehatan anak</string>
     <string name="article_home">Artikel</string>
+    <string name="detail_artikel">Detail Artikel</string>
+    <string name="sumber">Sumber : %1$s</string>
 </resources>
