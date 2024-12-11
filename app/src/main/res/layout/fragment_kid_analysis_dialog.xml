@@ -26,27 +26,12 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/tv_wasting_ideal_result"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/wasting_result"
-            android:layout_marginBottom="16dp"
-            android:textSize="14sp" />
-
-        <TextView
             android:id="@+id/tv_stunting_result"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Stunting Result"
             android:textStyle="bold"
             android:textSize="18sp" />
-
-        <TextView
-            android:id="@+id/tv_stunting_ideal_result"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/stunting_result"
-            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/tv_stunting_description"

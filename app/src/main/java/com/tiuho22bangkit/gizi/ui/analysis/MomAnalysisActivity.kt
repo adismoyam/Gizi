@@ -10,8 +10,12 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
+import com.google.firebase.database.FirebaseDatabase
 import com.tiuho22bangkit.gizi.R
+import com.tiuho22bangkit.gizi.data.local.GiziDatabase
+import com.tiuho22bangkit.gizi.data.local.dao.MomDao
 import com.tiuho22bangkit.gizi.data.local.entity.MomEntity
 import com.tiuho22bangkit.gizi.databinding.ActivityMomAnalysisBinding
 import com.tiuho22bangkit.gizi.helper.PregnancyClassifierHelper
@@ -19,15 +23,20 @@ import com.tiuho22bangkit.gizi.ui.ViewModelFactory
 import com.tiuho22bangkit.gizi.ui.profile.UpdateMomActivity
 import com.tiuho22bangkit.gizi.utility.calculateYearAge
 import com.tiuho22bangkit.gizi.utility.scaleInputMomData
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class MomAnalysisActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMomAnalysisBinding
+    private lateinit var giziDatabase: GiziDatabase
     private val viewModel: AnalysisViewModel by viewModels {
         ViewModelFactory.getInstance(this)
     }
 
     private var mom: MomEntity? = null
+    private lateinit var momDao: MomDao
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,6 +52,9 @@ class MomAnalysisActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        giziDatabase = GiziDatabase.getInstance(this)
+        momDao = giziDatabase.momDao()
 
         binding.btnBack.setOnClickListener {
             finish()
@@ -100,11 +112,26 @@ class MomAnalysisActivity : AppCompatActivity() {
                     mom.heartRate.toInt()
                 )
 
-
                 btnUbahData.setOnClickListener {
                     val intent = Intent(root.context, UpdateMomActivity::class.java)
                     intent.putExtra("mom_data", mom)
                     root.context.startActivity(intent)
+                }
+
+                btnDelete.setOnClickListener {
+                    lifecycleScope.launch(Dispatchers.IO) {
+                        try {
+                            momDao.deleteTheMom(mom)
+                            withContext(Dispatchers.Main) {
+                                showToast("Data Kehamilan Berhasil di Hapus!")
+                                finish()
+                            }
+                        } catch (e: Exception) {
+                            withContext(Dispatchers.Main) {
+                                showToast("Terjadi kesalahan, coba lagi")
+                            }
+                        }
+                    }
                 }
 
                 btnAnalisis.setOnClickListener {

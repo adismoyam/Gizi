@@ -1,6 +1,9 @@
 package com.tiuho22bangkit.gizi.utility
 
 import android.util.Log
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -148,6 +151,15 @@ fun millisToDate(millis: Long): String {
     val kalender = Calendar.getInstance()
     kalender.timeInMillis = millis
     return formatTanggal.format(kalender.time)
+}
+
+fun <T> LiveData<T>.observeOnce(owner: LifecycleOwner, observer: Observer<T>) {
+    observe(owner, object : Observer<T> {
+        override fun onChanged(value: T) {
+            removeObserver(this)
+            observer.onChanged(value)
+        }
+    })
 }
 
 /* Easter Egg, shhh.... Don't tell anyone about this.

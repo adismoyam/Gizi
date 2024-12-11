@@ -36,7 +36,6 @@ class RemakeArticleFragment : Fragment() {
     companion object {
         @StringRes
         private val TAB_TITLES = intArrayOf(
-            R.string.tab_rekomendasi_article,
             R.string.tab_kehamilan_article,
             R.string.tab_nutrisi_article,
             R.string.tab_parenting_article

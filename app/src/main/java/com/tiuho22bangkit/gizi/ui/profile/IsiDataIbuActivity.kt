@@ -1,14 +1,19 @@
 package com.tiuho22bangkit.gizi.ui.profile
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import com.tiuho22bangkit.gizi.R
 import com.tiuho22bangkit.gizi.data.local.GiziDatabase
 import com.tiuho22bangkit.gizi.data.local.dao.MomDao
 import com.tiuho22bangkit.gizi.data.local.entity.MomEntity
 import com.tiuho22bangkit.gizi.databinding.ActivityIsiDataIbuBinding
+import com.tiuho22bangkit.gizi.ui.analysis.MomAnalysisActivity
 import com.tiuho22bangkit.gizi.utility.DatePickerFragment
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -27,8 +32,19 @@ class IsiDataIbuActivity : AppCompatActivity(), DatePickerFragment.DialogDateLis
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        enableEdgeToEdge()
+        supportActionBar?.hide()
+
         binding = ActivityIsiDataIbuBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.isi_data_ibu)) { v, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
+        }
+
 
         // Inisialisasi database
         giziDatabase = GiziDatabase.getInstance(this)
@@ -51,7 +67,7 @@ class IsiDataIbuActivity : AppCompatActivity(), DatePickerFragment.DialogDateLis
         }
 
         binding.btnClose.setOnClickListener {
-            finish() // Kembali ke activity sebelumnya
+            finish()
         }
 
         // Tombol tambah data
@@ -62,15 +78,17 @@ class IsiDataIbuActivity : AppCompatActivity(), DatePickerFragment.DialogDateLis
             val eddDate = binding.tvEddDate.text.toString()
             val birthDate = binding.tvBirthDate.text.toString()
 
-            val systolicBloodPressure = binding.etSystolicBloodPressure.text.toString().toFloatOrNull()
-            val diastolicBloodPressure = binding.etDiastolicBloodPressure.text.toString().toFloatOrNull()
+            val systolicBloodPressure =
+                binding.etSystolicBloodPressure.text.toString().toFloatOrNull()
+            val diastolicBloodPressure =
+                binding.etDiastolicBloodPressure.text.toString().toFloatOrNull()
 
             val bloodSugarLevel = binding.etBloodSugarLevel.text.toString().toFloatOrNull()
             val bodyTemperature = binding.etBodyTemperature.text.toString().toFloatOrNull()
             val heartRate = binding.etHeartRate.text.toString().toFloatOrNull()
 
             when {
-                lmpDate.isEmpty() || lmpDate == getString(R.string.hari_pertama_haid_terakhir)-> {
+                lmpDate.isEmpty() || lmpDate == getString(R.string.hari_pertama_haid_terakhir) -> {
                     Toast.makeText(this, "Pilih tanggal HPHT", Toast.LENGTH_SHORT).show()
                 }
 
@@ -78,17 +96,19 @@ class IsiDataIbuActivity : AppCompatActivity(), DatePickerFragment.DialogDateLis
                     Toast.makeText(this, "Pilih tanggal HPL", Toast.LENGTH_SHORT).show()
                 }
 
-                birthDate.isEmpty() || birthDate == getString(R.string.tanggal_lahir)-> {
+                birthDate.isEmpty() || birthDate == getString(R.string.tanggal_lahir) -> {
                     Toast.makeText(this, "Pilih tanggal lahir", Toast.LENGTH_SHORT).show()
                 }
 
                 systolicBloodPressure == null || systolicBloodPressure <= 0 -> {
-                    binding.etSystolicBloodPressure.error = "Masukkan tekanan darah sistolik yang valid"
+                    binding.etSystolicBloodPressure.error =
+                        "Masukkan tekanan darah sistolik yang valid"
                     binding.etSystolicBloodPressure.requestFocus()
                 }
 
                 diastolicBloodPressure == null || diastolicBloodPressure <= 0 -> {
-                    binding.etDiastolicBloodPressure.error = "Masukkan tekanan darah diastolik yang valid"
+                    binding.etDiastolicBloodPressure.error =
+                        "Masukkan tekanan darah diastolik yang valid"
                     binding.etDiastolicBloodPressure.requestFocus()
                 }
 
@@ -103,7 +123,8 @@ class IsiDataIbuActivity : AppCompatActivity(), DatePickerFragment.DialogDateLis
                 }
 
                 heartRate == null || heartRate <= 0 -> {
-                    binding.etDiastolicBloodPressure.error = "Masukkan jumlah detak jantung yang valid"
+                    binding.etDiastolicBloodPressure.error =
+                        "Masukkan jumlah detak jantung yang valid"
                     binding.etDiastolicBloodPressure.requestFocus()
                 }
 
@@ -125,12 +146,27 @@ class IsiDataIbuActivity : AppCompatActivity(), DatePickerFragment.DialogDateLis
                         try {
                             momDao.insertMomData(mom)
                             withContext(Dispatchers.Main) {
-                                Toast.makeText(this@IsiDataIbuActivity, "Data berhasil disimpan", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(
+                                    this@IsiDataIbuActivity,
+                                    "Data berhasil disimpan",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                                val intent = Intent(
+                                    this@IsiDataIbuActivity,
+                                    MomAnalysisActivity::class.java
+                                ).apply {
+                                    putExtra(MomAnalysisActivity.MOM_DATA, mom)
+                                }
+                                startActivity(intent)
                                 finish()
                             }
                         } catch (e: Exception) {
                             withContext(Dispatchers.Main) {
-                                Toast.makeText(this@IsiDataIbuActivity, "Terjadi kesalahan, coba lagi", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(
+                                    this@IsiDataIbuActivity,
+                                    "Terjadi kesalahan, coba lagi",
+                                    Toast.LENGTH_SHORT
+                                ).show()
                             }
                         }
                     }

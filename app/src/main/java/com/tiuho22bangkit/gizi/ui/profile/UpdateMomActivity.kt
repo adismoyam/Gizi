@@ -61,8 +61,6 @@ class UpdateMomActivity : AppCompatActivity(), DatePickerFragment.DialogDateList
             intent.getParcelableExtra("mom_data")
         }
 
-
-
         binding.apply {
             btnLmpDate.setOnClickListener {
                 currentSelectedDate = "LMP"

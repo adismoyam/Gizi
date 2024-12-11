@@ -1,6 +1,7 @@
 package com.tiuho22bangkit.gizi.ui.home
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -10,6 +11,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -17,8 +20,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.tiuho22bangkit.gizi.R
 import com.tiuho22bangkit.gizi.databinding.FragmentHomeBinding
 import com.tiuho22bangkit.gizi.ui.ViewModelFactory
+import com.tiuho22bangkit.gizi.ui.analysis.MomAnalysisActivity
 import com.tiuho22bangkit.gizi.ui.article.ArticleAdapter
+import com.tiuho22bangkit.gizi.ui.profile.IsiDataIbuActivity
 import com.tiuho22bangkit.gizi.ui.profile.KidProfileAdapter
+import com.tiuho22bangkit.gizi.utility.observeOnce
 
 class HomeFragment : Fragment() {
 
@@ -68,14 +74,34 @@ class HomeFragment : Fragment() {
 
         setupRVKidProfile()
         binding.add.setOnClickListener {
-            findNavController().navigate(R.id.navigation_role)
+//            findNavController().navigate(R.id.navigation_role)
+            findNavController().navigate(R.id.isi_data_anak_fragment)
         }
+
         setupCardDescription()
 
         binding.buttonChatbot.setOnClickListener {
             findNavController().navigate(R.id.navigation_nutriai)
         }
+
+        binding.btnPregAnalysisHome.setOnClickListener {
+            viewModel.isMomDataAvailable.observeOnce(viewLifecycleOwner) { isMomDataAvailable ->
+                if (isMomDataAvailable) {
+                    viewModel.loadMomData().observeOnce(viewLifecycleOwner) { mom ->
+                        Log.d("HomeFragment", "Ada $mom")
+                        val intent = Intent(requireContext(), MomAnalysisActivity::class.java)
+                            .putExtra(MomAnalysisActivity.MOM_DATA, mom)
+                        startActivity(intent)
+                    }
+                } else {
+                    val intent = Intent(requireContext(), IsiDataIbuActivity::class.java)
+                    startActivity(intent)
+                }
+            }
+        }
     }
+
+
 
     private fun articleObserver() {
         viewModel.allArticles .observe(viewLifecycleOwner) { article ->
