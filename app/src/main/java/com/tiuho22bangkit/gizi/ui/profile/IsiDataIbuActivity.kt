@@ -50,123 +50,136 @@ class IsiDataIbuActivity : AppCompatActivity(), DatePickerFragment.DialogDateLis
         giziDatabase = GiziDatabase.getInstance(this)
         momDao = giziDatabase.momDao()
 
-        // Tombol pilih tanggal lahir
-        binding.btnLmpDate.setOnClickListener {
-            currentSelectedDate = "LMP"
-            showDatePicker()
-        }
+        binding.apply {
+            btnLmpDate.setOnClickListener {
+                currentSelectedDate = "LMP"
+                showDatePicker()
+            }
 
-        binding.btnEddDate.setOnClickListener {
-            currentSelectedDate = "EDD"
-            showDatePicker()
-        }
+            btnEddDate.setOnClickListener {
+                currentSelectedDate = "EDD"
+                showDatePicker()
+            }
 
-        binding.btnBirthDate.setOnClickListener {
-            currentSelectedDate = "BIRTH"
-            showDatePicker()
-        }
+            btnBirthDate.setOnClickListener {
+                currentSelectedDate = "BIRTH"
+                showDatePicker()
+            }
 
-        binding.btnClose.setOnClickListener {
-            finish()
-        }
+            btnClose.setOnClickListener {
+                finish()
+            }
+            // Tombol tambah data
+            btnTambahData.setOnClickListener {
+                val name = name.text.toString().trim()
 
-        // Tombol tambah data
-        binding.btnTambahData.setOnClickListener {
-            val name = binding.name.text.toString().trim()
+                val lmpDate = btnLmpDate.text.toString()
+                val eddDate = btnEddDate.text.toString()
+                val birthDate = btnBirthDate.text.toString()
 
-            val lmpDate = binding.tvLmpDate.text.toString()
-            val eddDate = binding.tvEddDate.text.toString()
-            val birthDate = binding.tvBirthDate.text.toString()
+                val systolicBloodPressure =
+                    etSystolicBloodPressure.text.toString().toFloatOrNull()
+                val diastolicBloodPressure =
+                    etDiastolicBloodPressure.text.toString().toFloatOrNull()
 
-            val systolicBloodPressure =
-                binding.etSystolicBloodPressure.text.toString().toFloatOrNull()
-            val diastolicBloodPressure =
-                binding.etDiastolicBloodPressure.text.toString().toFloatOrNull()
+                val bloodSugarLevel = etBloodSugarLevel.text.toString().toFloatOrNull()
+                val bodyTemperature = etBodyTemperature.text.toString().toFloatOrNull()
+                val heartRate = etHeartRate.text.toString().toFloatOrNull()
 
-            val bloodSugarLevel = binding.etBloodSugarLevel.text.toString().toFloatOrNull()
-            val bodyTemperature = binding.etBodyTemperature.text.toString().toFloatOrNull()
-            val heartRate = binding.etHeartRate.text.toString().toFloatOrNull()
+                when {
+                    lmpDate.isEmpty() -> {
+                        Toast.makeText(
+                            this@IsiDataIbuActivity,
+                            "Pilih tanggal HPHT",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
 
-            when {
-                lmpDate.isEmpty() || lmpDate == getString(R.string.hari_pertama_haid_terakhir) -> {
-                    Toast.makeText(this, "Pilih tanggal HPHT", Toast.LENGTH_SHORT).show()
-                }
+                    eddDate.isEmpty() -> {
+                        Toast.makeText(
+                            this@IsiDataIbuActivity,
+                            "Pilih tanggal HPL",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
 
-                eddDate.isEmpty() || eddDate == getString(R.string.hari_perkiraan_lahir) -> {
-                    Toast.makeText(this, "Pilih tanggal HPL", Toast.LENGTH_SHORT).show()
-                }
+                    birthDate.isEmpty() -> {
+                        Toast.makeText(
+                            this@IsiDataIbuActivity,
+                            "Pilih tanggal lahir",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
 
-                birthDate.isEmpty() || birthDate == getString(R.string.tanggal_lahir) -> {
-                    Toast.makeText(this, "Pilih tanggal lahir", Toast.LENGTH_SHORT).show()
-                }
+                    systolicBloodPressure == null || systolicBloodPressure <= 0 -> {
+                        etSystolicBloodPressure.error =
+                            "Masukkan tekanan darah sistolik yang valid"
+                        etSystolicBloodPressure.requestFocus()
+                    }
 
-                systolicBloodPressure == null || systolicBloodPressure <= 0 -> {
-                    binding.etSystolicBloodPressure.error =
-                        "Masukkan tekanan darah sistolik yang valid"
-                    binding.etSystolicBloodPressure.requestFocus()
-                }
+                    diastolicBloodPressure == null || diastolicBloodPressure <= 0 -> {
+                        etDiastolicBloodPressure.error =
+                            "Masukkan tekanan darah diastolik yang valid"
+                        etDiastolicBloodPressure.requestFocus()
+                    }
 
-                diastolicBloodPressure == null || diastolicBloodPressure <= 0 -> {
-                    binding.etDiastolicBloodPressure.error =
-                        "Masukkan tekanan darah diastolik yang valid"
-                    binding.etDiastolicBloodPressure.requestFocus()
-                }
+                    bloodSugarLevel == null || bloodSugarLevel <= 0 -> {
+                        etBloodSugarLevel.error =
+                            "Masukkan tekanan darah diastolik yang valid"
+                        etBloodSugarLevel.requestFocus()
+                    }
 
-                bloodSugarLevel == null || bloodSugarLevel <= 0 -> {
-                    binding.etBloodSugarLevel.error = "Masukkan tekanan darah diastolik yang valid"
-                    binding.etBloodSugarLevel.requestFocus()
-                }
+                    bodyTemperature == null || bodyTemperature <= 0 -> {
+                        etDiastolicBloodPressure.error = "Masukkan suhu tubuh yang valid"
+                        etDiastolicBloodPressure.requestFocus()
+                    }
 
-                bodyTemperature == null || bodyTemperature <= 0 -> {
-                    binding.etDiastolicBloodPressure.error = "Masukkan suhu tubuh yang valid"
-                    binding.etDiastolicBloodPressure.requestFocus()
-                }
+                    heartRate == null || heartRate <= 0 -> {
+                        etDiastolicBloodPressure.error =
+                            "Masukkan jumlah detak jantung yang valid"
+                        etDiastolicBloodPressure.requestFocus()
+                    }
 
-                heartRate == null || heartRate <= 0 -> {
-                    binding.etDiastolicBloodPressure.error =
-                        "Masukkan jumlah detak jantung yang valid"
-                    binding.etDiastolicBloodPressure.requestFocus()
-                }
+                    else -> {
+                        val mom = MomEntity(
+                            name = name,
+                            lastMenstrualPeriod = lmpDate,
+                            estimatedDeliveryDate = eddDate,
+                            birthDate = birthDate,
+                            systolicBloodPressure = systolicBloodPressure,
+                            diastolicBloodPressure = diastolicBloodPressure,
+                            bloodSugarLevel = bloodSugarLevel,
+                            bodyTemperature = bodyTemperature,
+                            heartRate = heartRate
+                        )
 
-                else -> {
-                    val mom = MomEntity(
-                        name = name,
-                        lastMenstrualPeriod = lmpDate,
-                        estimatedDeliveryDate = eddDate,
-                        birthDate = birthDate,
-                        systolicBloodPressure = systolicBloodPressure,
-                        diastolicBloodPressure = diastolicBloodPressure,
-                        bloodSugarLevel = bloodSugarLevel,
-                        bodyTemperature = bodyTemperature,
-                        heartRate = heartRate
-                    )
-
-                    // Simpan ke database
-                    lifecycleScope.launch(Dispatchers.IO) {
-                        try {
-                            momDao.insertMomData(mom)
-                            withContext(Dispatchers.Main) {
-                                Toast.makeText(
-                                    this@IsiDataIbuActivity,
-                                    "Data berhasil disimpan",
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                                val intent = Intent(
-                                    this@IsiDataIbuActivity,
-                                    MomAnalysisActivity::class.java
-                                ).apply {
-                                    putExtra(MomAnalysisActivity.MOM_DATA, mom)
+                        // Simpan ke database
+                        lifecycleScope.launch(Dispatchers.IO) {
+                            try {
+                                momDao.insertMomData(mom)
+                                withContext(Dispatchers.Main) {
+                                    Toast.makeText(
+                                        this@IsiDataIbuActivity,
+                                        "Data berhasil disimpan",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                    val intent = Intent(
+                                        this@IsiDataIbuActivity,
+                                        MomAnalysisActivity::class.java
+                                    ).apply {
+                                        putExtra(MomAnalysisActivity.MOM_DATA, mom)
+                                    }
+                                    startActivity(intent)
+                                    finish()
                                 }
-                                startActivity(intent)
-                                finish()
-                            }
-                        } catch (e: Exception) {
-                            withContext(Dispatchers.Main) {
-                                Toast.makeText(
-                                    this@IsiDataIbuActivity,
-                                    "Terjadi kesalahan, coba lagi",
-                                    Toast.LENGTH_SHORT
-                                ).show()
+                            } catch (e: Exception) {
+                                withContext(Dispatchers.Main) {
+                                    Toast.makeText(
+                                        this@IsiDataIbuActivity,
+                                        "Terjadi kesalahan, coba lagi",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                }
                             }
                         }
                     }
@@ -189,9 +202,9 @@ class IsiDataIbuActivity : AppCompatActivity(), DatePickerFragment.DialogDateLis
         val formattedDate = dateFormat.format(calendar.time)
 
         when (currentSelectedDate) {
-            "LMP" -> binding.tvLmpDate.text = formattedDate
-            "EDD" -> binding.tvEddDate.text = formattedDate
-            "BIRTH" -> binding.tvBirthDate.text = formattedDate
+            "LMP" -> binding.btnLmpDate.text = formattedDate
+            "EDD" -> binding.btnEddDate.text = formattedDate
+            "BIRTH" -> binding.btnBirthDate.text = formattedDate
         }
     }
 

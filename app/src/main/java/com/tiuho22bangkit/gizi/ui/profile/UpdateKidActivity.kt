@@ -62,7 +62,7 @@ class UpdateKidActivity : AppCompatActivity(), DatePickerFragment.DialogDateList
             kidName.setText(nameData)
             kidHeight.setText(heightData.toString())
             kitWeight.setText(weightData.toString())
-            tvDate.text = birthdateData
+            btnDate.text = birthdateData
 
             if (genderData == "Laki-Laki") {
                 rgGender.check(R.id.rb_boy)
@@ -88,7 +88,7 @@ class UpdateKidActivity : AppCompatActivity(), DatePickerFragment.DialogDateList
                 R.id.rb_girl -> "Perempuan"
                 else -> ""
             }
-            val birthDate = binding.tvDate.text.toString()
+            val birthDate = binding.btnDate.text.toString()
             val height = binding.kidHeight.text.toString().toFloatOrNull()
             val weight = binding.kitWeight.text.toString().toFloatOrNull()
 
@@ -179,7 +179,7 @@ class UpdateKidActivity : AppCompatActivity(), DatePickerFragment.DialogDateList
         calendar.set(year, month, dayOfMonth)
         val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
         val formattedDate = dateFormat.format(calendar.time)
-        binding.tvDate.text = formattedDate
+        binding.btnDate.text = formattedDate
     }
 
     // Menampilkan DatePickerFragment

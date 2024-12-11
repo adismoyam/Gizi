@@ -15,6 +15,5 @@ class ArticlePagerAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
             else -> throw IllegalStateException("Invalid position: $position")
         }
     }
-
     override fun getItemCount(): Int = 3
 }

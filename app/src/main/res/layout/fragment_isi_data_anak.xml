@@ -10,45 +10,46 @@
         android:id="@+id/header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingVertical="10dp"
-        android:background="@drawable/rounded_background2"
         android:layout_gravity="top"
+        android:background="@drawable/rounded_background2"
         android:outlineSpotShadowColor="@color/black"
-        app:layout_constraintTop_toTopOf="parent"
+        android:paddingVertical="10dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/page_title"
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="12dp"
+            android:text="@string/add_data"
             android:textAlignment="center"
             android:textColor="@color/purple_200"
-            android:layout_height="wrap_content"
-            android:text="@string/add_data"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:textStyle="bold"
             android:textSize="16sp"
-            android:padding="12dp" />
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/btn_close"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
             android:padding="8dp"
-            android:src="@drawable/ic_back"/>
+            android:src="@drawable/ic_back"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="16dp">
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -66,8 +67,8 @@
             android:layout_height="48dp"
             android:layout_gravity="start"
             android:layout_marginBottom="16dp"
-            android:inputType="textPersonName"
-            android:hint="@string/nama_anak" />
+            android:hint="@string/nama_anak"
+            android:inputType="textPersonName" />
 
         <RadioGroup
             android:id="@+id/rg_gender"
@@ -91,27 +92,22 @@
                 android:text="@string/perempuan" />
         </RadioGroup>
 
-        <LinearLayout
-            android:layout_width="match_parent"
+
+        <TextView
+            android:id="@+id/tv_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tanggal_lahir" />
+
+        <Button
+            android:id="@+id/btn_date"
+            style="?attr/materialIconButtonFilledStyle"
+            android:layout_width="160dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:contentDescription="@string/tanggal_lahir"
+            app:icon="@drawable/baseline_date_range_24" />
 
-            <Button
-                android:id="@+id/btn_date"
-                style="?attr/materialIconButtonFilledStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:contentDescription="@string/tanggal_lahir"
-                app:icon="@drawable/baseline_date_range_24" />
-
-            <TextView
-                android:id="@+id/tv_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/tanggal_lahir" />
-        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"

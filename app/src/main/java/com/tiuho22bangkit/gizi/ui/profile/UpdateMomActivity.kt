@@ -1,5 +1,6 @@
 package com.tiuho22bangkit.gizi.ui.profile
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
@@ -12,14 +13,9 @@ import androidx.lifecycle.lifecycleScope
 import com.tiuho22bangkit.gizi.R
 import com.tiuho22bangkit.gizi.data.local.GiziDatabase
 import com.tiuho22bangkit.gizi.data.local.dao.MomDao
-import com.tiuho22bangkit.gizi.data.local.entity.KidEntity
 import com.tiuho22bangkit.gizi.data.local.entity.MomEntity
-import com.tiuho22bangkit.gizi.databinding.ActivityUpdateKidBinding
 import com.tiuho22bangkit.gizi.databinding.ActivityUpdateMomBinding
-import com.tiuho22bangkit.gizi.ui.analysis.KidAnalysisActivity
-import com.tiuho22bangkit.gizi.ui.analysis.KidAnalysisActivity.Companion.KID_DATA
 import com.tiuho22bangkit.gizi.ui.analysis.MomAnalysisActivity
-import com.tiuho22bangkit.gizi.ui.profile.IsiDataIbuActivity.Companion
 import com.tiuho22bangkit.gizi.utility.DatePickerFragment
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -36,6 +32,7 @@ class UpdateMomActivity : AppCompatActivity(), DatePickerFragment.DialogDateList
     private lateinit var momDao: MomDao
     private var mom: MomEntity? = null
 
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -67,6 +64,10 @@ class UpdateMomActivity : AppCompatActivity(), DatePickerFragment.DialogDateList
                 showDatePicker()
             }
 
+            btnClose.setOnClickListener {
+                finish()
+            }
+
             btnEddDate.setOnClickListener {
                 currentSelectedDate = "EDD"
                 showDatePicker()
@@ -78,9 +79,9 @@ class UpdateMomActivity : AppCompatActivity(), DatePickerFragment.DialogDateList
             }
             mom?.let { mom ->
                 etName.setText(mom.name)
-                tvLmpDate.text = mom.lastMenstrualPeriod
-                tvEddDate.text = mom.estimatedDeliveryDate
-                tvBirthDate.text = mom.birthDate
+                btnLmpDate.text = mom.lastMenstrualPeriod
+                btnEddDate.text = mom.estimatedDeliveryDate
+                btnBirthDate.text = mom.birthDate
                 etSystolicBloodPressure.setText(mom.systolicBloodPressure.toString())
                 etDiastolicBloodPressure.setText(mom.diastolicBloodPressure.toString())
                 etBloodSugarLevel.setText(mom.bloodSugarLevel.toString())
@@ -92,62 +93,74 @@ class UpdateMomActivity : AppCompatActivity(), DatePickerFragment.DialogDateList
             btnPerbaruiData.setOnClickListener {
                 val momId = mom?.id
 
-                val name = binding.etName.text.toString().trim()
+                val name = etName.text.toString().trim()
 
-                val lmpDate = binding.tvLmpDate.text.toString()
-                val eddDate = binding.tvEddDate.text.toString()
-                val birthDate = binding.tvBirthDate.text.toString()
+                val lmpDate = btnLmpDate.text.toString()
+                val eddDate = btnEddDate.text.toString()
+                val birthDate = btnBirthDate.text.toString()
 
                 val systolicBloodPressure =
-                    binding.etSystolicBloodPressure.text.toString().toFloatOrNull()
+                    etSystolicBloodPressure.text.toString().toFloatOrNull()
                 val diastolicBloodPressure =
-                    binding.etDiastolicBloodPressure.text.toString().toFloatOrNull()
+                    etDiastolicBloodPressure.text.toString().toFloatOrNull()
 
-                val bloodSugarLevel = binding.etBloodSugarLevel.text.toString().toFloatOrNull()
-                val bodyTemperature = binding.etBodyTemperature.text.toString().toFloatOrNull()
-                val heartRate = binding.etHeartRate.text.toString().toFloatOrNull()
+                val bloodSugarLevel = etBloodSugarLevel.text.toString().toFloatOrNull()
+                val bodyTemperature = etBodyTemperature.text.toString().toFloatOrNull()
+                val heartRate = etHeartRate.text.toString().toFloatOrNull()
 
 
                 when {
                     lmpDate.isEmpty() || lmpDate == getString(R.string.hari_pertama_haid_terakhir) -> {
-                        Toast.makeText(this@UpdateMomActivity, "Pilih tanggal HPHT", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            this@UpdateMomActivity,
+                            "Pilih tanggal HPHT",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
 
                     eddDate.isEmpty() || eddDate == getString(R.string.hari_perkiraan_lahir) -> {
-                        Toast.makeText(this@UpdateMomActivity, "Pilih tanggal HPL", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            this@UpdateMomActivity,
+                            "Pilih tanggal HPL",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
 
                     birthDate.isEmpty() || birthDate == getString(R.string.tanggal_lahir) -> {
-                        Toast.makeText(this@UpdateMomActivity, "Pilih tanggal lahir", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            this@UpdateMomActivity,
+                            "Pilih tanggal lahir",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
 
                     systolicBloodPressure == null || systolicBloodPressure <= 0 -> {
-                        binding.etSystolicBloodPressure.error =
+                        etSystolicBloodPressure.error =
                             "Masukkan tekanan darah sistolik yang valid"
-                        binding.etSystolicBloodPressure.requestFocus()
+                        etSystolicBloodPressure.requestFocus()
                     }
 
                     diastolicBloodPressure == null || diastolicBloodPressure <= 0 -> {
-                        binding.etDiastolicBloodPressure.error =
+                        etDiastolicBloodPressure.error =
                             "Masukkan tekanan darah diastolik yang valid"
-                        binding.etDiastolicBloodPressure.requestFocus()
+                        etDiastolicBloodPressure.requestFocus()
                     }
 
                     bloodSugarLevel == null || bloodSugarLevel <= 0 -> {
-                        binding.etBloodSugarLevel.error =
+                        etBloodSugarLevel.error =
                             "Masukkan tekanan darah diastolik yang valid"
-                        binding.etBloodSugarLevel.requestFocus()
+                        etBloodSugarLevel.requestFocus()
                     }
 
                     bodyTemperature == null || bodyTemperature <= 0 -> {
-                        binding.etDiastolicBloodPressure.error = "Masukkan suhu tubuh yang valid"
-                        binding.etDiastolicBloodPressure.requestFocus()
+                        etDiastolicBloodPressure.error = "Masukkan suhu tubuh yang valid"
+                        etDiastolicBloodPressure.requestFocus()
                     }
 
                     heartRate == null || heartRate <= 0 -> {
-                        binding.etDiastolicBloodPressure.error =
+                        etDiastolicBloodPressure.error =
                             "Masukkan jumlah detak jantung yang valid"
-                        binding.etDiastolicBloodPressure.requestFocus()
+                        etDiastolicBloodPressure.requestFocus()
                     }
 
                     else -> {
@@ -213,9 +226,9 @@ class UpdateMomActivity : AppCompatActivity(), DatePickerFragment.DialogDateList
         val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
         val formattedDate = dateFormat.format(calendar.time)
         when (currentSelectedDate) {
-            "LMP" -> binding.tvLmpDate.text = formattedDate
-            "EDD" -> binding.tvEddDate.text = formattedDate
-            "BIRTH" -> binding.tvBirthDate.text = formattedDate
+            "LMP" -> binding.btnLmpDate.text = formattedDate
+            "EDD" -> binding.btnEddDate.text = formattedDate
+            "BIRTH" -> binding.btnBirthDate.text = formattedDate
         }
     }
 
