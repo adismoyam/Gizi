@@ -18,7 +18,6 @@ import com.tiuho22bangkit.gizi.data.local.entity.KidEntity
 import com.tiuho22bangkit.gizi.databinding.ActivityKidAnalysisBinding
 import com.tiuho22bangkit.gizi.helper.StuntWastClassifierHelper
 import com.tiuho22bangkit.gizi.ui.ViewModelFactory
-import com.tiuho22bangkit.gizi.ui.profile.KidAnalysisDialogFragment
 import com.tiuho22bangkit.gizi.ui.profile.UpdateKidActivity
 import com.tiuho22bangkit.gizi.utility.calculateMonthAge
 import com.tiuho22bangkit.gizi.utility.scaleInputKidData

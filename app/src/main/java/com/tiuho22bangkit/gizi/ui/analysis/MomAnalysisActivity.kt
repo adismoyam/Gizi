@@ -16,9 +16,7 @@ import com.tiuho22bangkit.gizi.data.local.entity.MomEntity
 import com.tiuho22bangkit.gizi.databinding.ActivityMomAnalysisBinding
 import com.tiuho22bangkit.gizi.helper.PregnancyClassifierHelper
 import com.tiuho22bangkit.gizi.ui.ViewModelFactory
-import com.tiuho22bangkit.gizi.ui.profile.UpdateKidActivity
 import com.tiuho22bangkit.gizi.ui.profile.UpdateMomActivity
-import com.tiuho22bangkit.gizi.utility.calculateMonthAge
 import com.tiuho22bangkit.gizi.utility.calculateYearAge
 import com.tiuho22bangkit.gizi.utility.scaleInputMomData
 
@@ -35,6 +33,8 @@ class MomAnalysisActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
 
+        supportActionBar?.hide()
+
         binding = ActivityMomAnalysisBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -44,9 +44,9 @@ class MomAnalysisActivity : AppCompatActivity() {
             insets
         }
 
-//        binding.btnClose.setOnClickListener {
-//            finish()
-//        }
+        binding.btnBack.setOnClickListener {
+            finish()
+        }
 
         mom = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             intent.getParcelableExtra(MOM_DATA, MomEntity::class.java)

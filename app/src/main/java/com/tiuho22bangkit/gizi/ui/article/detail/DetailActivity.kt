@@ -29,6 +29,7 @@ class DetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
 
+        supportActionBar?.hide()
         binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -36,6 +37,10 @@ class DetailActivity : AppCompatActivity() {
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
+        }
+
+        binding.btnBack.setOnClickListener {
+            finish()
         }
 
         val article = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
@@ -53,7 +58,8 @@ class DetailActivity : AppCompatActivity() {
 
                 tvTitle.text = it.title
                 tvAuthor.text = it.author
-                tvPublishedAt.text = it.publishedAt
+                tvArticleSauce.text =  String.format(getString(R.string.sumber),it.source.name)
+                tvPublishedAt.text = String.format(getString(R.string.published_at),it.publishedAt)
                 tvDescription.text = it.description
                 tvContent.text = HtmlCompat.fromHtml(
                     it.content,
