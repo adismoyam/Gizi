@@ -70,7 +70,9 @@ dependencies {
     implementation(libs.androidx.legacy.support.v4)
     implementation(libs.androidx.fragment.ktx)
     implementation(libs.androidx.activity)
+
     implementation(libs.firebase.database)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -78,7 +80,7 @@ dependencies {
     // tflite
     implementation(libs.tensorflow.lite.metadata)
     implementation(libs.tensorflow.lite.support)
-    implementation(libs.tensorflow.lite)    // tflite core (saran dari chatGPT) :v
+    implementation(libs.tensorflow.lite)
 
     // retrofit
     implementation(libs.retrofit)

@@ -44,6 +44,10 @@ class MomAnalysisActivity : AppCompatActivity() {
             insets
         }
 
+//        binding.btnClose.setOnClickListener {
+//            finish()
+//        }
+
         mom = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             intent.getParcelableExtra(MOM_DATA, MomEntity::class.java)
         } else {
