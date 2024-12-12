@@ -57,19 +57,18 @@ class NutriaiFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.adapter = chatAdapter
 
-        val imageView = binding.loadingGif
-        Glide.with(this)
-            .asGif()
-            .load(R.drawable.bot) // ganti dengan GIF di folder drawable
-            .into(imageView)
-
         sendButton.setOnClickListener {
             val userMessage = inputField.text.toString()
             if (userMessage.isEmpty()) {
                 Toast.makeText(requireContext(), "Kolom Input Tidak Boleh Kosong!", Toast.LENGTH_SHORT).show()
             } else {
-                // Tambahkan pesan pengguna ke RecyclerView
+                // Tambahkan pesan pengguna
                 messages.add(ChatMessage(userMessage, true))
+                chatAdapter.notifyItemInserted(messages.size - 1)
+                recyclerView.scrollToPosition(messages.size - 1)
+
+                // Tambahkan pesan loading
+                messages.add(ChatMessage("", false, isLoading = true))
                 chatAdapter.notifyItemInserted(messages.size - 1)
                 recyclerView.scrollToPosition(messages.size - 1)
 
@@ -80,12 +79,10 @@ class NutriaiFragment : Fragment() {
                     titleDescription.visibility = View.GONE
                 }
                 startLoadingAnimation()
-
                 viewModel.sendChatToApi(id!!, userMessage)
                 inputField.text.clear()
             }
         }
-
 
         viewModel.response.observe(viewLifecycleOwner) { response ->
             val formattedResponse = response
@@ -96,21 +93,25 @@ class NutriaiFragment : Fragment() {
                 .replace("^\\*\\s+(.*?)<br>".toRegex(RegexOption.MULTILINE), "<li>$1</li>")
                 .replace("(<li>.*?</li>)".toRegex(RegexOption.DOT_MATCHES_ALL), "<ul>$1</ul>")
 
+            // Hapus pesan loading
+            val loadingIndex = messages.indexOfFirst { it.isLoading }
+            if (loadingIndex != -1) {
+                messages.removeAt(loadingIndex)
+                chatAdapter.notifyItemRemoved(loadingIndex)
+            }
+
             stopLoadingAnimation()
             binding.loadingIndicator.visibility = View.GONE
             binding.pageTitle.visibility = View.VISIBLE
-
             messages.add(ChatMessage(formattedResponse, false))
             chatAdapter.notifyItemInserted(messages.size - 1)
             recyclerView.scrollToPosition(messages.size - 1)
         }
-
     }
 
     private var isLoading = false
 
     private fun startLoadingAnimation() {
-        binding.loadingGif.visibility = View.VISIBLE
         isLoading = true
         val loadingText = binding.loadingIndicator
         val handler = Handler(Looper.getMainLooper())
@@ -131,7 +132,6 @@ class NutriaiFragment : Fragment() {
     }
 
     private fun stopLoadingAnimation() {
-        binding.loadingGif.visibility = View.GONE
         isLoading = false
     }
 

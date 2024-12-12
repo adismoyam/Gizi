@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Gizi</string>
     <string name="title_home">Home</string>
+    <string name="loading">Memproses </string>
     <string name="title_start">Start</string>
     <string name="title_login">Login</string>
     <string name="title_verify">Verify</string>
