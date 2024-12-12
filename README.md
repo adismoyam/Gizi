@@ -49,9 +49,9 @@ Welcome to **GIZI**! This app provides innovative solutions to enhance user expe
 ### 1. Chatbot Integration
 Interact with our intelligent chatbot for instant assistance and seamless communication.
 
-<div style="display: flex; flex-wrap: wrap; gap: 10px;">
-  <img src="./assets/Nutri%20AI%20Chatbot.jpg" alt="Nutri AI Chatbot" width="200">
-  <img src="./assets/Tampilan%20setelah%20memberikan%20pertanyaan%20dan%20diberikan%20jawban%20oleh%20Nutri%20AI.jpg" alt="Chatbot Responses" width="200">
+<div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;">
+  <img src="./assets/Nutri%20AI%20Chatbot.jpg" alt="Nutri AI Chatbot" width="300">
+  <img src="./assets/Tampilan%20setelah%20memberikan%20pertanyaan%20dan%20diberikan%20jawban%20oleh%20Nutri%20AI.jpg" alt="Chatbot Responses" width="300">
 </div>
 
 - **Key Feature:** Dynamic responses with typing animations.
@@ -65,8 +65,8 @@ Interact with our intelligent chatbot for instant assistance and seamless commun
 ### 2. Splash Screen Animation
 Enjoy a sleek splash screen with SVG or video animations for a modern app opening experience.
 
-<div style="display: flex; flex-wrap: wrap; gap: 10px;">
-  <img src="./assets/gizi.gif" alt="Splash Screen Animation" width="200">
+<div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;">
+  <img src="./assets/gizi.gif" alt="Splash Screen Animation" width="300">
 </div>
 
 - **Key Feature:** Smooth and visually appealing app launch.
@@ -77,10 +77,10 @@ Enjoy a sleek splash screen with SVG or video animations for a modern app openin
 ### 3. User-Friendly Interface
 An intuitive design that adapts seamlessly to all screen sizes and provides effortless navigation.
 
-<div style="display: flex; flex-wrap: wrap; gap: 10px;">
-  <img src="./assets/Homepage.jpg" alt="Homepage" width="200">
-  <img src="./assets/Hasil%20analisis%20data%20anak.jpg" alt="Child Data Analysis" width="200">
-  <img src="./assets/Laman%20artikel%20bagian%20nutrisi.jpg" alt="Nutrition Article" width="200">
+<div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;">
+  <img src="./assets/Homepage.jpg" alt="Homepage" width="300">
+  <img src="./assets/Hasil%20analisis%20data%20anak.jpg" alt="Child Data Analysis" width="300">
+  <img src="./assets/Laman%20artikel%20bagian%20nutrisi.jpg" alt="Nutrition Article" width="300">
 </div>
 
 - **Key Feature:** Adaptive layouts for an exceptional user experience.
@@ -93,15 +93,16 @@ An intuitive design that adapts seamlessly to all screen sizes and provides effo
 ### 4. Data Synchronization
 Your data is always in sync with our cloud-based architecture.
 
-<div style="display: flex; flex-wrap: wrap; gap: 10px;">
-  <img src="./assets/Login.jpg" alt="Login Page" width="200">
-  <img src="./assets/Rekam%20medis%20anak.jpg" alt="Child Medical Records" width="200">
+<div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;">
+  <img src="./assets/Login.jpg" alt="Login Page" width="300">
+  <img src="./assets/Rekam%20medis%20anak.jpg" alt="Child Medical Records" width="300">
 </div>
 
 - **Key Feature:** Real-time updates and offline support.
 - **Libraries Used:**
   - [Room](https://developer.android.com/jetpack/androidx/releases/room) - For local database.
   - [Firebase Realtime Database](https://firebase.google.com/products/realtime-database) - For cloud synchronization.
+
 
 ## How to Build
 
@@ -112,21 +113,21 @@ Your data is always in sync with our cloud-based architecture.
 ## Screenshots
 
 Other Screenshot:
-<div style="display: flex; flex-wrap: wrap; gap: 10px;">
-<img src="./assets/Tampilan%20Awal.jpg" alt="App Screenshot" width="200">
-<img src="./assets/Ubah%20data%20anak.jpg" alt="App Screenshot" width="200">
-<img src="./assets/Contoh%20tampilan%20artikel%20ketika%20di%20buka.jpg" alt="App Screenshot" width="200">
-<img src="./assets/Daftar.jpg" alt="App Screenshot" width="200">
-<img src="./assets/Data%20anak.jpg" alt="App Screenshot" width="200">
-<img src="./assets/Data%20ibu.jpg" alt="App Screenshot" width="200">
-<img src="./assets/Hasil%20analisis%20data%20ibu.jpg" alt="App Screenshot" width="200">
-<img src="./assets/Laman%20artikel%20bagian%20kehamilan.jpg" alt="App Screenshot" width="200">
-<img src="./assets/Laman%20artikel%20bagian%20parenting.jpg" alt="App Screenshot" width="200">
-<img src="./assets/Perbarui%20data%20ibu.jpg" alt="App Screenshot" width="200">
-<img src="./assets/Profil.jpg" alt="App Screenshot" width="200">
-<img src="./assets/Rekam%20Medis%20Kehamilan.jpg" alt="App Screenshot" width="200">
-<img src="./assets/Tambah%20data%20ibu.jpg" alt="App Screenshot" width="200">
-<img src="./assets/Tambah%20data%20anak.jpg" alt="App Screenshot" width="200">
+<div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content:center">
+<img src="./assets/Tampilan%20Awal.jpg" alt="App Screenshot" width="300">
+<img src="./assets/Ubah%20data%20anak.jpg" alt="App Screenshot" width="300">
+<img src="./assets/Contoh%20tampilan%20artikel%20ketika%20di%20buka.jpg" alt="App Screenshot" width="300">
+<img src="./assets/Daftar.jpg" alt="App Screenshot" width="300">
+<img src="./assets/Data%20anak.jpg" alt="App Screenshot" width="300">
+<img src="./assets/Data%20ibu.jpg" alt="App Screenshot" width="300">
+<img src="./assets/Hasil%20analisis%20data%20ibu.jpg" alt="App Screenshot" width="300">
+<img src="./assets/Laman%20artikel%20bagian%20kehamilan.jpg" alt="App Screenshot" width="300">
+<img src="./assets/Laman%20artikel%20bagian%20parenting.jpg" alt="App Screenshot" width="300">
+<img src="./assets/Perbarui%20data%20ibu.jpg" alt="App Screenshot" width="300">
+<img src="./assets/Profil.jpg" alt="App Screenshot" width="300">
+<img src="./assets/Rekam%20Medis%20Kehamilan.jpg" alt="App Screenshot" width="300">
+<img src="./assets/Tambah%20data%20ibu.jpg" alt="App Screenshot" width="300">
+<img src="./assets/Tambah%20data%20anak.jpg" alt="App Screenshot" width="300">
 </div>
 
 
