@@ -68,6 +68,7 @@ class GiziRepository private constructor(
     fun getLastKidAnalysisHistory(): LiveData<KidAnalysisHistoryEntity> {
         return kidAnalysisHistoryDao.getLastKidAnalysisHistory()
     }
+
     fun getTheMom(): LiveData<MomEntity> = momDao.getTheMom()
 
     fun addKidAnalysisHistory(kidAnalysisHistoryEntity: KidAnalysisHistoryEntity) {
@@ -87,6 +88,13 @@ class GiziRepository private constructor(
 
     fun getAllMomAnalysisHistory(): LiveData<List<MomAnalysisHistoryEntity>> =
         momAnalysisHistoryDao.getAllMomAnalysisHistories()
+
+    fun deleteKidAnalysisHistory(kidAH: KidAnalysisHistoryEntity) =
+        kidAnalysisHistoryDao.deleteKidAnalysisHistory(kidAH)
+
+    fun deleteMomAnalysisHistory(momAH: MomAnalysisHistoryEntity) =
+        momAnalysisHistoryDao.deleteMomAnalysisHistory(momAH)
+
 
     companion object {
         @Volatile
