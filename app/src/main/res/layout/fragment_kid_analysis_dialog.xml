@@ -48,7 +48,7 @@
             android:id="@+id/btn_close"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/logout"
+            android:text="@string/tutup"
             android:background="@drawable/rounded_button"
             android:textColor="@android:color/white"/>
     </LinearLayout>

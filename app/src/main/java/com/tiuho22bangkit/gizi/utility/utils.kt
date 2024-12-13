@@ -12,31 +12,6 @@ import java.util.Calendar
 import java.util.Locale
 import java.time.LocalDateTime
 
-//  fungsi untuk menghitung perbedaan waktu
-fun calculateTimeDifference(dateString: String): String {
-
-    // menyesuaikan format tahun-bulan-hari
-    val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
-
-    // Ubah string menjadi LocalDate
-    val inputDate = LocalDate.parse(dateString, formatter)
-
-    // Tanggal saat ini
-    val currentDate = LocalDate.now()
-
-    // Hitung selisih waktu
-    val daysBetween = ChronoUnit.DAYS.between(inputDate, currentDate)
-    val monthsBetween = ChronoUnit.MONTHS.between(inputDate, currentDate)
-    val yearsBetween = ChronoUnit.YEARS.between(inputDate, currentDate)
-
-    return when {
-        yearsBetween > 0 -> "$yearsBetween tahun yang lalu"
-        monthsBetween > 0 -> "$monthsBetween bulan yang lalu"
-        daysBetween > 0 -> "$daysBetween hari yang lalu"
-        else -> "Hari ini"
-    }
-}
-
 //  fungsi untuk menghitung umur anak (bulan)
 fun calculateMonthAge(dateString: String): Long {
     val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
@@ -161,38 +136,3 @@ fun <T> LiveData<T>.observeOnce(owner: LifecycleOwner, observer: Observer<T>) {
         }
     })
 }
-
-/* Easter Egg, shhh.... Don't tell anyone about this.
-    val formattedResponse = response
-        // Baris baru
-        .replace("\n", "<br>")
-        // Heading 1-6
-        .replace("^###### (.*?)<br>".toRegex(RegexOption.MULTILINE), "<h6>$1</h6>")
-        .replace("^##### (.*?)<br>".toRegex(RegexOption.MULTILINE), "<h5>$1</h5>")
-        .replace("^#### (.*?)<br>".toRegex(RegexOption.MULTILINE), "<h4>$1</h4>")
-        .replace("^### (.*?)<br>".toRegex(RegexOption.MULTILINE), "<h3>$1</h3>")
-        .replace("^## (.*?)<br>".toRegex(RegexOption.MULTILINE), "<h2>$1</h2>")
-        .replace("^# (.*?)<br>".toRegex(RegexOption.MULTILINE), "<h1>$1</h1>")
-        // Bold
-        .replace("\\*\\*(.*?)\\*\\*".toRegex(), "<b>$1</b>")
-        // Italic
-        .replace("\\*(.*?)\\*".toRegex(), "<i>$1</i>")
-        // Link
-        .replace("\\[(.*?)\\]\\((.*?)\\)".toRegex(), "<a href=\"$2\">$1</a>")
-        // Inline code
-        .replace("`(.*?)`".toRegex(), "<code>$1</code>")
-        // Block code
-        .replace("```([\\s\\S]*?)```".toRegex(), "<pre><code>$1</code></pre>")
-        // Blockquote
-        .replace("^> (.*?)<br>".toRegex(RegexOption.MULTILINE), "<blockquote>$1</blockquote>")
-        // Horizontal line
-        .replace("^(---|\\*\\*\\*)<br>".toRegex(RegexOption.MULTILINE), "<hr>")
-        // Unordered list
-        .replace("^\\* (.*?)<br>".toRegex(RegexOption.MULTILINE), "<li>$1</li>")
-        .replace("<li>(.*?)</li>".toRegex(), "<ul><li>$1</li></ul>")
-        // Ordered list
-        .replace("^\\d+\\. (.*?)<br>".toRegex(RegexOption.MULTILINE), "<li>$1</li>")
-        .replace("<li>(.*?)</li>".toRegex(), "<ol><li>$1</li></ol>")
-        // Image
-        .replace("!\\[(.*?)\\]\\((.*?)\\)".toRegex(), "<img src=\"$2\" alt=\"$1\" />")
- */
